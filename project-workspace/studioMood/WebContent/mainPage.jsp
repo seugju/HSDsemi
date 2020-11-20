@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
 	<h1>서버 테스트</h1>
 </body>
 </html>

@@ -1,0 +1,3 @@
+INDEX VERSION 1.130
+C:\Users\sonhs\project-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\477635219.index
+\studioMood\src
