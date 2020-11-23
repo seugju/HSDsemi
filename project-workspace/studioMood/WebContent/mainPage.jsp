@@ -9,5 +9,6 @@
 <body>
 	<h1>서버 테스트</h1>
 	<h1>커밋 테스트</h1>
+	<a href="/test">테스트</a>
 </body>
 </html>
