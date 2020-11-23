@@ -90,6 +90,13 @@
     console.log(test);
     var test2=$('a[data-navlink]').attr('data-navlink');
     console.log(test2);
+    var test3=$('td[data-date]');
+    test3.each(function(i){
+		$(this).click(function(e){
+			e.preventDefault();
+			console.log(test3.eq(i).attr('data-date'));
+		});
+	});
   });
 
 </script>
