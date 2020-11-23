@@ -62,4 +62,26 @@ public class PostDao {
 		return list;
 	}
 
+	public int insertPost(Connection conn, Post p) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "insert into postscripte values(post_seq.nextval,?,?,?,to_char(sysdate,'yyyy-mm-dd'),?,?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, p.getPostTitle());
+			pstmt.setString(2, p.getPostContent());
+			pstmt.setString(3, p.getPostWriter());
+			pstmt.setString(4, p.getFilename());
+			pstmt.setString(5, p.getFilepath());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
 }

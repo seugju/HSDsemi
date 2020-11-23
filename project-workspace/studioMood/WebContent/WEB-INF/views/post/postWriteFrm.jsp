@@ -1,5 +1,9 @@
+<%@page import="member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+    Member m = (Member)session.getAttribute("member");
+    %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,7 +13,7 @@
 <body>
 	<section>
 		<div>
-			<form action="/insertNotice" method="post" enctype="multipart/form-data">
+			<form action="/insertPost" method="post" enctype="multipart/form-data">
 				<table class = "table table-bordered">
 					<tr>
 						<th colspan="2">공지사항 작성</th>
