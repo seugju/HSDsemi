@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+     .post{
+            width: 80%;
+            text-align: center;
+        }
+      .btn-post{
+          margin-top: 30px;
+          margin-bottom: 30px;
+            width: 100px;
+            height: 38px;
+            font-weight: bold;
+            font-size: 17px;
+            background-color: white;
+            border: 2px solid rgb(252, 157, 154);
+            border-radius: 5px;
+        }
+        .post-write>form>table>tbody>tr>td>input{
+            border: none;
+        }
+        .post-write>form>table>tbody>tr>th:first-child{
+            border-top: 1px solid lightgray;
+            border-left: 1px solid lightgray;
+            border-right: 1px solid lightgray;
+            resize: none;
+            outline: none;
+            height: 30px;
+        }
+        .post-write>form>table>tbody>tr>td:nth-child(2){
+            border-top: 1px solid lightgray;
+            border-left: 1px solid lightgray;
+            border-right: 1px solid lightgray;
+        }
+         .post-write>form>table>tbody>tr>td>textarea{
+            border-top: 1px solid lightgray;
+            border-left: 1px solid lightgray;
+            border-right: 1px solid lightgray;
+             border-bottom: 1px solid lightgray;
+            resize : none;
+            outline: none;
+        }
+        
+        .post-write>form>table{
+             border-spacing: 0;
+        }
+        
+       
+    </style>
+</head>
+<body>
+    	<section>
+		<div class="post-write">
+			<form action="/insertPost" method="post" enctype="multipart/form-data">
+				<table>
+					<tr>
+						<th width="150px">제목</th>
+                        <td><input type="text" class="form-control" name="postTitle" style="width: 500px; outline: none; "></td>
+					</tr>
+				
+					<tr>
+						<th width="150px">작성자</th>
+						<td width="500px"><%=m.getMemberId() %>
+						<input type="hidden" name="noticeWriter" value="<%=m.getMemberId() %>">
+						</td>
+					</tr>
+						<tr>
+						<th width="150px">첨부파일</th>
+						<td width="500px"><input type="file" name="filename"></td>
+					</tr>
+					<tr>
+						<td colspan="2"><textarea name="postContent" class="form-control" style="width: 655px; height: 500px"></textarea></td>
+					</tr>
+					<tr style="text-align:center;">
+						<td colspan = "2">
+							<button type="submit" class="btn-post">등록</button>
+							<button type="reset" class="btn-post">취소</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</section>
+</body>
+</html>
