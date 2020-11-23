@@ -56,13 +56,14 @@ public class InsertPostServlet extends HttpServlet {
 		p.setFilename(mRequest.getOriginalFileName("filename"));//파일을 가져오는 원본 이름
 		p.setFilepath(mRequest.getFilesystemName("filename"));
 		
+		
 		int result = new PostService().insertPost(p);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		if(result>0) {
-			request.setAttribute("msg", "공지사항 등록 성공");
+			request.setAttribute("msg", "등록 성공");
 		}else {
-			request.setAttribute("msg", "공지사항 등록 실패");
+			request.setAttribute("msg", "등록 실패");
 		}
 		request.setAttribute("loc", "/postList?reqPage=1");
 		rd.forward(request, response);

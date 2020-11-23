@@ -9,37 +9,84 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+    <style>
+     .post-write{
+            width: 80%;
+            margin: 0 auto;
+            
+        }
+      .btn-post{
+          margin-top: 30px;
+          margin-bottom: 30px;
+            width: 100px;
+            height: 38px;
+            font-weight: bold;
+            font-size: 17px;
+            background-color: white;
+            border: 2px solid rgb(252, 157, 154);
+            border-radius: 5px;
+        }
+        .post-write>form>table>tbody>tr>td>input{
+            border: none;
+        }
+        .post-write>form>table>tbody>tr>th:first-child{
+            border-top: 1px solid lightgray;
+            border-left: 1px solid lightgray;
+            border-right: 1px solid lightgray;
+            resize: none;
+            outline: none;
+            height: 30px;
+        }
+        .post-write>form>table>tbody>tr>td:nth-child(2){
+            border-top: 1px solid lightgray;
+            border-left: 1px solid lightgray;
+            border-right: 1px solid lightgray;
+        }
+         .post-write>form>table>tbody>tr>td>textarea{
+            border-top: 1px solid lightgray;
+            border-left: 1px solid lightgray;
+            border-right: 1px solid lightgray;
+             border-bottom: 1px solid lightgray;
+            resize : none;
+            outline: none;
+        }
+        
+        .post-write>form>table{
+             border-spacing: 0;
+             margin-top:50px;
+        }
+        
+       
+    </style>
 </head>
 <body>
-	<section>
-		<div>
+    	<section>
+		<div class="post-write">
 			<form action="/insertPost" method="post" enctype="multipart/form-data">
-				<table class = "table table-bordered">
+				<table>
 					<tr>
-						<th colspan="2">공지사항 작성</th>
+						<th width="150px">제목</th>
+                        <td><input type="text" class="form-control" name="postTitle" style="width: 500px; outline: none; "></td>
 					</tr>
+				
 					<tr>
-					<th>제목</th>
-					<td><input type="text" class="form-control" name="noticeTitle"></td>
-					</tr>
-					<tr>
-						<th>첨부파일</th>
-						<td><input type="file" name="filename"></td>
-					</tr>
-					<tr>
-						<th>작성자</th>
-						<td><%=m.getMemberId() %>
-						<input type="hidden" name="noticeWriter" value="<%=m.getMemberId() %>">
+						<th width="150px">작성자</th>
+						<td width="500px"><//%=m.getMemberId() %>
+						<input type="hidden" name="postWriter" value="<//%=m.getMemberId() %>">
 						</td>
 					</tr>
+						<tr>
+						<th width="150px">첨부파일</th>
+						<td width="500px"><input type="file" name="filename"></td>
+					</tr>
 					<tr>
-						<th>내용</th>
-						<td><textarea name="noticeContent" class="form-control" rows="3" col="40"></textarea></td>
+						<td colspan="2"><textarea name="postContent" class="form-control" style="width: 655px; height: 500px"></textarea></td>
 					</tr>
 					<tr style="text-align:center;">
-						<th colspan = "2">
-							<button type="submit" class="btn btn-primary">등록하기</button>
-						</th>
+						<td colspan = "2">
+							<button type="submit" class="btn-post">등록</button>
+							<button type="reset" class="btn-post">취소</button>
+						</td>
 					</tr>
 				</table>
 			</form>
