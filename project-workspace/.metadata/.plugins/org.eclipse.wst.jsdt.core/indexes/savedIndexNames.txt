@@ -1,7 +1,6 @@
-INDEX VERSION 1.4+C:\Users\user1\Desktop\git\HSDsemi\project-workspace\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-6435313.index
-3831249568.index
+INDEX VERSION 1.4+C:\Users\user1\Desktop\»õ Æú´õ\HSDsemi\project-workspace\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
 2223883669.index
-3858036091.index
-1626751113.index
-3710001654.index
+1261647702.index
+13954567.index
+4078127164.index
+2333094702.index
