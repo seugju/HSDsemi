@@ -15,18 +15,22 @@
       expandRows: true,
       slotMinTime: '08:00',
       slotMaxTime: '20:00',
+      //툴바관리
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
       },
+      //보여주는 형식
       initialView: 'dayGridMonth',
+      //초기화된 날짜
       initialDate: '2020-09-12',
       navLinks: true, // can click day/week names to navigate views
-      editable: true,
+      editable: true,// 기존 스케줄 이동
       selectable: true,
       nowIndicator: true,
       dayMaxEvents: true, // allow "more" link when too many events
+      //일정
       events: [
         {
           title: 'All Day Event',
