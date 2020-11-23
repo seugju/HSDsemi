@@ -1,0 +1,30 @@
+package qna.model.vo;
+
+import java.util.ArrayList;
+
+public class NoticeViewData {
+	private Qna n;
+	private ArrayList<NoticeComment> list;
+	public NoticeViewData() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public NoticeViewData(Qna n, ArrayList<NoticeComment> list) {
+		super();
+		this.n = n;
+		this.list = list;
+	}
+	public Qna getN() {
+		return n;
+	}
+	public void setN(Qna n) {
+		this.n = n;
+	}
+	public ArrayList<NoticeComment> getList() {
+		return list;
+	}
+	public void setList(ArrayList<NoticeComment> list) {
+		this.list = list;
+	}
+	
+}

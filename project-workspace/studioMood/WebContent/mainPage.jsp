@@ -8,6 +8,6 @@
 </head>
 <body>
 	<h1>서버 테스트</h1>
-	<h1>커밋 테스트</h1>
+	<h3><a href="/postList?reqPage=1">후기</a></h3>
 </body>
 </html>

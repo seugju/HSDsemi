@@ -1,0 +1,12 @@
+package qna.model.vo;
+
+public class Qna {
+	private int qNum;
+	private int qnaNo;
+	private String qnaTitle;
+	private String qnaContent;
+	private String admin;
+	private String writeDate;
+	
+	
+}
