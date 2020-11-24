@@ -32,7 +32,7 @@ public class MemberService {
 		Connection conn = JDBCTemplate.getConnection();
 		Member loginMember = new MemberDao().selectOneMember(conn, member);
 		JDBCTemplate.close(conn);
-		return loginMember;
+		return loginMember; 
 	}
 
 }

@@ -80,7 +80,7 @@ public class MemberDao {
 			rset = pstmt.executeQuery();
 			System.out.println(member.getMemberId());
 			System.out.println(member.getMemberPw());
-			
+			 
 			if(rset.next()) {
 				loginMember = new Member();
 				loginMember.setAddress(rset.getString("address"));

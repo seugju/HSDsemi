@@ -33,7 +33,7 @@ public class JoinServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		
+		 
 		Member member = new Member();
 		member.setMemberId(request.getParameter("memberId"));
 		member.setMemberPw(request.getParameter("memberPw"));
