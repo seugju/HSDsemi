@@ -27,14 +27,28 @@
             text-align: center;
             font-weight: bold;
             font-size: 30px;   
-            border-bottom: 4px solid rgb(252, 157, 154);
+            border-bottom: 4px solid #FBB1B5;
+        }
+         .post-table>tbody>tr>td{
+            border-top: 1px solid lightgray;
         }
         .post-table{
             width: 80%;
-            border-top: 4px solid rgb(252, 157, 154);
+            border-top: 4px solid #FBB1B5;
             border-left: 1px solid lightgray;
-            border-bottom: 4px solid rgb(252, 157, 154);
+            border-bottom: 4px solid #FBB1B5;
             border-right: 1px solid lightgray;
+        }
+        .post-table>tbody>tr>td{
+         text-align: center;
+        }
+       .post-table>tbody>tr>td>a{
+       text-decoration: none;
+            color: black;
+       
+       }
+        .post-table>tbody>tr>th{
+        height : 30px;
         }
        .write>a{
             text-decoration: none;
@@ -71,7 +85,7 @@
             font-weight: bold;
             font-size: 17px;
             background-color: white;
-            border: 2px solid rgb(252, 157, 154);
+            border: 2px solid #FBB1B5;
             border-radius: 5px;
         }
         #pageNavi{
@@ -97,17 +111,15 @@
            <tr>
                <th width="10%">No.</th>
                <th width="50%">제목</th>
-               <th width="15%;">이름</th>
-               <th width="15%;">날짜</th>
-               <th width="10%;">조회수</th>
+               <th width="20%;">이름</th>
+               <th width="20%;">날짜</th>
            </tr>
            <%for(Post p : list) {%>
           <tr>
-               <th><%=p.getpNum() %></th>
-               <th><a href="/postView?postNo=<%=p.getPostNo()%>"><%=p.getPostTitle() %></a></th>
-               <th><%=p.getPostWriter() %></th>
-               <th><%=p.getPostWriter() %></th>
-               <th></th>
+               <td><%=p.getpNum() %></td>
+               <td><a href="/postView?postNo=<%=p.getPostNo()%>"><%=p.getPostTitle() %></a></td>
+               <td><%=p.getPostWriter() %></td>
+               <td><%=p.getPDate() %></td>
            </tr>
            <%} %>
        </table>
