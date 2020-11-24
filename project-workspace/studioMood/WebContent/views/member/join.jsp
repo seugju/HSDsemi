@@ -4,19 +4,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<title>회원가입</title>
 <style>
         .join-table-wrap {
             width: 80%;
             margin: 0 auto;
+            margin-bottom : 50px;
             text-align: center;
         }
 
         .join-title {
             width: 200px;
             margin: 0 auto;
+            margin-top : 30px;
             text-align: center;
-            border-bottom: 3px solid rgba(252, 157, 154, 0.87);
+            border-bottom: 3px solid #FBB1B5;
         }
 
         input {
@@ -35,19 +39,18 @@
             line-height: 37px;
             width: 130px;
             text-align: center;
-            border: 1px solid #1f4787;
-            color: #1f4787;
+            border: 1px solid rgb(94, 94, 94);
+            color: rgb(94, 94, 94);
         }
 
         input[name=gender]:checked+label {
             background-color: rgb(94, 94, 94);
             color: #fff;
-
         }
 
         input[type=checkbox] {
-            width: 30px;
-            height: 20px;
+            width: 15px;
+            height: 15px;
         }
 
         .join-table {
@@ -56,12 +59,11 @@
         }
 
         .join-table th {
-            width: 150px;
-            
+            width: 150px;   
         }
 
         .join-table td {
-            width: 500px;
+            width: 450px;
             height: 30px;
         }
 
@@ -75,7 +77,7 @@
         }
         #idMsg,
         #pwMsg{
-        	font-size: 9pt;
+        	font-size: 8pt;
         }
 
         .most {
@@ -85,8 +87,10 @@
         .submit {
             margin: 0 auto;
             width: 150px;
-            height: 35px;
-            background-color: rgb(94, 94, 94);
+            height: 40px;
+            font-size: 11pt;
+            background-color: #FBB1B5;
+            border : none;
             color: rgb(248, 246, 246);
             
         }
@@ -105,7 +109,7 @@
 	            <tr>
 	                <th><span class="most">*</span> 아이디</th>
 	                <td>
-	                    <input type="text" name="memberId" id="memberId"><span id="idMsg"></span>
+	                    <input type="text" name="memberId" id="memberId"> <span id="idMsg"></span>
 	                </td>
 	
 	            </tr>
@@ -118,7 +122,7 @@
 	            <tr>
 	                <th><span class="most">*</span> 비밀번호 확인</th>
 	                <td>
-	                    <input type="password" name="memberPw-re" id="memberPw_re"><span id="pwMsg"></span>
+	                    <input type="password" name="memberPw-re" id="memberPw_re"> <span id="pwMsg"> </span>
 	                </td>
 	            </tr>
 	            <tr>
@@ -134,11 +138,12 @@
 	                </td>
 	            </tr>
 	            <tr>
-	                <th> 주소</th>
+	                <th> 생년월일</th>
 	                <td>
-	                    <input type="text" name="email" id="email">
+	                    <input type="text" name="birth" id="birth" placeholder="예)19900202">
 	                </td>
 	            </tr>
+	            
 	            <tr>
 	                <th> 성별</th>
 	                <td class="gender-td">
@@ -147,24 +152,51 @@
 	                </td>
 	            </tr>
 	            <tr>
-	                <th> 생년월일</th>
+	                <th>이메일</th>
 	                <td>
-	                    <input type="text" name="birth" id="birth">
+	                    <input type="text" name="email" id="email">
 	                </td>
 	            </tr>
+	            
+	             <tr>
+	                <th> 주소</th>
+	                <td>
+	                    <input type="text" name="address" id="address">
+	                </td>
+	            </tr>
+	            
 	            <tr>
 	                <td colspan="2" style="text-align: center">
+	                	<br>
 	                    <input type="checkbox" name="agree" id="agree">
-	                    <a href="#">이용약관</a>개인정보 사용 동의
+	                    <a href="#">이용약관</a> 개인정보 사용 동의<br>
+	                    <input type="checkbox" name="agree" id="agree">
+	                    <a href="#">이용약관</a> 개인정보 사용 동의
 	                </td>
 	            </tr>
 	        </table>
-	        
+	        <br>
 	        <input class="submit" type="submit" value="회원가입">
 	    </div>
 	</form>
    
 	<script>
+		$(function(){
+			var pw = $("#memberPw");
+		    var pw_re = $("#memberPw_re");
+		    var msg = $("#pwMsg");
+			console.log("test");
+		    pw_re.change(function() {
+		    	console.log("이벤트 안");
+		        if (pw.val() == pw_re.val()) {
+		            $(this).next().html("비밀번호가 일치합니다.").css('color','#5AB6DB');
+		        }else{
+		            $(this).next().html("비밀번호가 일치하지 않습니다.").css('color','#DC413E');
+		        }
+		    });
+		    
+		});
+	
 		$("#memberId").keyup(function(){
 			var memberId = $(this).val();
 			
@@ -176,16 +208,18 @@
 					var msg = $("#idMsg");
 					if(data == 1){
 						msg.html("  사용 가능한 아이디 입니다.");
-						msg.css('color','blue');
+						msg.css('color','#5AB6DB');
 					}else{
 						msg.html("  이미 사용중인 아이디 입니다.");
-						msg.css('color','orangered');
+						msg.css('color','#DC413E');
 					}
 				}
-			})
-		})
+			});
+		});
 	
 	</script>
-
+	
+	
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>
