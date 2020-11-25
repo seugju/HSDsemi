@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+        <style>
+         .postView{
+            width: 80%;
+            margin: 0 auto;
+            
+        }
+      .btn-post{
+          margin-top: 30px;
+          margin-bottom: 30px;
+            width: 100px;
+            height: 38px;
+            font-weight: bold;
+            font-size: 17px;
+            background-color: white;
+            border: 2px solid rgb(252, 157, 154);
+            border-radius: 5px;
+        }
+        
+        .postView>table{
+             border-spacing: 0;
+             margin-top:50px;
+            
+        }
+            .firstth{
+                text-align: left;
+            }
+            .postView>table *{
+                border: 1px solid lightgray;
+            }
+            .inputComment{
+                 width: 100%;
+            margin: 0 auto;
+            }
+            .inputComment>form>ul{
+                padding: 0;
+                overflow: hidden;
+            }
+            .inputComment>form>ul>li{
+            text-decoration: none;
+            list-style-type: none;
+            float: left;
+            }
+            .inputComment>form>ul>li:nth-child(2){
+                width: 20%;
+                margin: 0 auto;
+                line-height: 100px;
+}
+             .postCommenttext{
+                 outline: none;
+            }
+            
+            .btn-postView{
+                width: 100px;
+                height: 60px;
+                font-size: 20px;
+                color: white;
+                border: none;
+                background-color: rgb(252, 157, 154);
+            }
+            
+    </style>
+</head>
+<body>
+    <section>
+        <div class="postView">
+            <table>
+                <tr>
+                    <th class="firstth" colspan="2" style="width: 1000px; height: 50px; font-size: 25px; font-weight: bold;border-top: 3px solid rgb(252, 157, 154);">제목입니다</th>
+                </tr>
+                <tr>
+                    <td style="height: 30px;">작성자</td>
+                    <td style="text-align: center">작성시간</td>
+                </tr>
+                <tr>
+                    <td style="width: 20%;">첨부파일</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="2">컨텐츠</td>
+                </tr>
+                <tr>
+                    <th colspan="2">
+                        
+                        
+                    </th>
+                    
+                </tr>
+            </table>
+            <div class="inputComment postView">
+                <form action="/insertPostCommnet">
+                    <ul>
+                        <li>
+                            <input type="hidden" name="postCommnetLevel" value="1">
+                            <input type="hidden" name="postCommnetWriter" value="">
+                            <input type="hidden" nmae="postRef" value="">
+                            <textarea class="postCommenttext"style="width: 600px; height: 100px;resize: none;"name="postCommnetContent"></textarea>                           
+                        </li>
+                        <li style="text-align: center; width: 200;">
+                            <button type="submit" class="btn-postView" >등록</button>
+                        </li>
+                    </ul>
+                    
+                    
+                </form>
+                
+                
+                
+                
+            </div>
+            
+        </div>
+        
+        
+        
+    </section>
+</body>
+</html>

@@ -35,8 +35,8 @@
 		</list>
 	</section>
 	<section name="org.eclipse.egit.ui.internal.staging.StagingView">
-		<item value="494,497" key="STAGING_SASH_FORM_WEIGHT"/>
+		<item value="498,501" key="STAGING_SASH_FORM_WEIGHT"/>
 		<item value="false" key="sortItemState"/>
-		<item value="498,499" key="HORIZONTAL_SASH_FORM_WEIGHT"/>
+		<item value="499,500" key="HORIZONTAL_SASH_FORM_WEIGHT"/>
 	</section>
 </section>

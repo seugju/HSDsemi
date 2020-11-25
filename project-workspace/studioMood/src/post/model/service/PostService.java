@@ -1,6 +1,7 @@
 package post.model.service;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import org.apache.tomcat.dbcp.dbcp2.Jdbc41Bridge;
@@ -8,7 +9,9 @@ import org.apache.tomcat.dbcp.dbcp2.Jdbc41Bridge;
 import common.JDBCTemplate;
 import post.model.dao.PostDao;
 import post.model.vo.Post;
+import post.model.vo.PostComment;
 import post.model.vo.PostPageData;
+import post.model.vo.PostViewData;
 
 public class PostService {
 
@@ -69,6 +72,39 @@ public class PostService {
 		}
 		JDBCTemplate.close(conn);
 		return result;
+	}
+
+	public int updatePost(Post p) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new PostDao().updatePost(conn, p);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public Post selectOnePost(int postNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		Post p = new PostDao().selectPost(conn, postNo);
+		if(p != null) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return p;
+	}
+
+	public PostViewData selectPostView(int postNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		Post p = new PostDao().selectPost(conn, postNo);
+		ArrayList<PostComment> list = new PostDao().selectPostCommentlist(conn, postNo);
+		JDBCTemplate.close(conn);
+		PostViewData pvd = new PostViewData(p, list);
+		return pvd;
 	}
 
 	

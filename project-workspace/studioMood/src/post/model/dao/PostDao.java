@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import common.JDBCTemplate;
 import post.model.vo.Post;
+import post.model.vo.PostComment;
 
 public class PostDao {
 
@@ -82,6 +83,85 @@ public class PostDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
+	}
+
+	public int updatePost(Connection conn, Post p) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update postscripte set p_title=?, p_content=?, filename=?, filepath=? where p_num?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, p.getPostTitle());
+			pstmt.setString(2, p.getPostContent());
+			pstmt.setString(3, p.getFilename());
+			pstmt.setString(4, p.getFilepath());
+			pstmt.setInt(5, p.getPostNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public Post selectPost(Connection conn, int postNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select * from postscripte where p_num = ?";
+		Post p = new Post();
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, postNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				p.setPostNo(rset.getInt("p_num"));
+				p.setPostTitle(rset.getString("p_title"));
+				p.setPostContent(rset.getString("p_content"));
+				p.setPostWriter(rset.getString("p_writer"));
+				p.setPDate(rset.getString("p_date"));
+				p.setFilename(rset.getString("filename"));
+				p.setFilepath(rset.getString("filepath"));
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return p;
+	}
+
+	public ArrayList<PostComment> selectPostCommentlist(Connection conn, int postNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select * from postcoment where pc_ref = ? order by 1";
+		ArrayList<PostComment> list = new ArrayList<PostComment>();
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, postNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				PostComment pc = new PostComment();
+				pc.setPostCommentNo(rset.getInt("pc_num"));
+				pc.setPostCommentWriter(rset.getString("pc_writer"));
+				pc.setPostCommentContent(rset.getString("pc_content"));
+				pc.setPostCommentDate(rset.getString("pc_date"));
+				pc.setPostRef(rset.getInt("pc_ref"));
+				list.add(pc);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return list;
 	}
 
 }
