@@ -42,7 +42,7 @@ public class PostViewServlet extends HttpServlet {
 			request.setAttribute("loc", "/postList?reqPage=1");
 			rd.forward(request, response);
 		}else {
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/post/postList.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/post/postView.jsp");
 			request.setAttribute("p", pvd.getP());
 			request.setAttribute("list", pvd.getList());
 			rd.forward(request, response);

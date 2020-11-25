@@ -93,7 +93,6 @@
     </style>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
   <div class="join-title">
         <h3>회원가입</h3>

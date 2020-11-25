@@ -164,4 +164,190 @@ public class PostDao {
 		return list;
 	}
 
+	public int deletePost(Connection conn, int postNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "delete from postscripte where p_num=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, postNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertPostComment(Connection conn, PostComment pc) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "insert into postcoment values(postcoment_seq.nextval,?,?,to_char(sysdate,'yyyy-mm-dd'),?)";
+		
+		try {
+			pstmt =conn.prepareStatement(query);
+			pstmt.setString(1, pc.getPostCommentWriter());
+			pstmt.setString(2, pc.getPostCommentContent());
+			pstmt.setInt(3, pc.getPostRef());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int postCommentUpdate(Connection conn, int postCommentNo, String postCommentContent) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update postcoment set pc_content=? where pc_num=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, postCommentContent);
+			pstmt.setInt(2, postCommentNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int postCommentDelete(Connection conn, int postCommentNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "delete from postcoment where pc_num=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, postCommentNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public ArrayList<Post> searchKeywordtitle(Connection conn, String keyword) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select * from (select rownum as pnum, p.* from (select * from postscripte order by 1 desc)p) where p_title like (?)";
+		ArrayList<Post> list = new ArrayList<Post>();
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, '%'+keyword+'%');
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Post p = new Post();
+				p.setpNum(rset.getInt("pnum"));
+				p.setPostNo(rset.getInt("p_num"));
+				p.setPostTitle(rset.getString("p_title"));
+				p.setPostWriter(rset.getString("p_writer"));
+				p.setPDate(rset.getString("p_date"));
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return list;
+	}
+
+	public ArrayList<Post> searchKeywordId(Connection conn, String keyword) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select * from (select rownum as pnum, p.* from (select * from postscripte order by 1 desc)p) where p_writer like (?)";
+		ArrayList<Post> list = new ArrayList<Post>();
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, '%'+keyword+'%');
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Post p = new Post();
+				p.setpNum(rset.getInt("pnum"));
+				p.setPostNo(rset.getInt("p_num"));
+				p.setPostTitle(rset.getString("p_title"));
+				p.setPostWriter(rset.getString("p_writer"));
+				p.setPDate(rset.getString("p_date"));
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return list;
+	}
+
+	public ArrayList<Post> searchList(Connection conn, int start, int end, String keyword) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Post> list = new ArrayList<Post>();
+		System.out.println(start);
+		System.out.println(end);
+		String query = "select * from (select rownum as pnum, p.* from (select * from postscripte where p_title like (?) order by 1 desc)p) where pnum between ? and ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, '%'+keyword+'%');
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				System.out.println("난 while문 내부");
+				Post p = new Post();
+				p.setpNum(rset.getInt("pnum"));
+				p.setPostNo(rset.getInt("p_num"));
+				p.setPostTitle(rset.getString("p_title"));
+				p.setPostWriter(rset.getString("p_writer"));
+				p.setPDate(rset.getString("p_date"));
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return list;
+	}
+
+	public int searchTitleCount(Connection conn, String keyword) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String query = "select count(*) cnt from postscripte where p_title like (?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, '%'+keyword+'%');
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
 }

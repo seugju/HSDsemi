@@ -39,6 +39,9 @@ public class PostComment {
 	public void setPostCommentWriter(String postCommentWriter) {
 		this.postCommentWriter = postCommentWriter;
 	}
+	public String getPostCommentContentBr() {
+		return postCommentContent.replaceAll("\r\n", "<br>");
+	}
 	public String getPostCommentContent() {
 		return postCommentContent;
 	}

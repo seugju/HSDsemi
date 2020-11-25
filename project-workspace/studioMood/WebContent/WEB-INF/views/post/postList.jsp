@@ -7,6 +7,14 @@
     ArrayList<Post> list = (ArrayList<Post>)request.getAttribute("list");
     String pageNavi = (String)request.getAttribute("pageNavi");
     Member m = (Member)session.getAttribute("member");
+    String keyword = (String)request.getAttribute("keyword");
+    if(keyword == null){
+    	keyword="";
+    }
+    String type = (String)request.getAttribute("type");
+    if(type == null){
+    	type = "postWriter";
+    }
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -30,14 +38,14 @@
             border-bottom: 4px solid #FBB1B5;
         }
          .post-table>tbody>tr>td{
-            border-top: 1px solid lightgray;
+            border-top: 1px solid #b8b0b0;
         }
         .post-table{
             width: 80%;
             border-top: 4px solid #FBB1B5;
-            border-left: 1px solid lightgray;
+            border-left: 1px solid #b8b0b0;
             border-bottom: 4px solid #FBB1B5;
-            border-right: 1px solid lightgray;
+            border-right: 1px solid #b8b0b0;
         }
         .post-table>tbody>tr>td{
          text-align: center;
@@ -60,10 +68,8 @@
             font-size: 17px;
             text-align: center;
             background-color: white;
-            border: 2px solid rgb(252, 157, 154);
+            border: 2px solid #FBB1B5;
             border-radius: 5px;
-            
-            
         }
         .write{
             width: 80%;
@@ -79,7 +85,7 @@
             height: 30px;
         }
         .btn-post{
-            margin-top: 20px;
+            vertical-align:middle;
             width: 100px;
             height: 38px;
             font-weight: bold;
@@ -91,6 +97,10 @@
         #pageNavi{
             text-align: center;
             margin: 50px;
+        }
+        .post>form>select{
+        width : 100px;
+        height : 37px;
         }
     </style>
 </head>
@@ -125,8 +135,18 @@
        </table>
        <div id="pageNavi"><%=pageNavi %></div>
        <div class="post">
-       <form action="" method="get" id="search">
-       <input type="text" placeholder="검색어를 입력해주세요." class="search-text">
+       <form action="/searchKeyword">
+       <input type="hidden" name="reqPage" value="1">
+       <select name="type">
+       <%if(type.equals("postWriter")) {%>
+       <option value="postWriter" selected>작성자</option>
+       <option value="postTitle">제목</option>
+       <%}else if(type.equals("postTitle")) {%>
+       <option value="postTitle" selected>제목</option>
+       <option value="postWriter">작성자</option>
+       <%} %>
+       </select>
+       <input type="text" placeholder="검색어를 입력해주세요." name ="keyword" class="search-text" value = <%=keyword %> >
        <input type="submit" value="검색" class="btn-post">
        </form>
        </div>
