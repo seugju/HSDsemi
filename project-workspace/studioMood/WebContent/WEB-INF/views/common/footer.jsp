@@ -7,11 +7,24 @@
 <title>Insert title here</title>
 
 <style>
+		 @font-face {
+            font-family: 'S-CoreDream-4Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'S-CoreDream-5Medium';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
         .footer{
             background-color: rgb(124, 117, 117);
             text-align: center;
             width: 100vw;
-            height: 300px;
+            height: 250px;
             margin: 0;
             padding: 0;
         }
@@ -22,13 +35,17 @@
             display: inline-block
         }
         .footerBox >h2{
+       		font-family: 'S-CoreDream-5Medium';
             color: rgb(241, 209, 209);
         }
         .footerBox>p{
+        	font-family: 'S-CoreDream-4Regular';
+        	font-size: 10pt;
             color: rgb(241, 238, 238);
         }
         .footer-top,
         .footer-bottom{
+        	margin : 0 auto;
             width: 1198px;
         }
         .footer-bottom{
@@ -74,9 +91,9 @@
                 </p>
             </div>
            <div class="footerBox icon" width:130px;>    
-               <img src="img/Facebook_1.png">
-               <img src="img/Twitter_1.png">
-               <img src="img/Instagram_1.png">
+               <img src="/img/Facebook_1.png">
+               <img src="/img/Twitter_1.png">
+               <img src="/img/Instagram_1.png">
                <p><br><br><br><br></p>
            </div>
            </div>
