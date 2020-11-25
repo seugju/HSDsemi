@@ -167,7 +167,7 @@ public class PostService {
 		return list;
 	}
 
-	public PostPageData searchList(int reqPage, String keyword) {
+	public PostPageData searchTitleList(int reqPage, String keyword) {
 		Connection conn = JDBCTemplate.getConnection();
 		PostDao dao = new PostDao();
 		int totalCount = dao.searchTitleCount(conn, keyword);
@@ -181,7 +181,53 @@ public class PostService {
 		int start = (reqPage-1)*numPerPage +1;
 		int end = reqPage*numPerPage;
 		
-		ArrayList<Post> list = new PostDao().searchList(conn,start,end, keyword);
+		ArrayList<Post> list = new PostDao().searchWriterList(conn,start,end, keyword);
+		int pageNaviSize = 5;
+		String pageNavi="";
+		
+		int pageNo = reqPage-2;
+		if(reqPage <=3) {
+			pageNo=1;
+		}else if(pageNo>totalPage-4){
+			pageNo = totalPage-4;
+		}
+		if(pageNo != 1) {
+			pageNavi += "<a class='btn' href='/searchKeyword?reqPage="+(pageNo-1)+"'>이전</a>";
+		}
+		for(int i=0; i<pageNaviSize;i++) {
+			if(reqPage == pageNo) {
+				pageNavi += "<span class='selectPage'>"+pageNo+"</spna>";
+			}else {
+				pageNavi +="<a class='btn' href='/searchKeyword?reqPage="+pageNo+"'>"+pageNo+"</a>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		if(pageNo <= totalPage) {
+			pageNavi += "<a class='btn' href='/searchKeyword?reqPage="+pageNo+"'>다음</a>";
+		}
+		PostPageData ppd = new PostPageData(list, pageNavi);
+		JDBCTemplate.close(conn);
+		return ppd;
+	}
+
+	public PostPageData searchWriterList(int reqPage, String keyword) {
+		Connection conn = JDBCTemplate.getConnection();
+		PostDao dao = new PostDao();
+		int totalCount = dao.searchTitleCount(conn, keyword);
+		int numPerPage = 10;
+		int totalPage = 0;
+		if(totalCount%numPerPage == 0) {
+			totalPage = totalCount / numPerPage;
+		}else {
+			totalPage = totalCount/ numPerPage+1;
+		}
+		int start = (reqPage-1)*numPerPage +1;
+		int end = reqPage*numPerPage;
+		
+		ArrayList<Post> list = new PostDao().searchTitleList(conn,start,end, keyword);
 		int pageNaviSize = 5;
 		String pageNavi="";
 		

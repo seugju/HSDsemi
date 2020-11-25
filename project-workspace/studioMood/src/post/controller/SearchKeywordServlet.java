@@ -40,7 +40,8 @@ public class SearchKeywordServlet extends HttpServlet {
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
 		
 		ArrayList<Post> list = new PostService().searchKeyword(keyword, type);
-		PostPageData ppd = new PostService().searchList(reqPage, keyword);
+		PostPageData ppd = new PostService().searchTitleList(reqPage, keyword);
+		PostPageData ppd2 = new PostService().searchWriterList(reqPage, keyword);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/post/postList.jsp");
 		request.setAttribute("list", list);
@@ -48,6 +49,7 @@ public class SearchKeywordServlet extends HttpServlet {
 		request.setAttribute("keyword", keyword);
 		request.setAttribute("list", ppd.getList());
 		request.setAttribute("pageNavi", ppd.getPageNavi());
+		request.setAttribute("pageNavi", ppd2.getPageNavi());
 		rd.forward(request, response);
 	}
 

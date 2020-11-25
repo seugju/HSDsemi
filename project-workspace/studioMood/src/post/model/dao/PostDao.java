@@ -294,7 +294,7 @@ public class PostDao {
 		return list;
 	}
 
-	public ArrayList<Post> searchList(Connection conn, int start, int end, String keyword) {
+	public ArrayList<Post> searchTitleList(Connection conn, int start, int end, String keyword) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Post> list = new ArrayList<Post>();
@@ -348,6 +348,36 @@ public class PostDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
+	}
+
+	public ArrayList<Post> searchWriterList(Connection conn, int start, int end, String keyword) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Post> list = new ArrayList<Post>();
+		String query = "select * from (select rownum as pnum, p.* from (select * from postscripte where p_writer like (?) order by 1 desc)p) where pnum between ? and ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, '%'+keyword+'%');
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Post p = new Post();
+				p.setpNum(rset.getInt("pnum"));
+				p.setPostNo(rset.getInt("p_num"));
+				p.setPostTitle(rset.getString("p_title"));
+				p.setPostWriter(rset.getString("p_writer"));
+				p.setPDate(rset.getString("p_date"));
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return list;
 	}
 
 }
