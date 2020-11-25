@@ -27,8 +27,7 @@
             background-color: white;
             border-radius: 10px;
             height: 400px;
-            max-width: 60%;
-            min-height: 30%;
+            width: 700px;
         }
 
         .imgBox {
