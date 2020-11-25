@@ -1,4 +1,3 @@
-<%@page import="member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
@@ -8,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Mypage</title>
+<title>My page</title>
  <style>
         @font-face {
             font-family: 'S-CoreDream-4Regular';
@@ -112,7 +111,7 @@
 <div class="wrap">
         <h2>마이페이지</h2>
         
-        <form action="/updateMember" method="post">
+        <form action="/updateMember?memberId=<%=m.getMemberId() %>" method="post">
             <table class="mypage-table">
                 <tr>
                     <th>아이디</th>
