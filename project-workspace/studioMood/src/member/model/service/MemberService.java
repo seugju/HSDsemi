@@ -2,6 +2,7 @@ package member.model.service;
 
 import java.net.ConnectException;
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import common.JDBCTemplate;
 import member.model.dao.MemberDao;
@@ -33,6 +34,37 @@ public class MemberService {
 		Member loginMember = new MemberDao().selectOneMember(conn, member);
 		JDBCTemplate.close(conn);
 		return loginMember; 
+	}
+
+	public ArrayList<Member> selectAllMember() {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Member> list = new MemberDao().selectAllMember(conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+
+	public int deleteMember(String memberId) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MemberDao().deleteMember(conn,memberId);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else{
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int updateMember(Member member) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MemberDao().updateMember(conn,member);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
 	}
 
 }

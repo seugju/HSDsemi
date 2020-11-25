@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<h1>서버 테스트</h1>
 	<h3><a href="/postList?reqPage=1">후기</a></h3>
 	

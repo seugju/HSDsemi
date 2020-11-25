@@ -10,6 +10,20 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
 
     <style>
+    
+     	@font-face {
+            font-family: 'S-CoreDream-4Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+		    font-family: 'Cafe24Danjunghae';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Danjunghae.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+        
         .modal {
             position: fixed;
             width: 100%;
@@ -54,6 +68,10 @@
         .login {
             text-align: center;
             margin-top: 20px;
+            font-family: 'S-CoreDream-4Regular';
+        }
+        .login-title {
+        	font-family: 'Cafe24Danjunghae';
         }
 
         .login input {
@@ -72,6 +90,7 @@
             border: none;
             background-color: #000;
             margin: 20px;
+            font-weight: bold;
         }
 
 

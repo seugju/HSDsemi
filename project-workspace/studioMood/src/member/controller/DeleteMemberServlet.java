@@ -11,20 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import member.model.service.MemberService;
-import member.model.vo.Member;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class DeleteMemberServlet
  */
-@WebServlet(name = "Login", urlPatterns = { "/login" })
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "DeleteMember", urlPatterns = { "/deleteMember" })
+public class DeleteMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
-     * @see HttpServlet#HttpServlet()
+     * Default constructor. 
      */
-    public LoginServlet() {
-        super();
+    public DeleteMemberServlet() {
         // TODO Auto-generated constructor stub
     }
 
@@ -33,24 +31,16 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		
-		Member member = new Member();
-		member.setMemberId(request.getParameter("id"));
-		member.setMemberPw(request.getParameter("pw"));
-		
-		Member loginMember = new MemberService().selectOneMember(member);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-		if(loginMember != null) {
+		String memberId = request.getParameter("memberId");
+		int result = new MemberService().deleteMember(memberId);
+		if(result > 0) {
 			HttpSession session = request.getSession();
-			session.setAttribute("loginMember", loginMember);
-			request.setAttribute("msg", "로그인 되었습니다.");
+			session.invalidate();
+			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/common/msg.jsp");
+			request.setAttribute("msg", "탈퇴되었습니다.");
 			request.setAttribute("loc", "/");
-		}else {
-			request.setAttribute("msg", "아이디 또는 비밀번호를 확인하세요");
-			request.setAttribute("loc", "/views/member/login.jsp");
+			rd.forward(request, response);
 		}
-		rd.forward(request, response);
 		
 	}
 

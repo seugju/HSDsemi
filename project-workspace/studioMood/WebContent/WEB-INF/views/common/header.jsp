@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
-    	Member m = (Member)session.getAttribute("member");
+    	Member m = (Member)session.getAttribute("loginMember");
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -17,7 +17,26 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
      <style>
+    	 @font-face {
+            font-family: 'S-CoreDream-4Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
 
+		@font-face {
+		    font-family: 'Cafe24Danjunghae';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Danjunghae.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		
+		@font-face {
+		    font-family: 'KCC-eunyoung';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KCC-eunyoung-Regular.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
         header{
             width: 100vw;
         }
@@ -33,9 +52,13 @@
             width: 500px;
             text-align: center;
         }
-
-        .logo>img {
-            margin: 0 auto;
+        .logo >h2{
+         	font-family: 'Cafe24Danjunghae';
+         }
+        
+        .logo>p{
+        	 font-family: 'KCC-eunyoung';
+        	 font-size: 14pt;
         }
 
         .navi-menu,
@@ -80,8 +103,10 @@
         }
 
         .nav-top {
+     	   	font-family: 'S-CoreDream-4Regular';
             width: 1200px;
             float: right;
+            padding-right: 30px;
         }
 
         .navi-menu-top li {
@@ -147,7 +172,11 @@
                 <a class="nav-top-link" href="/logout">로그아웃</a>
             </li>
             <li>
+            <%if(m.getMemberLevel() == 0) {%>
+                <a class="nav-top-link" href="/adminPage">회원관리</a>
+            <%}else{ %>
                 <a class="nav-top-link" href="/myPage?memberId=<%=m.getMemberId()%>">마이페이지</a>
+            <%} %>
             </li>
         </ul>
      <%}else { %>
@@ -167,7 +196,7 @@
         <br>
         <div class="logo">
             <img src="/img/logo.png" width="100px;" onclick="location.href = '/'">
-            <h3>STUDIO MOOD</h3>
+            <h2>STUDIO Mood:</h2>
             <p>감성을 담는 사진관 </p>
         </div>
 
