@@ -9,5 +9,6 @@
 <body>
 	<h1>서버 테스트</h1>
 	<h3><a href="/postList?reqPage=1">후기</a></h3>
+	<a href="/noticeList?reqPage=1">공지사항</a>
 </body>
 </html>

@@ -24,8 +24,8 @@
 					</tr>
 					<tr>
 						<th>작성자</th>
-						<td><%=m.getMemberId() %>
-						<input type="hidden" name="noticeWriter" value="<%=m.getMemberId() %>">
+<%-- 						<td><%=m.getMemberId() %>
+						<input type="hidden" name="noticeWriter" value="<%=m.getMemberId() %>"> --%>
 						</td>
 					</tr>
 					<tr>

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class NoticeListServlet
  */
-@WebServlet(name = "NoticeList", urlPatterns = { "/noticeList" })
+@WebServlet(name = "QnaList", urlPatterns = { "/QnaList" })
 public class QnaListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -18,7 +18,7 @@ public class JDBCTemplate {
 		Connection conn = null;
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@1.220.236.74:15213:xe","webserver","1234");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@1.220.236.74:15213:xe","HSDsemi","1234");
 			
 			//자동 오토 커밋이 설정되어있다.
 			conn.setAutoCommit(false); //자동 커밋 설정 해지
