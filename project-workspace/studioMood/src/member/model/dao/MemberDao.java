@@ -159,7 +159,7 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String query = "update member set phone=?, birth=?, email=?,address=? where member_id=?";
-		System.out.println("member_id : " + member.getMemberId());
+
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, member.getPhone());
@@ -168,7 +168,7 @@ public class MemberDao {
 			pstmt.setString(4, member.getAddress());
 			pstmt.setString(5, member.getMemberId());
 			result = pstmt.executeUpdate();
-			System.out.println("Dao result :"+result);
+			System.out.println("Dao addr :"+member.getAddress());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

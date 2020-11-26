@@ -63,7 +63,6 @@ public class MemberService {
 		}else {
 			JDBCTemplate.rollback(conn);
 		}
-		System.out.println("Service result :"+result);
 		JDBCTemplate.close(conn);
 		return result;
 	}
