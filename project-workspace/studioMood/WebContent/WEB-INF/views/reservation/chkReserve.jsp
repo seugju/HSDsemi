@@ -16,8 +16,9 @@
 <style>
 	#table-content{
 		margin:0 auto;
-		width:80vw;
-		height:60vw;
+		width:80%;
+		height:40vw;
+		max-height:500px;
 		text-align:center;
 		display: flex;
 		justify-content: center;
@@ -26,42 +27,77 @@
 	}
 	#btn{
 		border:none;
+		width: calc(100%/3);
 	}
 	table{
 		margin:0 auto;
+		width: 80%;
+		height: 80%;
+		font-family: 'S-CoreDream-5Medium';
+ 		src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff') format('woff');
+		font-weight: normal;
+ 		font-style: normal;
+	}
+	#btns{
+		width: 90%;
 	}
 </style>
 <body>
-<div id="header"><h4>헤더</h4>
+
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 </div>
 	<div id="table-content">	
 	<table border="2">
+		
 		<tr>
-			<th>예약번호</th><th>이름</th><th>전화번호</th><th>예약날짜</th><th>시작시간</th><th>종료시간</th><th>컨셉</th><th>컷수</th><th>예약확인</th><th>예약비밀번호</th>
-		</tr>		
-		<tr>
-		<%if(r.getrNum()==0){ %>		
-			<td colspan="10">조회결과없음(<%=msg %>)</td>
-		<%} else{%>
-			<td><%= r.getrNum()%></td>
-			<td><%= r.getName()%></td>
-			<td><%= r.getPhone()%></td>
-			<td><%= r.getrDate()%></td>
-			<td><%= r.getsTime()%></td>
-			<td><%= r.geteTime()%></td>
-			<td><%= r.getConcept()%></td>
-			<td><%= r.getCutNum()%></td>
-			<td><%= r.getrCheck()%></td>
-			<td><%= r.getrPass()%></td>
+			<th>예약번호</th>			
+			<td colspan="2"><%=r.getrNum() %></td>
 		</tr>
 		<tr>
-		<td id="btn" colspan="5"><button type="button" onclick="location.href='/reserveUpdate?phone=<%=r.getPhone()%>' ">예약수정하기</button></td>
-		<td id="btn" colspan="5"><button type="button" onclick="location.href='/reserveDelete?phone=<%=r.getPhone()%>' ">예약취소하기</button></td>
-		<%} %>
+			<th>이름</th>
+			<td colspan="2"><%=r.getName() %></td>
+		</tr>
+		<tr>
+			<th>전화번호</th>
+			<td colspan="2"><%=r.getPhone() %></td>
+		</tr>
+		<tr>
+			<th>예약날짜</th>
+			<td colspan="2"><%=r.getrDate() %></td>
+		</tr>
+		<tr>
+			<th>시작시간</th>
+			<td colspan="2"><%=r.getsTime() %></td>
+		</tr>
+		<tr>
+			<th>종료시간</th>
+			<td colspan="2"><%=r.geteTime() %></td>
+		</tr>
+		<tr>
+			<th>컨셉</th>
+			<td colspan="2"><%=r.getConcept() %></td>
+		</tr>
+		<tr>
+			<th>컷수</th>	
+			<td colspan="2"><%=r.getCutNum() %></td>
+		</tr>
+		<tr>
+			<th>예약확인</th>
+			<td colspan="2"><%=r.getrCheck() %></td>
+		</tr>
+		<tr>
+			<th>예약비밀번호</th>
+			<td colspan="2"><%=r.getrPass() %></td>
+		</tr>	
+		
+		<tr id="btns">
+			<td id="btn"><button type="button" onclick="location.href='/reserveUpdate?phone=<%=r.getPhone() %>' ">예약수정하기</button></td>
+			<td id="btn"><button type="button" onclick="location.href='/reserveDelete?phone=<%=r.getPhone() %>' ">예약취소하기</button></td>
+			<td id="btn"><button type="button" onclick="location.href='/' ">결제하기</button></td>
 		</tr>
 	</table>
 	</div>
-	<div id="footer"><h4>푸터</h4>
+	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 </div>
 </body>
 </html>

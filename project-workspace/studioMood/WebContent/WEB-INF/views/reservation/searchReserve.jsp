@@ -7,10 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>서버 테스트</h1>
-	<h3><a href="/postList?reqPage=1">후기</a></h3>
-	<a href="/noticeList?reqPage=1">공지사항</a>
-	<h3><a href="/searchReserve">예약조회</a></h3>
-	<h3><a href="/reservationAllSearch">예약조회(관리자)</a></h3>
+	<form action="/chkReserve" method="post">
+		<input type="text" name="phone" placeholder='번호를 입력해주세요.'>
+		<input type="password" name="pw" placeholder='비밀번호를 입력해주세요.'>
+		<button type="submit">조회하기</button>
+	</form>
 </body>
 </html>
