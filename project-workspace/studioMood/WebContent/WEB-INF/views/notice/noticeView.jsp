@@ -33,7 +33,6 @@
         } */
 
         .content-table{
-             margin-top:50px;
              width:100%;
              border: 1px solid lightgray;
              border-collapse: collapse;
@@ -78,29 +77,59 @@
             	
             }
          .content-btn {
-         margin:0 auto;
          display:block;
+            width: 60px;
+            height: 30px;
+            font-size: 15px;
+            text-align: center;
+            background:none;
+            border: none;
+
+            list-style: none;
+            color: #4a4a4a;
+             text-decoration: none;
+             line-height:30px;
+             float:right;
+        }
+        .back {
+            width: 100%;
+            height:30px;
+            text-align: right;
+            
+        }
+		.modify{
+			
+			text-align: center;
+			align-item: baseline;
+		}
+		.modify-btn {
+		display:inline-block;
             width: 80px;
             height: 40px;
-            font-weight: bold;
+            line-height:40px;
+            font-weight: bold; 
             font-size: 15px;
             text-align: center;
             background-color: #dfd3d3;
             border: 2px solid #dfd3d3;
             border-radius: 5px;
+            margin-bottom: 10px;
             list-style: none;
             color: #4a4a4a;
-             text-decoration: none;
-             line-height:40px;
+            margin:5px;
         }
-
     </style>
 </head>
 <body>
-	<%@ include file="/views/header.jsp"%>
+	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	
 	<section>
         <div class="postView">
+        <br><br>
+        <div class="back">
+        <button type="button" class="content-btn"><a href="javascript:history.go(-1)">목록</a></button>
+        </div>
+        
             <table class="content-table">
                 <tr style="border-bottom: 2px solid #FBB1B5;"  height="30px">
                 	 <th width="20%">제목</th>
@@ -123,19 +152,19 @@
                 	<%=n.getNoticeContentBr() %>
                 	</td>
                 </tr>
-                <tr style="text-align: center; ">
-				<th colspan="2">
-					<%if (m != null && m.getMemberId().equals(n.getNoticeWriter())) {%> 
-					<a href="/noticeUpdateFrm?noticeNo=<%=n.getNoticeNo() %>" class="btn btn-primary btn-sm">수정하기</a> 
-					<a href="/noticeDelete?noticeNo=<%=n.getNoticeNo() %>" class="btn btn-primary btn-sm">삭제하기</a> 
-					<%} %>
-            
-        
-				</th>
-			</tr>
+                	
+		
             </table>
-           
-<a href="javascript:history.go(-1)" class="content-btn">목록</a>
+           <br><br>
+<%if (m != null && m.getMemberId().equals(n.getNoticeWriter())) {%> 
+	
+				<div class="modify">
+				
+					<a href="/noticeUpdateFrm?noticeNo=<%=n.getNoticeNo() %>" class="modify-btn">수정</a>
+					<a href="/noticeDelete?noticeNo=<%=n.getNoticeNo() %>" class="modify-btn">삭제</a>
+	</div>
+					<%} %>
+<br><br><br>
 
         </div>
 
@@ -173,7 +202,7 @@
 
 	</div>
 	</section> --%>
-	
+		<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	<script>
 
 		$(".recShow").click(function() {

@@ -78,7 +78,7 @@
 </style>
 </head>
 <body>
-	<%@ include file="/views/header.jsp" %>
+	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<section>
 		<div class="content-writer" style="text-align: center; margin: 0 auto; "width="80%">
 			<div class="header-text">공지사항</div>
@@ -114,5 +114,6 @@
 			</form>
 		</div>
 	</section>
+		<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 </html>

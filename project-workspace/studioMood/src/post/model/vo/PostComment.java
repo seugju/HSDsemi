@@ -6,21 +6,19 @@ public class PostComment {
 	private String postCommentWriter;
 	private String postCommentContent;
 	private int postRef;
-	private int postCommentRef;
 	private String postCommentDate;
 	public PostComment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public PostComment(int postCommentNo, int postCommentLevel, String postCommentWriter, String postCommentContent,
-			int postRef, int postCommentRef, String postCommentDate) {
+			int postRef, String postCommentDate) {
 		super();
 		this.postCommentNo = postCommentNo;
 		this.postCommentLevel = postCommentLevel;
 		this.postCommentWriter = postCommentWriter;
 		this.postCommentContent = postCommentContent;
 		this.postRef = postRef;
-		this.postCommentRef = postCommentRef;
 		this.postCommentDate = postCommentDate;
 	}
 	public int getPostCommentNo() {
@@ -41,6 +39,9 @@ public class PostComment {
 	public void setPostCommentWriter(String postCommentWriter) {
 		this.postCommentWriter = postCommentWriter;
 	}
+	public String getPostCommentContentBr() {
+		return postCommentContent.replaceAll("\r\n", "<br>");
+	}
 	public String getPostCommentContent() {
 		return postCommentContent;
 	}
@@ -52,12 +53,6 @@ public class PostComment {
 	}
 	public void setPostRef(int postRef) {
 		this.postRef = postRef;
-	}
-	public int getPostCommentRef() {
-		return postCommentRef;
-	}
-	public void setPostCommentRef(int postCommentRef) {
-		this.postCommentRef = postCommentRef;
 	}
 	public String getPostCommentDate() {
 		return postCommentDate;

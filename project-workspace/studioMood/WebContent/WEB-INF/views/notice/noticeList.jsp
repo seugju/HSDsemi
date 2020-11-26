@@ -96,10 +96,12 @@
 
         .search-text {
             width: 250px;
-            height: 34px;
+            height: 40px;
             border-radius: 5px;
             border: 2px solid #b8b0b0;
+            vertical-align:middle;
         }
+        
 
         .btn-post {
             width: 100px;
@@ -127,11 +129,15 @@
 		 text-decoration: none;
 		color:black;
 	}
+	a:hover{
+		 text-decoration: none;
+		color:#4a4a4a;
+	}
     </style>
 </head>
 
 <body>
-	<%@ include file="/views/header.jsp"%>
+	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 
         <section>
             <div class="content" style="text-align: center; margin: 0 auto;">
@@ -140,15 +146,15 @@
             <br>
             <br>
             
-<%--           <%
+        <%
 			if (m != null && m.getMemberLevel() == 0) {
-		%> --%>
+		%> 
 		<div class="write">
 			<button type="button" class="write-btn"><a href="/noticeWriteFrm">글쓰기</a></button>
 		</div>
-<%-- 		<%
+		<%
 			}
-		%> --%>
+		%>
 <!--  <div class="write">
        <input type="submit" value="글쓰기" class="write-btn"></div> -->
        
@@ -177,7 +183,9 @@
 				}
 			%>
 		</table>
+		<br>
 		<div id="pageNavi"><%=pageNavi%></div>
+		 <br><br>
             <div class="post">
                 <form action="/searchKeyword">
           			<input type="hidden" name="reqPage" value="1">
@@ -189,7 +197,8 @@
             
                 </div>
         </section>
-
+        <br><br><br>
+	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 <script>
 /* 		$(".btn-post").click(function() {

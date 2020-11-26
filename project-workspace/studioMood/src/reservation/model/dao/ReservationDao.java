@@ -1,0 +1,116 @@
+package reservation.model.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import common.JDBCTemplate;
+import post.model.vo.Post;
+import reservation.model.vo.Reservation;
+
+public class ReservationDao {
+
+	public ArrayList<Reservation> selectAllReservation(Connection conn) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Reservation> list = new ArrayList<Reservation>();
+		String query = "select * from reserve";
+		try {
+			pstmt = conn.prepareStatement(query);		
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Reservation r = new Reservation();
+				r.setrNum(rset.getInt("r_num"));
+				r.setName(rset.getString("name"));
+				r.setPhone(rset.getString("phone"));
+				r.setrDate(rset.getString("r_date"));
+				r.setsTime(rset.getString("s_time"));
+				r.seteTime(rset.getString("e_time"));
+				r.setConcept(rset.getString("concept"));
+				r.setCutNum(rset.getInt("cutnum"));
+				r.setrCheck(rset.getString("r_check").charAt(0));
+				r.setrPass(rset.getString("r_pass"));
+				list.add(r);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+
+	public Reservation selectReservation(Connection conn, String phone, String pw) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Reservation r = new Reservation();
+		String query = "select * from reserve where phone=? and r_pass=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, phone);
+			pstmt.setString(2, pw);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				r.setrNum(rset.getInt("r_num"));
+				r.setName(rset.getString("name"));
+				r.setPhone(rset.getString("phone"));
+				r.setrDate(rset.getString("r_date"));
+				r.setsTime(rset.getString("s_time"));
+				r.seteTime(rset.getString("e_time"));
+				r.setConcept(rset.getString("concept"));
+				r.setCutNum(rset.getInt("cutnum"));
+				r.setrCheck(rset.getString("r_check").charAt(0));
+				r.setrPass(rset.getString("r_pass"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return r;
+	}
+
+	public int deleteReservation(Connection conn, String phone) {
+		PreparedStatement pstmt = null;		
+		int result = 0;
+		String query = "delete from reserve where phone=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, phone);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateReservation(Connection conn, String phone, String s_time, String e_time) {
+		PreparedStatement pstmt = null;		
+		int result = 0;
+		String query = "update reserve set s_time=?,e_time=? where phone=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, s_time);
+			pstmt.setString(2, e_time);
+			pstmt.setString(3, phone);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+}

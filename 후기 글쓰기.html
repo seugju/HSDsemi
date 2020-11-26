@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <style>
-     .post{
+      <style>
+     .post-write{
             width: 80%;
-            text-align: center;
+            margin: 0 auto;
         }
       .btn-post{
           margin-top: 30px;
@@ -58,13 +58,13 @@
 				<table>
 					<tr>
 						<th width="150px">제목</th>
-                        <td><input type="text" class="form-control" name="postTitle" style="width: 500px; outline: none; "></td>
+                        <td><input type="text" name="postTitle" style="width: 500px; outline: none; "></td>
 					</tr>
 				
 					<tr>
 						<th width="150px">작성자</th>
 						<td width="500px"><%=m.getMemberId() %>
-						<input type="hidden" name="noticeWriter" value="<%=m.getMemberId() %>">
+						<input type="hidden" name="postWriter" value="<%=m.getMemberId() %>">
 						</td>
 					</tr>
 						<tr>
@@ -72,7 +72,7 @@
 						<td width="500px"><input type="file" name="filename"></td>
 					</tr>
 					<tr>
-						<td colspan="2"><textarea name="postContent" class="form-control" style="width: 655px; height: 500px"></textarea></td>
+						<td colspan="2"><textarea name="postContent" style="width: 655px; height: 500px"></textarea></td>
 					</tr>
 					<tr style="text-align:center;">
 						<td colspan = "2">

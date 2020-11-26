@@ -1,8 +1,8 @@
 package post.model.vo;
 
 public class Post {
-	private int pNum;
-	private int postNo;	//게시글 넘버
+	private int pNum;	//페이지수를 구하는 번호
+	private int postNo;	//게시글 번호 p_num
 	private String postTitle;
 	private String postContent;
 	private String postWriter;
@@ -48,6 +48,9 @@ public class Post {
 	}
 	public void setPostContent(String postContent) {
 		this.postContent = postContent;
+	}
+	public String getPostContentBr() {
+		return postContent.replaceAll("\r\n", "<br>");
 	}
 	public String getPostWriter() {
 		return postWriter;

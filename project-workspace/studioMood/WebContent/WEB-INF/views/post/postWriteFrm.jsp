@@ -27,6 +27,8 @@
 <%-- 						<td><%=m.getMemberId() %>
 						<input type="hidden" name="noticeWriter" value="<%=m.getMemberId() %>"> --%>
 						</td>
+						<td colspan="2"><textarea name="postContent" class="form-control" style="width: 100%; height: 500px; box-sizing: border-box;"></textarea></td>
+						<td colspan="2"><textarea name="postContent" class="form-control" style="width: 100%; height: 500px; box-sizing: border-box;"></textarea></td>
 					</tr>
 					<tr>
 						<th>내용</th>
