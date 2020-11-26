@@ -147,9 +147,16 @@
             float: none;
         }
         .subMenu li>a:hover{
-            text-decoration: none;
-            
+            text-decoration: none; 
         }
+	a{
+		 text-decoration: none;
+		color:black;
+	}
+	a:hover{
+		 text-decoration: none;
+		color:#4a4a4a;
+	}
     </style>
     
         <script>
@@ -245,7 +252,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">board</a>
                     <ul class="subMenu">
-                        <li><a class="sub-nav-link sub-nav-item" href="#">공지사항</a></li>
+                        <li><a class="sub-nav-link sub-nav-item" href="/noticeList?reqPage=1">공지사항</a></li>
                         <li><a class="sub-nav-link sub-nav-item"href="#">QnA</a></li>
                         <li><a class="sub-nav-link sub-nav-item" href="#">review</a></li>
                         <li><a class="sub-nav-link sub-nav-item"href="#">FAQ</a></li>
