@@ -2,7 +2,7 @@ package qna.model.vo;
 
 public class Qna {
 	private int qNum;	//
-	private int qnaNum;	//공지사항 번호
+	private int qnaNo;	//공지사항 번호
 	private String qTitle;
 	private String qWriter;
 	private String qContent;
@@ -12,10 +12,10 @@ public class Qna {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Qna(int qNum, int qnaNum, String qTitle, String qWriter, String qContent, String qDate, String openChk) {
+	public Qna(int qNum, int qnaNo, String qTitle, String qWriter, String qContent, String qDate, String openChk) {
 		super();
 		this.qNum = qNum;
-		this.qnaNum = qnaNum;
+		this.qnaNo = qnaNo;
 		this.qTitle = qTitle;
 		this.qWriter = qWriter;
 		this.qContent = qContent;
@@ -28,11 +28,11 @@ public class Qna {
 	public void setqNum(int qNum) {
 		this.qNum = qNum;
 	}
-	public int getQnaNum() {
-		return qnaNum;
+	public int getQnaNo() {
+		return qnaNo;
 	}
-	public void setQnaNum(int qnaNum) {
-		this.qnaNum = qnaNum;
+	public void setQnaNo(int qnaNum) {
+		this.qnaNo = qnaNo;
 	}
 	public String getqTitle() {
 		return qTitle;

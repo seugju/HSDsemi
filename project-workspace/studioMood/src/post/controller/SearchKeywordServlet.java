@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jsoup.Connection.Request;
+
 import post.model.service.PostService;
 import post.model.vo.Post;
 import post.model.vo.PostPageData;
@@ -38,18 +40,19 @@ public class SearchKeywordServlet extends HttpServlet {
 		String keyword = request.getParameter("keyword");
 		String type = request.getParameter("type");
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		
-		ArrayList<Post> list = new PostService().searchKeyword(keyword, type);
-		PostPageData ppd = new PostService().searchTitleList(reqPage, keyword);
-		PostPageData ppd2 = new PostService().searchWriterList(reqPage, keyword);
+		//서블릿 코드 수정할게요 
+		PostPageData ppd = new PostService().searchKeyword(reqPage, keyword, type);
+		System.out.println(ppd.getList().size());
+//		ArrayList<Post> list = new PostService().searchKeyword(reqPage, keyword, type);
+//		PostPageData ppd1 = new PostService().searchTitle(reqPage, keyword);
+//		PostPageData ppd2 = new PostService().searchWriter(reqPage, keyword);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/post/postList.jsp");
-		request.setAttribute("list", list);
 		request.setAttribute("type", type);
 		request.setAttribute("keyword", keyword);
-		request.setAttribute("list", ppd.getList());
-		request.setAttribute("pageNavi", ppd.getPageNavi());
-		request.setAttribute("pageNavi", ppd2.getPageNavi());
+			request.setAttribute("list", ppd.getList());
+			request.setAttribute("pageNavi", ppd.getPageNavi());
+
 		rd.forward(request, response);
 	}
 

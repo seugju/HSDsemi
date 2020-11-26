@@ -6,7 +6,6 @@
     <%
     ArrayList<Post> list = (ArrayList<Post>)request.getAttribute("list");
     String pageNavi = (String)request.getAttribute("pageNavi");
-    Member m = (Member)session.getAttribute("member");
     String keyword = (String)request.getAttribute("keyword");
     if(keyword == null){
     	keyword="";
@@ -24,6 +23,7 @@
    <style>
         .content{
             width: 80%;
+            margin : 0 auto;
             
         }
         .content *{
@@ -35,17 +35,16 @@
             text-align: center;
             font-weight: bold;
             font-size: 30px;   
-            border-bottom: 4px solid #FBB1B5;
+            border-bottom: 4px solid #f1d1d1;
         }
          .post-table>tbody>tr>td{
             border-top: 1px solid #b8b0b0;
+            height : 30px;
         }
         .post-table{
-            width: 80%;
-            border-top: 4px solid #FBB1B5;
-            border-left: 1px solid #b8b0b0;
-            border-bottom: 4px solid #FBB1B5;
-            border-right: 1px solid #b8b0b0;
+            width: 100%;
+            border-top: 4px solid #f1d1d1;
+            border-bottom: 4px solid #f1d1d1;
         }
         .post-table>tbody>tr>td{
          text-align: center;
@@ -56,23 +55,26 @@
        
        }
         .post-table>tbody>tr>th{
-        height : 30px;
+        height : 35px;
+        text-align: center;
+        border-bottom: 2px solid #f1d1d1;
         }
        .write>a{
             text-decoration: none;
             color: black;
             display: inline-block;
             width: 80px;
-            height: 30px;
-            line-height: 28px;
+            height: 38px;
+            line-height: 34px;
             font-size: 17px;
             text-align: center;
             background-color: white;
-            border: 2px solid #FBB1B5;
+            border: 2px solid #f1d1d1;
             border-radius: 5px;
         }
         .write{
-            width: 80%;
+        margin-top:-20px;
+            width: 100%;
             text-align: right;
             margin-bottom: 10px;
         }
@@ -85,13 +87,12 @@
             height: 30px;
         }
         .btn-post{
-            vertical-align:middle;
             width: 100px;
-            height: 38px;
+            height: 32px;
             font-weight: bold;
             font-size: 17px;
             background-color: white;
-            border: 2px solid #FBB1B5;
+            border: 2px solid #f1d1d1;
             border-radius: 5px;
         }
         #pageNavi{
@@ -100,23 +101,23 @@
         }
         .post>form>select{
         width : 100px;
-        height : 37px;
+        height : 30px;
         }
     </style>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
   <div class="content">
    <section>
        <div class="pink">후기</div>
        <br>
        <br>
-       <br>
        
-       <%//if(m!=null && m.getMemberLevel()==1) {%>
+       <%if(m!=null && m.getMemberLevel()==1) {%>
        <div class="write">
        <a href="/postWriterFrm" class="write-btn">글쓰기</a>
        </div>
-       <%//} %>
+       <%} %>
        <table class="post-table">
            <tr>
                <th width="10%">No.</th>
@@ -142,8 +143,8 @@
        <option value="postWriter" selected>작성자</option>
        <option value="postTitle">제목</option>
        <%}else if(type.equals("postTitle")) {%>
-       <option value="postTitle" selected>제목</option>
        <option value="postWriter">작성자</option>
+       <option value="postTitle" selected>제목</option>
        <%} %>
        </select>
        <input type="text" placeholder="검색어를 입력해주세요." name ="keyword" class="search-text" value = <%=keyword %> >
@@ -152,5 +153,7 @@
        </div>
    </section>
     </div>
+    <br><br><br>
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

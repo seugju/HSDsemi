@@ -1,0 +1,14 @@
+package qna.model.dao;
+
+import java.sql.Connection;
+
+import common.JDBCTemplate;
+import qna.model.vo.QnaPageData;
+
+public class QnaDao {
+	private int totalCount(Connection conn) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

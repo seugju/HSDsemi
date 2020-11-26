@@ -34,10 +34,8 @@ public class InsertPostCommentServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		PostComment pc = new PostComment();
-		pc.setPostCommentWriter(request.getParameter("postCommentwriter"));
+		pc.setPostCommentWriter(request.getParameter("postCommentWriter"));
 		pc.setPostCommentContent(request.getParameter("postCommentContent"));
-		pc.setPostCommentLevel(Integer.parseInt(request.getParameter("postCommentLevel")));
-		pc.setPostCommentDate(request.getParameter("postCommentDate"));
 		pc.setPostRef(Integer.parseInt(request.getParameter("postRef")));
 		
 		int result = new PostService().insertPostComment(pc);
