@@ -78,13 +78,13 @@
 <script type="text/javascript">
 	$("#btnChangeReserve").click(function(){
 		var check = $("[type=radio]:checked");
-		//location.href="/reserveUpdate";
-		console.log(check);
-		var rnum = check.parent().next().html();
-		console.log(rnum);
+		var rNum = check.parent().next().html();
+		location.href="/reserveUpdateNum?rNum="+rNum;
 	});
 	$("#btnDeleteReserve").click(function(){
-		console.log("삭제처리");
+		var check = $("[type=radio]:checked");
+		var rNum = check.parent().next().html();
+		location.href="/reserveDeleteNum?rNum="+rNum;
 	});
 </script>
 </html>

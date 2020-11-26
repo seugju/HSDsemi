@@ -91,7 +91,8 @@
 		</tr>	
 		
 		<tr id="btns">
-			<td id="btn"><button type="button" onclick="location.href='/reserveUpdate?phone=<%=r.getPhone() %>' ">예약수정하기</button></td>
+			<!--  td id="btn"><button type="button" onclick="location.href='/reserveUpdate?phone=<%=r.getPhone() %>' ">예약수정하기</button></td-->
+			<td id="btn"><button type="button" onclick="location.href='/수정페이지?phone=<%=r.getPhone() %>' ">예약수정하기</button></td>
 			<td id="btn"><button type="button" onclick="location.href='/reserveDelete?phone=<%=r.getPhone() %>' ">예약취소하기</button></td>
 			<td id="btn"><button type="button" onclick="location.href='/' ">결제하기</button></td>
 		</tr>

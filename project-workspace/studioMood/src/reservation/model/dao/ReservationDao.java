@@ -93,6 +93,22 @@ public class ReservationDao {
 		}
 		return result;
 	}
+	public int deleteReservation(Connection conn, int rNum) {
+		PreparedStatement pstmt = null;		
+		int result = 0;
+		String query = "delete from reserve where r_num=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, rNum);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 
 	public int updateReservation(Connection conn, String phone, String s_time, String e_time) {
 		PreparedStatement pstmt = null;		
@@ -113,4 +129,34 @@ public class ReservationDao {
 		return result;
 	}
 
+	public Reservation selectReservation(Connection conn, int rNum) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Reservation r = new Reservation();
+		String query = "select * from reserve where r_num=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, rNum);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				r.setrNum(rset.getInt("r_num"));
+				r.setName(rset.getString("name"));
+				r.setPhone(rset.getString("phone"));
+				r.setrDate(rset.getString("r_date"));
+				r.setsTime(rset.getString("s_time"));
+				r.seteTime(rset.getString("e_time"));
+				r.setConcept(rset.getString("concept"));
+				r.setCutNum(rset.getInt("cutnum"));
+				r.setrCheck(rset.getString("r_check").charAt(0));
+				r.setrPass(rset.getString("r_pass"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return r;
+	}
 }
