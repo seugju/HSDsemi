@@ -16,28 +16,30 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
-     <style>
-    	 @font-face {
+    
+    <style>
+        @font-face {
             font-family: 'S-CoreDream-4Regular';
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
             font-weight: normal;
             font-style: normal;
         }
 
-		@font-face {
-		    font-family: 'Cafe24Danjunghae';
-		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Danjunghae.woff') format('woff');
-		    font-weight: normal;
-		    font-style: normal;
-		}
-		
-		@font-face {
-		    font-family: 'KCC-eunyoung';
-		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KCC-eunyoung-Regular.woff') format('woff');
-		    font-weight: normal;
-		    font-style: normal;
-		}
-        header{
+        @font-face {
+            font-family: 'Cafe24Danjunghae';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Danjunghae.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'KCC-eunyoung';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KCC-eunyoung-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        header {
             width: 100vw;
         }
 
@@ -52,13 +54,14 @@
             width: 500px;
             text-align: center;
         }
-        .logo >h2{
-         	font-family: 'Cafe24Danjunghae';
-         }
-        
-        .logo>p{
-        	 font-family: 'KCC-eunyoung';
-        	 font-size: 14pt;
+
+        .logo>h2 {
+            font-family: 'Cafe24Danjunghae';
+        }
+
+        .logo>p {
+            font-family: 'KCC-eunyoung';
+            font-size: 14pt;
         }
 
         .navi-menu,
@@ -66,7 +69,7 @@
             /* menu ul */
             list-style: none;
             text-align: center;
-            
+
         }
 
         .navi-menu-top {
@@ -80,7 +83,7 @@
 
         .navi-menu>li {
             width: 125px;
-            height: 40px;
+            height: 100%;
             margin: 0 auto;
         }
 
@@ -94,8 +97,10 @@
         }
 
         .nav-link {
+            font-size: 14pt;
             color: #373a40;
             font-weight: bold;
+            padding: 10px;
         }
 
         .navi-menu-top {
@@ -103,7 +108,7 @@
         }
 
         .nav-top {
-     	   	font-family: 'S-CoreDream-4Regular';
+            font-family: 'S-CoreDream-4Regular';
             width: 1200px;
             float: right;
             padding-right: 30px;
@@ -124,20 +129,34 @@
             color: #373a40;
         }
 
-        .subMenu{
+        .subMenu {
             margin: 0;
             padding: 0;
             list-style-type: none;
             transition-duration: 2s;
         }
-        .subMenu li>a{
+        .sub-nav-link{
+            color: #373a40;
+            font-size: 10pt;
+        }
+        .subMenu li>a {
             margin: 0;
-            padding: 0;
+            padding: 10px;
             display: inline-block;
             width: 125px;
             float: none;
         }
-
+        .subMenu li>a:hover{
+            text-decoration: none; 
+        }
+	a{
+		 text-decoration: none;
+		color:black;
+	}
+	a:hover{
+		 text-decoration: none;
+		color:#4a4a4a;
+	}
     </style>
     
         <script>
@@ -164,7 +183,7 @@
     </script>
 </head>
 <body>
-<header>
+
      <div class="nav-top">
      <%if(m != null) { //로그인 된 상태%> 
      	<ul class="navbar-nav navi-menu-top" id="login-nav">
@@ -203,47 +222,48 @@
 
     </div>
 
-    <nav class="navbar navbar-expand-sm sticky-top">
-        <ul class="navbar-nav navi-menu">
-            <li class="nav-item">
-                <a class="nav-link" href="#">about</a>
-                <ul class="subMenu">
-                    <li><a class="nav-link sub-nav-item" href="#"></a>studio 'mood'</li>
-                    <li><a class="nav-link sub-nav-item" href="#"></a>오시는 길</li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">product</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">gallery</a>
-                <ul class="subMenu">
-                    <li><a class="nav-link sub-nav-item" href="#"></a>개인프로필</li>
-                    <li><a class="nav-link sub-nav-item" href="#"></a>바디프로필</li>
-                    <li><a class="nav-link sub-nav-item" href="#"></a>단체프로필</li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">reservation</a>
-                <ul class="subMenu">
-                    <li><a class="nav-link sub-nav-item" href="#"></a>예약</li>
-                    <li><a class="nav-link sub-nav-item" href="#"></a>예약확인</li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">board</a>
-                <ul class="subMenu">
-                    <li><a class="nav-link sub-nav-item" href="#"></a>공지사항</li>
-                    <li><a class="nav-link sub-nav-item" href="#"></a>QnA</li>
-                    <li><a class="nav-link sub-nav-item" href="#"></a>review</li>
-                </ul>
-            </li>
+     <nav class="navbar navbar-expand-sm sticky-top">
+            <ul class="navbar-nav navi-menu">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">about</a>
+                    <ul class="subMenu">
+                        <li><a class="sub-nav-link sub-nav-item" href="#">studio 'mood'</a></li>
+                        <li><a class="sub-nav-link sub-nav-item" href="#">오시는 길</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">product</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">gallery</a>
+                    <ul class="subMenu">
+                        <li><a class="sub-nav-link sub-nav-item" href="#">개인프로필</a></li>
+                        <li><a class="sub-nav-link sub-nav-item" href="#">바디프로필</a></li>
+                        <li><a class="sub-nav-link sub-nav-item" href="#">단체프로필</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">reservation</a>
+                    <ul class="subMenu">
+                        <li><a class="sub-nav-link sub-nav-item" href="#">예약</a></li>
+                        <li><a class="sub-nav-link sub-nav-item" href="#">예약확인</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">board</a>
+                    <ul class="subMenu">
+                        <li><a class="sub-nav-link sub-nav-item" href="/noticeList?reqPage=1">공지사항</a></li>
+                        <li><a class="sub-nav-link sub-nav-item"href="#">QnA</a></li>
+                        <li><a class="sub-nav-link sub-nav-item" href="#">review</a></li>
+                        <li><a class="sub-nav-link sub-nav-item"href="#">FAQ</a></li>
+                    </ul>
+                </li>
 
-        </ul>
-    </nav>
+            </ul>
+        </nav>
     
 
-</header>
+
 
 </body>
 </html>
