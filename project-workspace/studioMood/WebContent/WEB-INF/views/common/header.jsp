@@ -157,14 +157,13 @@
                 })
                 $(this).next().slideToggle();
              });
-            
         });
         
 
     </script>
 </head>
 <body>
-<header>
+
      <div class="nav-top">
      <%if(m != null) { //로그인 된 상태%> 
      	<ul class="navbar-nav navi-menu-top" id="login-nav">
@@ -189,7 +188,6 @@
             </li>
         </ul>
      <%} %>
-        
     </div>
 
     <div class="container-fluid">
@@ -199,17 +197,15 @@
             <h2>STUDIO Mood:</h2>
             <p>감성을 담는 사진관 </p>
         </div>
-
-
     </div>
 
-    <nav class="navbar navbar-expand-sm sticky-top">
+   <nav class="navbar navbar-expand-sm sticky-top">
         <ul class="navbar-nav navi-menu">
             <li class="nav-item">
                 <a class="nav-link" href="#">about</a>
                 <ul class="subMenu">
-                    <li><a class="nav-link sub-nav-item" href="#"></a>studio 'mood'</li>
-                    <li><a class="nav-link sub-nav-item" href="#"></a>오시는 길</li>
+                    <li><a class="nav-link sub-nav-item" href="#">studio 'mood'</a></li>
+                    <li><a class="nav-link sub-nav-item" href="#">오시는 길</a></li>
                 </ul>
             </li>
             <li class="nav-item">
@@ -218,32 +214,30 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">gallery</a>
                 <ul class="subMenu">
-                    <li><a class="nav-link sub-nav-item" href="#"></a>개인프로필</li>
-                    <li><a class="nav-link sub-nav-item" href="#"></a>바디프로필</li>
-                    <li><a class="nav-link sub-nav-item" href="#"></a>단체프로필</li>
+                    <li><a class="nav-link sub-nav-item" href="#">개인프로필</a></li>
+                    <li><a class="nav-link sub-nav-item" href="#">바디프로필</a></li>
+                    <li><a class="nav-link sub-nav-item" href="#">단체프로필</a></li>
                 </ul>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">reservation</a>
                 <ul class="subMenu">
-                    <li><a class="nav-link sub-nav-item" href="#"></a>예약</li>
-                    <li><a class="nav-link sub-nav-item" href="#"></a>예약확인</li>
+                    <li><a class="nav-link sub-nav-item" href="#">예약</a></li>
+                    <li><a class="nav-link sub-nav-item" href="#">예약확인</a></li>
                 </ul>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">board</a>
                 <ul class="subMenu">
-                    <li><a class="nav-link sub-nav-item" href="#"></a>공지사항</li>
-                    <li><a class="nav-link sub-nav-item" href="#"></a>QnA</li>
-                    <li><a class="nav-link sub-nav-item" href="#"></a>review</li>
+                    <li><a class="nav-link sub-nav-item" href="/noticeList?reqPage=1">공지사항</a></li>
+                    <li><a class="nav-link sub-nav-item" href="#">QnA</a></li>
+                    <li><a class="nav-link sub-nav-item" href="#">review</a></li>
+                    <li><a class="nav-link sub-nav-item" href="#">FAQ</a></li>
                 </ul>
             </li>
-
         </ul>
     </nav>
     
-
-</header>
 
 </body>
 </html>
