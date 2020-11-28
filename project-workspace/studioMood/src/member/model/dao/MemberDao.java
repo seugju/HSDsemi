@@ -168,7 +168,6 @@ public class MemberDao {
 			pstmt.setString(4, member.getAddress());
 			pstmt.setString(5, member.getMemberId());
 			result = pstmt.executeUpdate();
-			System.out.println("Dao addr :"+member.getAddress());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
