@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="HSDsemi">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/project-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/work/Catalina/localhost/ROOT"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/project-workspace/studioMood/src"/>
+        <property name="context-root" value="/"/>
+        <property name="java-output-path" value="/HSDsemi/bin"/>
+    </wb-module>
+</project-modules>
