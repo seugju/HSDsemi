@@ -36,6 +36,7 @@
         .mainPage-content {
             margin: 0 auto;
             width: 96vw;
+            
         }
 
         .carousel-inner img {
@@ -46,6 +47,9 @@
         .content {
             width: 1200px;
             margin: 0 auto;
+            margin-top: 100px;
+            margin-bottom: 100px;
+            
         }
 
         .main-info {
@@ -217,9 +221,6 @@
                     <div class="carousel-item">
                         <img src="img/unsplash3.jpg" alt="carousel3" width="1100" height="500">
                     </div>
-                    <div class="carousel-item">
-                        <img src="img/unsplash4.jpg" alt="carousel4" width="1100" height="500">
-                    </div>
                 </div>
 
                 <!-- 왼쪽 오른쪽 컨트롤 -->
@@ -314,9 +315,6 @@
                 </div>
             </div>
         </div>
-
-
-
     </div>
 
 	
