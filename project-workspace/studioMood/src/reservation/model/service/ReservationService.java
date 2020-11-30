@@ -49,9 +49,9 @@ public class ReservationService {
 		return result;
 	}
 
-	public int updateReservation(String phone, String s_time, String e_time) {
+	public int updateReservation(int rNum, String s_time, String e_time, String r_date) {
 		Connection conn = JDBCTemplate.getConnection();
-		int result = new ReservationDao().updateReservation(conn,phone,s_time,e_time);
+		int result = new ReservationDao().updateReservation(conn,rNum,s_time,e_time, r_date);
 		if(result>0) {
 			JDBCTemplate.commit(conn);
 		}else {

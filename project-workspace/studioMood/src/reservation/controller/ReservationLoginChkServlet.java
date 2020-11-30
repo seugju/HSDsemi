@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import member.model.vo.Member;
+import reservation.model.service.ReservationService;
 import reservation.model.vo.Reservation;
 
 /**
@@ -40,21 +41,34 @@ public class ReservationLoginChkServlet extends HttpServlet {
 		reservation.setsTime(request.getParameter("s_time"));
 		reservation.seteTime(request.getParameter("e_time"));
 		reservation.setConcept(request.getParameter("concept"));
-		reservation.setrCheck("N");
-		//이부분도 수정에선 결제가 된 이후일수도 있음 해결해야함
 		reservation.setrPass(request.getParameter("r_pass"));
 		reservation.setCutNum(Integer.parseInt(request.getParameter("cut")));
-		if(member==null) {
-			System.out.println("nnnn");
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reservation/nonMemResv.jsp");
-			request.setAttribute("reservation", reservation);// 비회원 페이지에 예약데이터를 넘겨서 나머지값을 입력받도록 유도
-			rd.forward(request, response);
+		RequestDispatcher rd = null;
+		if(request.getParameter("rCheck").equals(null)) {
+			reservation.setrCheck("N");
+			if(member==null) {
+				System.out.println("nnnn");
+				rd = request.getRequestDispatcher("/WEB-INF/views/reservation/nonMemResv.jsp");
+				request.setAttribute("reservation", reservation);// 비회원 페이지에 예약데이터를 넘겨서 나머지값을 입력받도록 유도
+			}else {
+				System.out.println("!!!!");
+				rd = request.getRequestDispatcher("/memberReservation");
+				request.setAttribute("reservation", reservation);  //회원 예약 서블릿에는 로그인 객체와  예약 객체를 섞어 완성데이터 받기
+			}
 		}else {
-		System.out.println("!!!!");
-			RequestDispatcher rd = request.getRequestDispatcher("/memberReservation");
-			request.setAttribute("reservation", reservation);  //회원 예약 서블릿에는 로그인 객체와  예약 객체를 섞어 완성데이터 받기
-			rd.forward(request, response);		
-		}
+			//수정값이 넘어오면 결제값은 유지되야함
+			System.out.println("수정진행해야함");
+			reservation.setrCheck(request.getParameter("rCheck"));
+			reservation.setrNum(Integer.parseInt(request.getParameter("rNum")));
+			rd = request.getRequestDispatcher("/WEB-INF/views/reservation/searchReserve.jsp");
+			int result = new ReservationService().updateReservation(reservation.getrNum(), reservation.getsTime(), reservation.geteTime(), reservation.getrDate());
+			if(result>0) {
+				System.out.println("수정성공");
+			}else {
+				System.out.println("수정실패");
+			}
+		}			
+		rd.forward(request, response);		
 	}
 
 	/**
