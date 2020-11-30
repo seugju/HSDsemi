@@ -37,8 +37,9 @@ public class ReserveUpdateNumServlet extends HttpServlet {
 		int rNum = Integer.parseInt(request.getParameter("rNum"));
 		Reservation r = new ReservationService().selectReservation(rNum);
 		//조회후 넘기기
-		RequestDispatcher rd = request.getRequestDispatcher("수정페이지");
+		RequestDispatcher rd = request.getRequestDispatcher("/fullcalendar-5.4.0/examples/full-height.jsp");
 		request.setAttribute("reserveAdmin", r);
+		System.out.println("예약번호 = "+r.getrNum());
 		rd.forward(request, response);
 	}
 

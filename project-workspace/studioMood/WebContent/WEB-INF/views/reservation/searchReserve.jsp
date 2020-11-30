@@ -146,8 +146,8 @@ body {
   <div class="thumbnail"><img src="/img/logo.png"/></div>
  
   <form class="login-form" action="/chkReserve">
-    <input type="text" placeholder="username"/>
-    <input type="text" placeholder="phone"/>
+    <input type="text" placeholder="phone" name="phone"/>
+    <input type="password" placeholder="password" name="pw"/>
     <button>login</button>
   </form>
 </div>

@@ -81,4 +81,11 @@ public class ReservationService {
 		JDBCTemplate.close(conn);
 		return list;
 	}
+
+	public ArrayList<Reservation> selectReservation(String phone) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Reservation> list = new ReservationDao().selectReservation(conn, phone);
+		JDBCTemplate.close(conn);
+		return list;
+	}
 }

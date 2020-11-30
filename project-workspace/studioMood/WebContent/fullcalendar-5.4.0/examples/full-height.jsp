@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="reservation.model.vo.Reservation"%>
+    <%
+    	Reservation r = (Reservation)request.getAttribute("reserveAdmin");
+    	System.out.println("예약날짜 = "+r.getrDate());
+    %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -74,23 +79,43 @@ $(document).ready(function(){
 				data:{resvDate:resvDate},
 				success:function(data){
 					console.log(data.length);
+					//현재 가져온 값의 해당 시간들을 전부 비활성화 처리
 					for(var i=0;i<data.length;i++){
 						var sTime=Number(data[i].sTime);
 						var eTime=Number(data[i].eTime);
 						//var timeLabel =document.getElementsByClassName("labelchk");
 						var timeLabel = $(".labelchk");
 						for(var i=0;i<timeLabel.length;i++){
-							var val = timeLabel.eq(i).attr("value");							
+							var val = timeLabel.eq(i).attr("value");
 							if(Number(val)>=sTime && Number(val)<=eTime){
 								timeLabel.eq(i).addClass("resv-chk-style-disabled");
 								//timeLabel.eq(i).removeClass(".labelchk");
-								timeLabel.eq(i).children().prop("disabled",true);								
+								timeLabel.eq(i).children().prop("disabled",true);
 							}
 						}
 					}
-					
 				},error:function(){
 					console.log("실패");
+				},complete:function(){
+					//finally와 유사한 구문(무조건 실행)
+					//현재가 수정이면  가져온 시간들을 활성화
+					var rDate="<%=r.getrDate()%>";
+					var sTime=Number(<%=r.getsTime()%>);
+					var eTime=Number(<%=r.geteTime()%>);
+					console.log(rDate);
+					console.log(resvDate);
+					if(rDate===resvDate){
+						console.log("sTime = "+sTime+", eTime = "+eTime);
+						console.log("일단 들어왔음,i는0~10까지");
+						var timeLabel = $(".labelchk");
+						for(var i=sTime-11;i<=eTime-11;i++){
+							var val = timeLabel.eq(i).attr("value");
+							if(Number(val)>=sTime && Number(val)<=eTime){
+								timeLabel.eq(i).removeClass("resv-chk-style-disabled");
+								timeLabel.eq(i).children().prop("disabled",false);
+							}
+						}
+					}
 				}
 			});
 			});

@@ -1,9 +1,10 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="reservation.model.vo.Reservation"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%
-    	Reservation r = (Reservation)request.getAttribute("chkReserve");
-    	request.setAttribute("chkReserve",r);
+    <%    
+    	ArrayList<Reservation> list = (ArrayList<Reservation>)request.getAttribute("ReserveList");
+    	//request.setAttribute("chkReserve",r);
     	String msg = (String)request.getAttribute("alertMsg");
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -46,7 +47,12 @@
   color: black;
 }
 #btn{
-	border:0px;
+	border: none;
+	height: 10vw;
+}
+#btn button{
+	width: 80%;
+	height:60%;
 }
 .resv-btn{
 	width:80vw;
@@ -69,6 +75,7 @@
 	
 	<table id="resv-one-search">
 	<tr>
+		<th>체크</th>
 		<th>예약번호</th>
 		<th>이름</th>
 		<th>전화번호</th>
@@ -80,25 +87,34 @@
 		<th>예약확인</th>
 		<th>예약비밀번호</th>
 	</tr>
-  
+	<%if(list.size()!=0) {%>
+  <%for(int i=0; i<list.size(); i++) {%>
   <tr>
-    <td><%=r.getrNum() %></td>
-    <td><%=r.getName() %></td>
-    <td><%=r.getPhone() %></td>
-    <td><%=r.getrDate() %></td>
-    <td><%=r.getsTime() %></td>
-    <td><%=r.geteTime() %></td>
-    <td><%=r.getConcept() %></td>
-    <td><%=r.getCutNum() %></td>
-    <td><%=r.getrCheck() %></td>
-    <td><%=r.getrPass() %></td>
-    
+  	<td><input type="radio" name="temp" class="change"></td>
+    <td><%=list.get(i).getrNum() %></td>
+    <td><%=list.get(i).getName() %></td>
+    <td><%=list.get(i).getPhone() %></td>
+    <td><%=list.get(i).getrDate() %></td>
+    <td><%=list.get(i).getsTime() %></td>
+    <td><%=list.get(i).geteTime() %></td>
+    <td><%=list.get(i).getConcept() %></td>
+    <td><%=list.get(i).getCutNum() %></td>
+    <td><%=list.get(i).getrCheck() %></td>
+    <td><%=list.get(i).getrPass() %></td>    
+  </tr>
+  <%} %>
+  <%}else{ %>
+  <tr>
+  	<td colspan="11"><%=msg %></td>
+  </tr>
+  <%} %>
+  <tr>
+  	<td id="btn" colspan="5"><button type="button" id="btnChangeReserve">변경하기</button></td>
+	<td id="btn"></td>
+	<td id="btn" colspan="5"><button type="button" id="btnDeleteReserve">취소하기</button></td>
   </tr>
   </table>
-  <div class="resv-btn">
-	<button type="button" onclick="location.href='/수정페이지?phone=<%=r.getPhone() %>' ">예약수정하기</button>
-	<button type="button" onclick="location.href='/reserveDelete?phone=<%=r.getPhone() %>' ">예약취소하기</button>
-	<button type="button" onclick="location.href='/' ">결제하기</button>
+  <div class="resv-btn">  
 	
 </div>
   </div>
@@ -106,4 +122,16 @@
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 
 </body>
+<script type="text/javascript">
+$("#btnChangeReserve").click(function(){
+	var check = $("[type=radio]:checked");
+	var rNum = check.parent().next().html();
+	location.href="/reserveUpdateNum?rNum="+rNum;
+});
+$("#btnDeleteReserve").click(function(){
+	var check = $("[type=radio]:checked");
+	var phone = check.parent().next().next().next().html();
+	location.href="/reserveDelete?phone="+phone;
+});
+</script>
 </html>

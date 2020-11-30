@@ -80,6 +80,7 @@
 		var check = $("[type=radio]:checked");
 		var rNum = check.parent().next().html();
 		location.href="/reserveUpdateNum?rNum="+rNum;
+		//비회원은 현재 수정이 아니라 삽입되는 현상 발생함 해결요망
 	});
 	$("#btnDeleteReserve").click(function(){
 		var check = $("[type=radio]:checked");

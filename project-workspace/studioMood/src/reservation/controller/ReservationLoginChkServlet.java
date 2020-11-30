@@ -41,6 +41,7 @@ public class ReservationLoginChkServlet extends HttpServlet {
 		reservation.seteTime(request.getParameter("e_time"));
 		reservation.setConcept(request.getParameter("concept"));
 		reservation.setrCheck("N");
+		//이부분도 수정에선 결제가 된 이후일수도 있음 해결해야함
 		reservation.setrPass(request.getParameter("r_pass"));
 		reservation.setCutNum(Integer.parseInt(request.getParameter("cut")));
 		if(member==null) {
@@ -52,8 +53,7 @@ public class ReservationLoginChkServlet extends HttpServlet {
 		System.out.println("!!!!");
 			RequestDispatcher rd = request.getRequestDispatcher("/memberReservation");
 			request.setAttribute("reservation", reservation);  //회원 예약 서블릿에는 로그인 객체와  예약 객체를 섞어 완성데이터 받기
-			rd.forward(request, response);
-		
+			rd.forward(request, response);		
 		}
 	}
 

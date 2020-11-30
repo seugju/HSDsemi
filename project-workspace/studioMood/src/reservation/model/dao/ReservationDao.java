@@ -111,7 +111,7 @@ public class ReservationDao {
 	}
 
 	public int updateReservation(Connection conn, String phone, String s_time, String e_time) {
-		PreparedStatement pstmt = null;		
+		PreparedStatement pstmt = null;
 		int result = 0;
 		String query = "update reserve set s_time=?,e_time=? where phone=?";
 		try {
@@ -217,6 +217,41 @@ public ArrayList<Reservation> selectAllTime(Connection conn, String rDate) {
 	}finally {
 		JDBCTemplate.close(pstmt);
 		JDBCTemplate.close(rset);
+	}
+	
+	return list;
+}
+
+public ArrayList<Reservation> selectReservation(Connection conn, String phone) {
+	PreparedStatement pstmt=null;
+	String query="select * from reserve where phone=?";
+	ArrayList<Reservation> list = new ArrayList<Reservation>();
+	ResultSet rset =null;
+	try {
+		pstmt=conn.prepareStatement(query);
+		pstmt.setString(1, phone);
+		rset=pstmt.executeQuery();
+		while(rset.next()) {
+			Reservation r = new Reservation();
+			r.setrNum(rset.getInt("r_num"));
+			r.setName(rset.getString("name"));
+			r.setPhone(rset.getString("phone"));
+			r.setrDate(rset.getString("r_date"));
+			r.setsTime(rset.getString("s_time"));
+			r.seteTime(rset.getString("e_time"));
+			r.setConcept(rset.getString("concept"));
+			r.setCutNum(rset.getInt("cutnum"));
+			r.setrCheck(rset.getString("r_check"));
+			r.setrPass(rset.getString("r_pass"));
+			list.add(r);
+		}
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}finally {
+		JDBCTemplate.close(rset);
+		JDBCTemplate.close(pstmt);
 	}
 	
 	return list;
