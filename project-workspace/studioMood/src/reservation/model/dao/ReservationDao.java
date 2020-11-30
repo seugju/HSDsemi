@@ -31,7 +31,7 @@ public class ReservationDao {
 				r.seteTime(rset.getString("e_time"));
 				r.setConcept(rset.getString("concept"));
 				r.setCutNum(rset.getInt("cutnum"));
-				r.setrCheck(rset.getString("r_check").charAt(0));
+				r.setrCheck(rset.getString("r_check"));
 				r.setrPass(rset.getString("r_pass"));
 				list.add(r);
 			}
@@ -64,7 +64,7 @@ public class ReservationDao {
 				r.seteTime(rset.getString("e_time"));
 				r.setConcept(rset.getString("concept"));
 				r.setCutNum(rset.getInt("cutnum"));
-				r.setrCheck(rset.getString("r_check").charAt(0));
+				r.setrCheck(rset.getString("r_check"));
 				r.setrPass(rset.getString("r_pass"));
 			}
 		} catch (SQLException e) {
@@ -147,7 +147,7 @@ public class ReservationDao {
 				r.seteTime(rset.getString("e_time"));
 				r.setConcept(rset.getString("concept"));
 				r.setCutNum(rset.getInt("cutnum"));
-				r.setrCheck(rset.getString("r_check").charAt(0));
+				r.setrCheck(rset.getString("r_check"));
 				r.setrPass(rset.getString("r_pass"));
 			}
 		} catch (SQLException e) {
@@ -159,4 +159,66 @@ public class ReservationDao {
 		}
 		return r;
 	}
+
+public int insertReservation(Reservation reservation) {
+	System.out.println("33");
+	PreparedStatement pstmt = null;
+	Connection conn=JDBCTemplate.getConnection();
+	int result=0;
+	String query = "insert into reserve values(reserve_seq.nextval,?,?,?,?,?,?,?,?,?)";
+	try {
+		pstmt=conn.prepareStatement(query);
+		pstmt.setString(1, reservation.getName());
+		pstmt.setString(2, reservation.getPhone());
+		pstmt.setString(3, reservation.getrDate());
+		pstmt.setString(4, reservation.getsTime());
+		pstmt.setString(5, reservation.geteTime());
+		pstmt.setString(6, reservation.getConcept());
+		pstmt.setInt(7, reservation.getCutNum());
+		pstmt.setString(8, reservation.getrCheck());
+		pstmt.setString(9, reservation.getrPass());
+		result=pstmt.executeUpdate();
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}finally {
+		JDBCTemplate.close(conn);
+		JDBCTemplate.close(pstmt);
+	}
+	return result;
+}
+
+public ArrayList<Reservation> selectAllTime(Connection conn, String rDate) {
+	System.out.println(2);
+	PreparedStatement pstmt=null;
+	String query="select * from reserve where r_date=?";
+	ArrayList<Reservation> list = new ArrayList<Reservation>();
+	ResultSet rset =null;
+	try {
+		pstmt=conn.prepareStatement(query);
+		pstmt.setString(1, rDate);
+		rset=pstmt.executeQuery();
+		while(rset.next()) {
+			Reservation reservation = new Reservation();
+			reservation.setsTime(rset.getString("s_time"));
+			reservation.seteTime(rset.getString("e_time"));
+			list.add(reservation);
+		}
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}finally {
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(rset);
+	}
+	
+	return list;
+}
 }

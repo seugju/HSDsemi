@@ -67,5 +67,18 @@ public class ReservationService {
 		JDBCTemplate.close(conn);
 		return r;
 	}
-
+	public ArrayList<Reservation> selectAllTime(String rDate) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Reservation> list = new ReservationDao().selectAllTime(conn,rDate);
+		
+		if(list.isEmpty()) {
+			System.out.println(1);
+		}
+			
+		
+			
+		
+		JDBCTemplate.close(conn);
+		return list;
+	}
 }

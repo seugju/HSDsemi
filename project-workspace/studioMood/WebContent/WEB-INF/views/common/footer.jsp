@@ -23,7 +23,7 @@
         .footer{
             background-color: rgb(124, 117, 117);
             text-align: center;
-            width: 100vw;
+            width: 80vw;
             height: 250px;
             margin: 0;
             padding: 0;

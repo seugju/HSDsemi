@@ -66,6 +66,30 @@ $(document).ready(function(){
 				리스트에 시작시간과 총시간 가져옴
 				반복문을 돌려서 시간만큼 비활성화
 			*/
+			$.ajax({
+				url:"/printReservedDateTime",
+				type:"get",
+				data:{resvDate:resvDate},
+				success:function(data){
+					console.log(data.length);
+					for(var i=0;i<data.length;i++){
+						var sTime=Number(data[i].sTime);
+						var eTime=Number(data[i].eTime);
+						//var timeLabel =document.getElementsByClassName("labelchk");
+						var timeLabel = $(".labelchk");
+						for(var i=0;i<timeLabel.length;i++){
+							var val = timeLabel.eq(i).attr("value");							
+							if(Number(val)>=sTime && Number(val)<=eTime){
+								timeLabel.eq(i).addClass("resv-chk-style-disabled");
+								timeLabel.eq(i).children().prop("disabled",true);								
+							}
+						}
+					}
+					
+				},error:function(){
+					console.log("실패");
+				}
+			});
 			});
 		});
     });
@@ -115,7 +139,6 @@ a{
 
 </style>
 </head>
-
 <body>
 	<div class="resv-main-frame">
     <div class="resv-chk">
@@ -222,7 +245,9 @@ a{
         </div>
         </form>
         </div>
+        
 </body>
+
 <script>
 var option;
 var startDay = 0;
@@ -268,7 +293,7 @@ $(".labelchk").click(function() {
     $('.resv-sesel').click(function() {
         option = $(this).val();
         console.log(option);
-        var inputChkbox = $('input[type="checkbox"]');  
+        var inputChkbox = $('input[type="checkbox"]');
         inputChkbox.click(function() {
             if (option == "start") {
                 $('.resv-chk-style-start').prop("checked", false);
@@ -353,8 +378,7 @@ $(".labelchk").click(function() {
             alert("다시");
            return false;
         }
-        });
+	});
 	
 </script>
-
 </html>

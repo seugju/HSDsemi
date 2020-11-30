@@ -15,7 +15,7 @@ import reservation.model.vo.Reservation;
 /**
  * Servlet implementation class ReserveDeleteNumServlet
  */
-@WebServlet(name = "ReserveDeleteNum", urlPatterns = { "/reserveDeleteNum" })
+@WebServlet(name = "ReserveDeleteNum", urlPatterns={"/reserveDeleteNum"})
 public class ReserveDeleteNumServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

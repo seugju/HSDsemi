@@ -9,14 +9,14 @@ public class Reservation {
 	String eTime;
 	String concept;
 	int cutNum;
-	char rCheck;
+	String rCheck;
 	String rPass;
 	public Reservation() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Reservation(int rNum, String name, String phone, String rDate, String sTime, String eTime, String concept,
-			int cutNum, char rCheck, String rPass) {
+			int cutNum, String rCheck, String rPass) {
 		super();
 		this.rNum = rNum;
 		this.name = name;
@@ -77,10 +77,10 @@ public class Reservation {
 	public void setCutNum(int cutNum) {
 		this.cutNum = cutNum;
 	}
-	public char getrCheck() {
+	public String getrCheck() {
 		return rCheck;
 	}
-	public void setrCheck(char rCheck) {
+	public void setrCheck(String rCheck) {
 		this.rCheck = rCheck;
 	}
 	public String getrPass() {

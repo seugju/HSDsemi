@@ -39,10 +39,12 @@
             font-style: normal;
         }
 
-        header {
-            width: 100vw;
+        .header {
+            width: 80vw;
         }
-
+		header {
+            width: 80vw;
+        }
         .navbar {
             display: block;
             background-color: #faf2f2;
@@ -183,7 +185,7 @@
     </script>
 </head>
 <body>
-
+	<div class="header">
      <div class="nav-top">
      <%if(m != null) { //로그인 된 상태%> 
      	<ul class="navbar-nav navi-menu-top" id="login-nav">
@@ -263,7 +265,7 @@
         </nav>
     
 
-
+</div>
 
 </body>
 </html>
