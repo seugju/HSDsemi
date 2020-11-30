@@ -1,18 +1,14 @@
-<%@page import="notice.model.vo.Notice"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-      <%
-    	Notice n =(Notice)request.getAttribute("n");
-    %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
 <script type="text/javascript"
 	src="/nse_files/js/HuskyEZCreator.js"
 	charset="utf-8"></script>
-<title>Insert title here</title>
- <style>
+<style>
 	.content-writer *{
 		margin: 0 auto;
 	}
@@ -88,42 +84,34 @@
 		text-align:left;
 		padding-left:5px;
 	}
-    </style>
+	button{
+		outline:none;
+	}
+</style>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/common/header.jsp" %>
-	
+	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<section>
 		<div class="content-writer" style="text-align: center; margin: 0 auto; "width="80%">
-			<div class="header-text">공지사항</div>
+			<div class="header-text">FAQ</div>
             <br>
             <br>
-            
-			<form action="/noticeUpdate" method="post">
-			<input type="hidden" name="noticeNo" value="<%=n.getNoticeNo() %>">
+			<form action="/insertFaq" method="post">
 			<table class="content-table">
 				<tr height="30px">
 					<th width="20%">제목</th>
-					<td width="80%"><input type="text" name="noticeTitle" value="<%=n.getNoticeTitle()%>">
+					<td width="80%"><input type="text" name="faqTitle" >
 					</td>
 				</tr>
 
-				<tr height="30px">
-					<th width="20%">작성자</th>
-					<td width="80%">
-						<%=n.getNoticeWriter() %>
-						<input type="hidden" name="noticeWriter" value="admin">
-					</td>
-				</tr>
 				<tr>
-					<td colspan="2"><textarea name="noticeContent" rows="3" col="40" id="noticeContent"><%=n.getNoticeContent() %></textarea>
-					
+					<td colspan="2"><textarea name="faqContent" rows="3" col="40" id="faqContent"></textarea>
 				</tr>
 	
 			</table>
 			<br><br>
 			<div class="button">
-				<button type="submit" class="content-btn" onclick="submitContents(this)">수정</button>
+				<button type="submit" class="content-btn" onclick="submitContents(this)">등록</button>
 				<a href="javascript:history.go(-1)" class="content-btn">취소</a>
 			
 			</div>
@@ -132,17 +120,17 @@
 			<br><br><br>
 		</div>
 	</section>
-	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
-			<script type="text/javascript">
+		<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+					<script type="text/javascript">
 			var oEditors = [];
 			nhn.husky.EZCreator.createInIFrame({
 				oAppRef : oEditors,
-				elPlaceHolder : "noticeContent",
+				elPlaceHolder : "faqContent",
 				sSkinURI : "/nse_files/SmartEditor2Skin.html",
 				fCreator : "createSEditor2"
 			});
 			function submitContents(elClickedObj) {
-				oEditors.getById["noticeContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됩니다. 
+				oEditors.getById["faqContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됩니다. 
 				// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
 
 				try {
@@ -151,7 +139,5 @@
 				}
 			}
 		</script>
-	
-
 </body>
 </html>

@@ -39,10 +39,11 @@
         }
 
 
-            .postView>table *{
+            .postView>table tr{
                     border-top: 1px solid #dfd3d3;
     border-bottom: 1px solid #dfd3d3;
             }  
+
             .inputComment{
                  width: 100%;
             margin: 0 auto;
@@ -118,6 +119,9 @@
             color: #4a4a4a;
             margin:5px;
         }
+        th{
+        	padding-left:10px;
+        }
     </style>
 </head>
 <body>
@@ -127,28 +131,28 @@
         <div class="postView">
         <br><br>
         <div class="back">
-        <button type="button" class="content-btn"><a href="javascript:history.go(-1)">목록</a></button>
+        <button type="button" class="content-btn"><a href="/noticeList?reqPage=1">목록</a></button>
         </div>
         
             <table class="content-table">
                 <tr style="border-bottom: 2px solid #FBB1B5;"  height="30px">
-                	 <th width="20%">제목</th>
+                	 <th width="20%">  제목</th>
 				<td width="80%" style="font-size: 16px; font-weight: bold;"><%=n.getNoticeTitle() %></td>
 <%--                     <th colspan="2" style="text-align: left; font-size: 20px; font-weight: bold;border-bottom: 2px solid #FBB1B5;">
                     <%=n.getNoticeTitle()%>
                     </th> --%>
                 </tr>
                 <tr height="30px">
-                   <th width="20%">작성자</th>
+                   <th width="20%">  작성자</th>
 				<td width="80%"><%=n.getNoticeWriter()%></td>
                 </tr>
 
                 <tr height="30px">
-                    <th width="20%">작성날짜</th>
+                    <th width="20%">  작성날짜</th>
 				<td width="80%"><%=n.getNoticeDate() %></td>
                 </tr>
                 <tr>
-                	<td colspan="2" style="padding-left: 10px;padding-right: 10px; height:300px; vertical-align:top;">
+                	<td colspan="2" style="padding-left: 10px;padding-right: 10px; height:400px; vertical-align:top;">
                 	<%=n.getNoticeContentBr() %>
                 	</td>
                 </tr>
