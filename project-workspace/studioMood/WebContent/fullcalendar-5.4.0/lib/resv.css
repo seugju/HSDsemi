@@ -2,9 +2,7 @@
     width: 80vw;
     min-width: 800px;
     height: 1300px;
-   	display:flex;
-   	justify-content:center;
-   	align-content:center;   	
+	margin:0 auto;
 } 
 .resv-chk {
         width: 50%;
@@ -164,14 +162,6 @@
 }
 .resv-time-chk{
     position: relative;
-}
-.resv-day-screen{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 200px;
-    height: 50px;
-    
 }
 .startendSel{
     position:absolute;
