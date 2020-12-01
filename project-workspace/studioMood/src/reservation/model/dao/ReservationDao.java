@@ -76,6 +76,28 @@ public class ReservationDao {
 		}
 		return r;
 	}
+	
+	public int totalCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String query = "select count(*) cnt from reserve";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return result;
+	}
 
 	public int deleteReservation(Connection conn, String phone) {
 		PreparedStatement pstmt = null;		
@@ -259,6 +281,43 @@ public ArrayList<Reservation> selectReservation(Connection conn, String phone) {
 		JDBCTemplate.close(pstmt);
 	}
 	
+	return list;
+}
+
+public ArrayList<Reservation> selectReservations(Connection conn, int start, int end) {
+	PreparedStatement pstmt = null;
+	ResultSet rset = null;
+	ArrayList<Reservation> list = new ArrayList<Reservation>();
+	String query = "select * from(select rownum as rnum,n.*from(select *from reserve order by 1 desc)n) where rnum between ? and ?";
+	
+	try {
+		pstmt = conn.prepareStatement(query);
+		pstmt.setInt(1, start);
+		pstmt.setInt(2, end);
+		rset = pstmt.executeQuery();
+		
+		while (rset.next()) {
+			Reservation r = new Reservation();
+			r.setrNum(rset.getInt("rNum"));
+			r.setName(rset.getString("name"));
+			r.setPhone(rset.getString("phone"));
+			r.setrDate(rset.getString("r_date"));
+			r.setsTime(rset.getString("s_time"));
+			r.seteTime(rset.getString("e_time"));
+			r.setConcept(rset.getString("concept"));
+			r.setCutNum(rset.getInt("cutNum"));
+			r.setrCheck(rset.getString("r_check"));
+			r.setrPass(rset.getString("r_pass"));
+			list.add(r);
+		}
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}finally {
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(rset);
+	}
 	return list;
 }
 }

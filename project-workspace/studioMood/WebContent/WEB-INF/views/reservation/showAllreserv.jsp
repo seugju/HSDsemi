@@ -4,12 +4,157 @@
     pageEncoding="UTF-8"%>
     <%
     	ArrayList<Reservation> list = (ArrayList<Reservation>)request.getAttribute("reservationList");
+    	String pageNavi = (String)request.getAttribute("pageNavi");
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+        @font-face {
+            font-family: 'Wemakeprice-Bold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Wemakeprice-Bold.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'GmarketSansMedium';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'GmarketSansBold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .admin-wrap {
+            margin: 0 auto;
+            width: 1500px;
+            height: 1000px;
+            border-radius: 20px;
+            background-color: #9f807d;
+        }
+
+        .admin-menu {
+            width: 200px;
+            text-align: center;
+            margin-top: 30px;
+            height: 900px;
+            background-color: #9f807d;
+            display: inline-block;
+            float: left;
+        }
+
+        .div1 {
+            height: 20%;
+        }
+
+        .menuBox {
+            height: 600px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .menu {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            font-weight: bold;
+        }
+
+        .profile-title {
+            font-family: 'Wemakeprice-Bold';
+            font-size: 20pt;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #56373c;
+        }
+
+        .icon {
+            width: 30px;
+            float: left;
+        }
+
+        .menu li>a {
+            font-family: 'GmarketSansMedium';
+            display: block;
+            height: 45px;
+            line-height: 45px;
+            font-size: 10pt;
+            color: #391e22;
+            text-decoration: none;
+        }
+
+        .menu>li {
+            text-align: left;
+            text-indent: 10px;
+            margin-left: 15px;
+            padding-left: 15px;
+            padding-top: 5px;
+        }
+
+        .div2 {
+            height: 10%;
+        }
+
+        .admin-content {
+            width: 1200px;
+            
+            float: left;
+            display: inline-block;
+            height: 950px;
+            
+            border-radius: 10px;
+            margin: 20px;
+            background-color: white;
+            text-align: center;
+        }
+
+        .real-content {
+            display: inline-block;
+        }
+
+        .title {
+            text-align: left;
+            font-family: 'GmarketSansBold';
+            font-size: 25pt;
+        }
+        .th-short{
+            width: 120px;
+        }
+        .th-long{
+            width: 200px;
+        }
+        .table th{
+            font-size: 11pt;
+        }
+        .table td{
+            font-size: 10pt;
+        }
+        #pageNavi>*{
+        	text-align: center;
+        	margin: 10px;
+        }
+        .selectPage{
+        	color : #5f7880;
+        	font-weight: bold;        	
+        }
+    </style>
+    <script>
+        $(function() {
+            $(".menu li>a").hover(function() {
+                $(this).parent().css('background-color', '#d0b0b1');
+            }, function() {
+                $(this).parent().css('background-color', '#9f807d');
+            });
+        });
+    </script>
 </head>
 <style>
 	#table-content{
@@ -51,7 +196,94 @@
 </style>
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
-<div id="table-content">
+<div class="admin-wrap">
+        <!--화면 좌측-->
+        <div class="admin-menu">
+            <div class="div1"></div>
+            <div class="menuBox">
+                <img class="circle profile" src="img/admin.svg" width="100px;">
+                <div class="profile-title">
+                    admin
+                </div><br><br>
+                <ul class="menu">
+                    <li>
+                        <a href="/">
+                            <img src="img/icon_Home.svg" class="icon">
+                            <span>STUDIO Mood:</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <img src="img/icon_members.svg" class="icon">
+                            MEMBERS
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <img src="img/icon_reservation.svg" class="icon">
+                            RESERVATION
+                        </a>
+                    </li>
+                    <li>
+
+                        <a href="">
+                            <img src="img/icon_Notice.svg" class="icon">
+                            NOTICE
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="div1"></div>
+        </div>
+        <!--화면 우측-->
+        <div class="admin-content">
+            <div class="div2"></div>
+            <div class="real-content">
+                <div class="members">
+                    <p class="title"> 전체예약정보 </p>
+                   
+                    <table class="table table-hover">
+                        <tr>                            
+                            <th class="th-short">체크</th>
+                            <th class="th-short">예약번호</th>
+                            <th class="th-long">이름</th>
+                            <th class="th-long">전화번호</th>
+                            <th class="th-long">예약날짜</th>
+                            <th class="th-long">시작시간</th>
+                            <th class="th-long">종료시간</th>
+                            <th class="th-long">컨셉</th>
+                            <th class="th-short">컷수</th>
+                            <th class="th-short">예약확인</th>
+                            <th class="th-long">예약비밀번호</th>
+                        </tr>
+                        <%for(Reservation r : list){%>
+                        	<tr>
+                        		<td><input type="radio" name="temp" class="change"></td>
+	                        	<td><%=r.getrNum() %></td>
+								<td><%=r.getName() %></td>
+								<td><%=r.getPhone() %></td>
+								<td><%=r.getrDate() %></td>
+								<td><%=r.getsTime() %></td>
+								<td><%=r.geteTime() %></td>
+								<td><%=r.getConcept() %></td>
+								<td><%=r.getCutNum() %></td>
+								<td><%=r.getrCheck() %></td>
+								<td><%=r.getrPass() %></td>
+                        	</tr>
+                        <%} %>
+                    </table>
+                    <div id= "pageNavi"><%=pageNavi %></div>
+                </div>
+            </div>
+            <div class="div2">
+            	<button type="button" class="btn btn-secondary btn-lg" id="btnChangeReserve">변경하기</button>
+            	<button type="button" class="btn btn-secondary btn-lg" id="btnDeleteReserve">취소하기</button>
+            </div>
+        </div>
+
+    </div>
+
+<!-- div id="table-content">
 	<table>
 		<tr id="titleLine">
 			<th>체크</th><th>예약번호</th><th>이름</th><th>전화번호</th><th>예약날짜</th><th>시작시간</th><th>종료시간</th><th>컨셉</th><th>컷수</th><th>예약확인</th><th>예약비밀번호</th>
@@ -77,7 +309,7 @@
 			<td id="btn" colspan="5"><button type="button" id="btnDeleteReserve">취소하기</button></td>
 		</tr>
 	</table>
-	</div>
+	</div!-->
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 <script type="text/javascript">
