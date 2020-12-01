@@ -126,6 +126,7 @@ public class MemberDao {
 				m.setPhone(rset.getString("phone"));
 				list.add(m);
 			}
+			System.out.println("MemberDao listSize : " + list.size());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -175,6 +176,61 @@ public class MemberDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
+	}
+
+	public int totalCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String query = "select count(*) cnt from member";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return result;
+	}
+
+	public ArrayList<Member> selectMembers(Connection conn, int start, int end) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Member> list = new ArrayList<Member>();
+		String query = "select * from(select rownum as rnum,n.*from(select *from member order by 1 desc)n) where rnum between ? and ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				Member m = new Member();
+				m.setMemberId(rset.getString("member_id"));
+				m.setMemberName(rset.getString("member_name"));
+				m.setAddress(rset.getString("address"));
+				m.setEmail(rset.getString("email"));
+				m.setBirth(rset.getString("birth"));
+				m.setPhone(rset.getString("phone"));
+				list.add(m);
+			}
+			System.out.println("start : " + start + "end : " + end);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return list;
 	}
 
 	

@@ -172,7 +172,7 @@
             </li>
             <li>
             <%if(m.getMemberLevel() == 0) {%>
-                <a class="nav-top-link" href="/adminPage">회원관리</a>
+                <a class="nav-top-link" href="/adminPage">관리자페이지</a>
             <%}else{ %>
                 <a class="nav-top-link" href="/myPage?memberId=<%=m.getMemberId()%>">마이페이지</a>
             <%} %>

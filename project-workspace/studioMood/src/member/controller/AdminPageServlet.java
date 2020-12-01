@@ -33,8 +33,9 @@ public class AdminPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		
 		ArrayList<Member> list = new MemberService().selectAllMember();
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/member/adminPage.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/admin/adminPage.jsp");
 		request.setAttribute("list", list);
 		rd.forward(request, response);
 		
