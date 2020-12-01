@@ -1,6 +1,7 @@
 package member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import member.model.service.MemberService;
+import member.model.vo.Member;
 import member.model.vo.MemberPageData;
 
 
@@ -34,6 +36,7 @@ public class AdminMembersServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		ArrayList<Member> list = new MemberService().selectAllMember();
 		
 		System.out.println("reqPage : " + reqPage);
 		

@@ -133,7 +133,7 @@
         .product {
             width: 350px;
             height: 208px;
-            background-color: #97c8d6;
+            background-color: #d0b0b1;
             display: inline-block;
             margin: 20px;
             padding: 0;
@@ -149,22 +149,22 @@
             top: 15px;
             left: 15px;
             box-shadow: 2px 2px 3px gray;
-            transition-duration: 0.4s;
+            transition-duration: 0.5s;
         }
         .imgHover{
             width: 350px;
             height: 208px;
             background-color: rgb(225,225,225);
             opacity: 0;
-            position: absolute;
+            
             top: 15px;
             left: 15px;
         }
         
         
         .product>img:hover{
-            top: 20px;
-            left: 20px;
+            top: 18px;
+            left: 18px;
         }
 
         @media(max-width:760px) {
@@ -185,13 +185,7 @@
     </style>
 
 <script>
-    $(function(){
-       $(".product>img").hover(function(){
-           $(this).next().css('opacity','0.3');
-       })
-        
-        
-    });
+
     
     </script>
 
@@ -291,7 +285,7 @@
                 <div class="cover">
                     <div class="product product1">
                         <img src="img/personal_profile2.png">
-                        <div class="imgHover"></div>
+                        
                     </div>
                     <p>개인프로필</p>
                 </div>
@@ -299,7 +293,7 @@
                 <div class="cover">
                     <div class="product product2">
                         <img src="img/body-profile.png">
-                        <div class="imgHover"></div>
+                        
                     </div>
                     <p>바디프로필</p>
 
@@ -308,7 +302,7 @@
                 <div class="cover">
                     <div class="product product3">
                         <img src="img/group_profile.png">
-                        <div class="imgHover"></div>
+                        
                     </div>
                     <p>단체프로필</p>
 
@@ -317,7 +311,7 @@
         </div>
     </div>
 
-	
+	<br><br><br><br><br>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

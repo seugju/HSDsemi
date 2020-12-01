@@ -14,9 +14,9 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap&subset=korean" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
         @font-face {
             font-family: 'Wemakeprice-Bold';
@@ -32,10 +32,26 @@
             font-style: normal;
         }
 
+        @font-face {
+            font-family: 'GmarketSansBold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .admin-wrap {
+            margin: 0 auto;
+            width: 1500px;
+            height: 1000px;
+            border-radius: 20px;
+            background-color: #9f807d;
+        }
+
         .admin-menu {
             width: 200px;
             text-align: center;
-            height: 100vw;
+            margin-top: 30px;
+            height: 900px;
             background-color: #9f807d;
             display: inline-block;
             float: left;
@@ -84,7 +100,9 @@
         .menu>li {
             text-align: left;
             text-indent: 10px;
-            padding-left: 10px;
+            margin-left: 15px;
+            padding-left: 15px;
+            padding-top: 5px;
         }
 
         .div2 {
@@ -92,25 +110,48 @@
         }
 
         .admin-content {
-            width:800px;
-            text-indent: 20px;
+            width: 1200px;
+            
             float: left;
             display: inline-block;
-            height: 100vw;
-            padding: 10px;
+            height: 950px;
+            
+            border-radius: 10px;
+            margin: 20px;
+            background-color: white;
+            text-align: center;
         }
 
         .real-content {
             display: inline-block;
         }
 
-        .members {
-            margin: 0 auto;
+        .title {
+            text-align: left;
+            font-family: 'GmarketSansBold';
+            font-size: 25pt;
         }
-        .td{
-            
+        .th-short{
+            width: 120px;
         }
-        
+        .th-long{
+            width: 200px;
+        }
+        .table th{
+            font-size: 11pt;
+        }
+        .table td{
+            font-size: 10pt;
+        }
+        #pageNavi>*{
+        	text-align: center;
+        	margin: 10px;
+        }
+        .selectPage{
+        	color : #5f7880;
+        	font-weight: bold;
+        	
+        }
     </style>
     <script>
         $(function() {
@@ -169,16 +210,16 @@
             <div class="real-content">
                 <div class="members">
                     <p class="title"> 전체회원정보 </p>
-                    <hr>
-                    <table class="table table-borderless">
+                   
+                    <table class="table table-hover">
                         <tr>
-                            <th id="id">회원ID</th>
-                            <th id="name">회원이름</th>
-                            <th id="addr">회원주소</th>
-                            <th id="email">회원메일</th>
-                            <th id="birth">생년월일</th>
-                            <th id="gender">성별</th>
-                            <th id="phone">전화번호</th>
+                            <th class="th-short">회원ID</th>
+                            <th class="th-short">회원이름</th>
+                            <th class="th-long">회원주소</th>
+                            <th class="th-long">회원메일</th>
+                            <th class="th-short">생년월일</th>
+                            <th class="th-short">성별</th>
+                            <th class="th-long">전화번호</th>
                         </tr>
                         <%for(Member m : list){%>
                         	<tr>

@@ -31,16 +31,16 @@
         .footerBox{
             margin: 20px;
             text-align: left;
-            
             display: inline-block
         }
         .footerBox >h2{
        		font-family: 'S-CoreDream-5Medium';
             color: rgb(241, 209, 209);
+            font-size: 18pt;
         }
         .footerBox>p{
         	font-family: 'S-CoreDream-4Regular';
-        	font-size: 10pt;
+        	font-size: 9pt;
             color: rgb(241, 238, 238);
         }
         .footer-top,
@@ -49,7 +49,8 @@
             width: 1198px;
         }
         .footer-bottom{
-          color: rgb(241, 238, 238);
+          color: rgba(241, 238, 238, 0.8);
+          font-size: 10pt;
         }
         .icon{
             

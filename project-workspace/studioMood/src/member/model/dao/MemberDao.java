@@ -222,7 +222,7 @@ public class MemberDao {
 				m.setPhone(rset.getString("phone"));
 				list.add(m);
 			}
-			System.out.println("start : " + start + "end : " + end);
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

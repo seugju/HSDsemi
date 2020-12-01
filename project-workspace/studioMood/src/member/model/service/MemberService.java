@@ -75,20 +75,15 @@ public class MemberService {
 		MemberDao dao = new MemberDao();
 		
 		int totalCount = dao.totalCount(conn);		//총 멤버수를 구하는 dao
-		int numPerPage = 10;						//한페이지당 조회되는 멤버 수
+		int numPerPage = 12;						//한페이지당 조회되는 멤버 수
 		int totalPage = 0;
-		
-		
-		
+	
 		if(totalCount % numPerPage == 0) {
 			totalPage = totalCount/numPerPage;
 		}else {
 			totalPage=totalCount/numPerPage +1;
 		}
-		
-		System.out.println("reqPage memberservice : " + reqPage);
-		
-		
+
 		//reqPage 1  -> start : 1, end : 10
 		//reqPage 2  -> start : 11, end : 20
 		//reqPage 3  -> start : 21, end : 30
