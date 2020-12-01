@@ -3,22 +3,22 @@ package qna.model.vo;
 import java.util.ArrayList;
 
 public class QnaViewData {
-	private Qna n;
+	private Qna q;
 	private ArrayList<QnaComment> list;
 	public QnaViewData() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public QnaViewData(Qna n, ArrayList<QnaComment> list) {
+	public QnaViewData(Qna q, ArrayList<QnaComment> list) {
 		super();
-		this.n = n;
+		this.q = q;
 		this.list = list;
 	}
-	public Qna getN() {
-		return n;
+	public Qna getQ() {
+		return q;
 	}
-	public void setN(Qna n) {
-		this.n = n;
+	public void setQ(Qna q) {
+		this.q = q;
 	}
 	public ArrayList<QnaComment> getList() {
 		return list;
@@ -26,5 +26,5 @@ public class QnaViewData {
 	public void setList(ArrayList<QnaComment> list) {
 		this.list = list;
 	}
-	
+
 }

@@ -9,21 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import qna.model.dao.QnaDao;
 import qna.model.service.QnaService;
-import qna.model.vo.QnaPageData;
+import qna.model.vo.QnaViewData;
 
 /**
- * Servlet implementation class NoticeListServlet
+ * Servlet implementation class QnaViewServlet
  */
-@WebServlet(name = "QnaList", urlPatterns = { "/qnaList" })
-public class QnaListServlet extends HttpServlet {
+@WebServlet(name = "QnaView", urlPatterns = { "/qnaView" })
+public class QnaViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QnaListServlet() {
+    public QnaViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,13 +32,22 @@ public class QnaListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		QnaPageData qpd = new QnaService().selectList(reqPage);
+		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
+		QnaViewData qvd = new QnaService().selectQnaView(qnaNo);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/qna/qnaList.jsp");
-		request.setAttribute("list", qpd.getList());
-		request.setAttribute("pageNavi", qpd.getPageNavi());
-		rd.forward(request, response);
+		if(qvd.getQ() == null) {
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+			request.setAttribute("msg", "게시글 없음");
+			request.setAttribute("loc", "/qnaList?reqPage=1");
+			rd.forward(request, response);
+		}else {
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/qna/qnaView.jsp");
+			request.setAttribute("q", qvd.getQ());
+			request.setAttribute("list", qvd.getList());
+			rd.forward(request, response);
+		}
+		
+		
 	}
 
 	/**

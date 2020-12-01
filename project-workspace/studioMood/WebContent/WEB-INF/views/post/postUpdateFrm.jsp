@@ -11,43 +11,40 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <style>
-  .post-write{
+  .postUpdate{
             width: 80%;
-            margin: 0 auto;
-            
+             margin : 0 auto;
         }
-      .btn-post{
-          margin-top: 30px;
-          margin-bottom: 30px;
+        .btn-post{
+        margin-top:10px;
+        margin-bottom:10px;
             width: 100px;
-            height: 38px;
+            height: 50px;
             font-weight: bold;
-            font-size: 17px;
-            background-color: white;
-            border: 2px solid #FBB1B5;
+            font-size: 18px;
+            background-color: #dfd3d3;
+            color:#4a4a4a;
+            border:none;
             border-radius: 5px;
         }
-        .post-write>form>table>tbody>tr>td>input{
+        .updateTable{
+        width:100%;
+        }
+        .updateTable>tbody>tr>td>input{
             border: none;
         }
-        .post-write>form>table>tbody>tr>th:first-child{
-            border-top: 1px solid lightgray;
-            border-left: 1px solid lightgray;
-            border-right: 1px solid lightgray;
+        .updateTable>tbody>tr{
+            border: 1px solid #b8b0b0;
             resize: none;
             outline: none;
-            height: 30px;
+            height: 40px;
+            font-size:17px;
         }
-        .post-write>form>table>tbody>tr>td:nth-child(2){
-            border-top: 1px solid lightgray;
-            border-left: 1px solid lightgray;
-            border-right: 1px solid lightgray;
+        .updateTable>tbody>tr>td{
+         border: 1px solid #b8b0b0;
         }
-         .post-write>form>table>tbody>tr>td>textarea{
-            border-top: 1px solid lightgray;
-            border-left: 1px solid lightgray;
-            border-right: 1px solid lightgray;
-             border-bottom: 1px solid lightgray;
+         .updateTable>tbody>tr>td>textarea{
+           border:none;
             resize : none;
             outline: none;
         }
@@ -56,29 +53,41 @@
              border-spacing: 0;
              margin-top:50px;
         }
-       
-
+       .btn-a{
+       		display:inline-block;
+       		line-height:50px;
+ 			width: 100px;
+            height: 50px;
+            font-weight: bold;
+            font-size: 18px;
+            background-color: #dfd3d3;
+            color:#4a4a4a;
+            border:none;
+            outline:none;
+            border-radius: 5px;
+       }
 </style>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<section>
-		<div class="postUpdate" style="width:80%;margin:0 auto">
-		<form action="/postUpdate" method="post" enctype="multipart/form-data">
+		<div class="postUpdate">
+		<form action="/postUpdate" method="post" enctype="multipart/form-data" style="margin-top:50px;">
 		<input type="hidden" name="postNo" value="<%=p.getPostNo() %>">
 		<table class="updateTable">
 		<tr>
-			<th width="150px">제목</th>
-            <td><input type="text" class="form-control" name="postTitle" style="width: 500px; outline: none;" value="<%=p.getPostTitle()%>"></td>	
+			<th style="width: 20%;">제목</th>
+            <td><input type="text" name="postTitle" style="width: 80%; outline: none;" value="<%=p.getPostTitle()%>"></td>	
 		</tr>
 		<tr>
-						<th width="150px">작성자</th>
-						<td width="500px"><%=p.getPostWriter() %>
+						<th style="width: 20%;">작성자</th>
+						<td style="width: 80%"><%=p.getPostWriter() %>
 						</td>
 					</tr>
 						<tr>
 						<!-- status를 통한 파일 삭제 여부 (delete와 stay로 서블릿에서 구분) -->
-						<th width="150px">첨부파일</th>
-						<td width="500px"><input type="hidden" id="status" name="status" value="stay">
+						<th style="width: 20%;">첨부파일</th>
+						<td style="width: 80%"><input type="hidden" id="status" name="status" value="stay">
 						<%if(p.getFilename() != null) {%>
 						<img src="/img/file.png" width="16px" class="delFile">
 						<input type="file" name="filename" id="file" style="display:none;">
@@ -93,18 +102,18 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2"><textarea name="postContent" style="width: 655px; height: 500px;"><%=p.getPostContent() %></textarea></td>
+						<td colspan="2"><textarea name="postContent" style="width:100%; height:500px; vertical-align:top;"><%=p.getPostContent() %></textarea></td>
 					</tr>
-					<tr style="text-align:center;">
-						<td colspan = "2">
-							<button type="submit" class="btn-post">수정완료</button>
-							<a href="/postList?reqPage=1" class="btn-post">목록으로</a>
+					<tr style="text-align:center; border:none;">
+						<td colspan = "2" style="border:none;">
+							<button type="submit" class="btn-post" style="outline:none;">수정</button>
+							<a href="javascript:history.go(-1)" class="btn-post btn-a">취소</a>
 						</td>
 					</tr>
 		</table>
 		</form>
 	</section>
-	
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	<script>
 	$("#fileDelBtn").click(function(){
 		if(confirm("첨부파일을 삭제하시겠습니까?")){

@@ -59,19 +59,19 @@ public class PostUpdateServlet extends HttpServlet {
 			
 			String oldFilename = mRequest.getParameter("oldFilename");
 			String oldFilepath = mRequest.getParameter("oldFilepath");
-			
+			//파일 삭제 확인용
 			String status = mRequest.getParameter("status");
-			
+			//현재 첨부파일 확인
 			File f = mRequest.getFile("filename");
 			
-			if(f != null && f.length() > 0) {
-				if(status.equals("delete")) {
+			if(f != null && f.length() > 0) {	//새로운 첨부파일이 있는 경우
+				if(status.equals("delete")) {	//기존 첨부파일 삭제한 경우
 					File delFile = new File(saveDirectory+"/"+oldFilepath);
 					boolean bool = delFile.delete();
 					System.out.println(bool?"삭제성공":"삭제실패");
 				}
-			}else {
-				if(status.equals("delete")) {
+			}else {		//새로운 첨부파일이 없는 경우
+				if(status.equals("delete")) {//기존 첨부파일을 삭제한 경우
 					File delFile = new File(saveDirectory+"/"+oldFilepath);
 					boolean bool = delFile.delete();
 					System.out.println(bool?"삭제성공":"삭제실패");
@@ -88,7 +88,7 @@ public class PostUpdateServlet extends HttpServlet {
 			}else {
 				request.setAttribute("msg", "등록실패");
 			}
-			request.setAttribute("loc", "/postList?postNo="+p.getPostNo());
+			request.setAttribute("loc", "/postView?postNo="+p.getPostNo());
 			rd.forward(request, response);
 	}
 

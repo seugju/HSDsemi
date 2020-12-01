@@ -9,21 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import qna.model.dao.QnaDao;
 import qna.model.service.QnaService;
-import qna.model.vo.QnaPageData;
 
 /**
- * Servlet implementation class NoticeListServlet
+ * Servlet implementation class QnaCommentUpdateServlet
  */
-@WebServlet(name = "QnaList", urlPatterns = { "/qnaList" })
-public class QnaListServlet extends HttpServlet {
+@WebServlet(name = "QnaCommentUpdate", urlPatterns = { "/qnaCommentUpdate" })
+public class QnaCommentUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QnaListServlet() {
+    public QnaCommentUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,12 +31,20 @@ public class QnaListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		QnaPageData qpd = new QnaService().selectList(reqPage);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/qna/qnaList.jsp");
-		request.setAttribute("list", qpd.getList());
-		request.setAttribute("pageNavi", qpd.getPageNavi());
+		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
+		String qnaCommentContent  = request.getParameter("qnaCommentContent");
+		int qnaCommentNo = Integer.parseInt(request.getParameter("qnaCommentNo"));
+		
+		int result = new QnaService().qnaCommentUpdate(qnaCommentNo, qnaCommentContent);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		if(result>0) {
+			request.setAttribute("msg", "수정 완료");
+		}else {
+			request.setAttribute("msg", "수정 실패");
+		}
+		request.setAttribute("loc", "/qnaView?qnaNo="+qnaNo);
 		rd.forward(request, response);
 	}
 
