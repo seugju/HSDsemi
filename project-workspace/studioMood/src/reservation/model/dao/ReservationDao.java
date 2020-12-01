@@ -110,15 +110,20 @@ public class ReservationDao {
 		return result;
 	}
 
-	public int updateReservation(Connection conn, String phone, String s_time, String e_time) {
+	public int updateReservation(Connection conn, int r_num, String s_time, String e_time, String r_date) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "update reserve set s_time=?,e_time=? where phone=?";
+		String query = "update reserve set s_time=?,e_time=?,r_date=? where r_num=?";
+		System.out.println("r_num = "+r_num);
+		System.out.println("sTime = "+s_time);
+		System.out.println("eTime = "+e_time);
+		System.out.println("rDate = "+r_date);
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, s_time);
 			pstmt.setString(2, e_time);
-			pstmt.setString(3, phone);
+			pstmt.setString(3, r_date);
+			pstmt.setInt(4, r_num);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

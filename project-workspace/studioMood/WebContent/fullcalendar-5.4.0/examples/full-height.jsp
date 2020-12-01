@@ -3,7 +3,10 @@
 <%@page import="reservation.model.vo.Reservation"%>
     <%
     	Reservation r = (Reservation)request.getAttribute("reserveAdmin");
-    	System.out.println("예약날짜 = "+r.getrDate());
+    	if(r!=null){
+    		//수정인경우만
+    		System.out.println("예약날짜 = "+r.getrDate());
+    	}
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -99,6 +102,7 @@ $(document).ready(function(){
 				},complete:function(){
 					//finally와 유사한 구문(무조건 실행)
 					//현재가 수정이면  가져온 시간들을 활성화
+					<%if(r!=null){%>
 					var rDate="<%=r.getrDate()%>";
 					var sTime=Number(<%=r.getsTime()%>);
 					var eTime=Number(<%=r.geteTime()%>);
@@ -116,6 +120,7 @@ $(document).ready(function(){
 							}
 						}
 					}
+					<%}%>
 				}
 			});
 			});
@@ -273,6 +278,10 @@ a{
                     </div>
             <input type="hidden" id="sendstartday" name="s_time" value="">
             <input type="hidden" id="sendendday" name="e_time" value="">
+            <%if(r!=null){%>
+            <input type="hidden" id="sendrCheck" name="rCheck" value="<%=r.getrCheck()%>">
+            <input type="hidden" id="sendrCheck" name="rNum" value="<%=r.getrNum()%>">
+            <%} %>
         </div>
         </div>
         </form>
