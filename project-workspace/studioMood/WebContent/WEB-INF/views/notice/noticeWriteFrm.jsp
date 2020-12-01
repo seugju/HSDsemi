@@ -4,6 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript"
+	src="/nse_files/js/HuskyEZCreator.js"
+	charset="utf-8"></script>
+
 <title>Insert title here</title>
 <style>
 	.content-writer *{
@@ -36,20 +40,22 @@
 		input{
 			width:95%;
 			border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;
+			outline:none;
 		}
 		input:focus {outline:none;}
 		textarea{
-			width:95%;
-			height:500px;
+			width:99.5%;
+			height:400px;
 			border:none;
 			resize: none;
+			text-align:center;
 		}
 		textarea:focus{
 			outline:none;
 		}
-		         .content-btn {
-         margin:0 auto;
-         display:block;
+		.content-btn {
+         margin:5px;
+         display:inline-block;
             width: 80px;
             height: 40px;
             font-weight: bold;
@@ -62,19 +68,27 @@
             color: #4a4a4a;
              text-decoration: none;
              line-height:40px;
+             vertical-align:middle;
+             padding:0;
         }
         .button{
         	width:100%;
         	height:50px;
         	text-align:center;
         }
-        .button>*{
-        	display:inline-block;
-        }
+        button:focus {
+	outline: none;
+}
+
         	a{
 		 text-decoration: none;
 		color: #4a4a4a;
 	}
+	td{
+		text-align:left;
+		padding-left:5px;
+	}
+
 </style>
 </head>
 <body>
@@ -88,32 +102,52 @@
 			<table class="content-table">
 				<tr height="30px">
 					<th width="20%">제목</th>
-					<td width="80%"><input type="text" class="form-control" name="noticeTitle" >
+					<td width="80%"><input type="text" name="noticeTitle" >
 					</td>
 				</tr>
 
 				<tr height="30px">
 					<th width="20%">작성자</th>
 					<td width="80%">
-						<%-- <%=m.getMemberId() %> --%>
+						<%=m.getMemberId() %>
 						<input type="hidden" name="noticeWriter" value="admin">
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2"><textarea name="noticeContent" class="form-control" rows="3" col="40"></textarea>
+					<td colspan="2"><textarea name="noticeContent" rows="3" col="40" id="noticeContent"></textarea>
 				</tr>
 	
 			</table>
 			<br><br>
 			<div class="button">
-				<button type="submit" class="content-btn">등록</button>
-				<button type="button" class="content-btn"><a href="javascript:history.go(-1)">취소</a></button>
+				<button type="submit" class="content-btn" onclick="submitContents(this)">등록</button>
+				<a href="javascript:history.go(-1)" class="content-btn">취소</a>
 			
 			</div>
 			
 			</form>
+			<br><br><br>
 		</div>
 	</section>
 		<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+			<script type="text/javascript">
+			var oEditors = [];
+			nhn.husky.EZCreator.createInIFrame({
+				oAppRef : oEditors,
+				elPlaceHolder : "noticeContent",
+				sSkinURI : "/nse_files/SmartEditor2Skin.html",
+				fCreator : "createSEditor2"
+			});
+			function submitContents(elClickedObj) {
+				oEditors.getById["noticeContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됩니다. 
+				// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
+
+				try {
+					elClickedObj.form.submit();
+				} catch (e) {
+				}
+			}
+		</script>
+
 </body>
 </html>

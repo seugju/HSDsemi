@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@page import="notice.model.vo.Notice"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -10,6 +12,10 @@
 	if(keyword == null){
 		keyword = "";
 	}
+	
+	Date nowTime = new Date();
+	SimpleDateFormat sf = new SimpleDateFormat("yy/MM/dd");
+
 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,6 +24,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Document</title>
         <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
 
         .content {
@@ -35,7 +45,7 @@
             text-align: center;
             font-weight: bold;
             font-size: 30px;
-            border-bottom: 4px solid #FBB1B5;
+            border-bottom: 4px solid #f1d1d1;
         }
 
         .table-title {
@@ -66,16 +76,18 @@
 		}
 		
         .write-btn {
+        display:inline-block;
             width: 80px;
             height: 40px;
             font-weight: bold;
             font-size: 15px;
             text-align: center;
-            background-color: #dfd3d3;
-            border: 2px solid #dfd3d3;
+            background-color: #f1d1d1;
+            border: 2px solid #f1d1d1;
             border-radius: 5px;
             margin-bottom: 10px;
             list-style: none;
+            line-height:40px;
             color: #4a4a4a;
             
         }
@@ -100,6 +112,7 @@
             border-radius: 5px;
             border: 2px solid #b8b0b0;
             vertical-align:middle;
+            outline:none;
         }
         
 
@@ -114,6 +127,11 @@
             color: #4a4a4a;
             vertical-align:middle;
         }
+        .btn-post:focus{
+        	
+             outline:none;
+        }
+
         #pageNavi>span{
         	color: #b8b0b0;
         	font-size:18px;
@@ -133,6 +151,16 @@
 		 text-decoration: none;
 		color:#4a4a4a;
 	}
+	        .pagination>li>a{
+        color:black;
+        }
+        .pagination>li>.selectPage{
+        color:#f1d1d1;
+        }
+        
+        img{
+        	line-height:30px;
+        }
     </style>
 </head>
 
@@ -150,7 +178,7 @@
 			if (m != null && m.getMemberLevel() == 0) {
 		%> 
 		<div class="write">
-			<button type="button" class="write-btn"><a href="/noticeWriteFrm">글쓰기</a></button>
+			<a href="/noticeWriteFrm" class="write-btn">글쓰기</a>
 		</div>
 		<%
 			}
@@ -175,7 +203,18 @@
 			%>
 			<tr class="content-tr" height="30px">
 				<td width="10%"><%=n.getrNum()%></td>
-				<td width="50%"><a href="/noticeView?noticeNo=<%=n.getNoticeNo()%>"><%=n.getNoticeTitle()%></a></td>
+				
+				<%
+					if(n.getNoticeDate().equals(sf.format(nowTime))) {				
+				%>
+						<td width="50%"><a href="/noticeView?noticeNo=<%=n.getNoticeNo()%>"><%=n.getNoticeTitle()%></a><img src="/upload/notice/newicon.png" width="20px" height="20px"></td>
+				<%
+					}else{
+				%>
+						<td width="50%"><a href="/noticeView?noticeNo=<%=n.getNoticeNo()%>"><%=n.getNoticeTitle()%></a></td>
+				<%
+					}
+				%>
 				<td width="20%"><%=n.getNoticeWriter()%></td>
 				<td width="20%"><%=n.getNoticeDate()%></td>
 			</tr>
@@ -184,7 +223,7 @@
 			%>
 		</table>
 		<br>
-		<div id="pageNavi"><%=pageNavi%></div>
+		<div id="pageNavi" class="pagination justify-content-center"><ul class='pagination'><%=pageNavi %></ul></div>
 		 <br><br>
             <div class="post">
                 <form action="/searchKeyword">

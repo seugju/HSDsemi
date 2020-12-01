@@ -34,13 +34,13 @@ public class NoticeService {
 		
 		int pageNo=((reqPage-1)/pageNaviSize)*pageNaviSize+1;
 		if(pageNo!=1) {
-			pageNavi+="<a class='btn' href='/noticeList?reqPage="+(pageNo-1)+"'>이전</a>";
+			pageNavi+="<li class='page-item'><a class='page-link' href='/noticeList?reqPage="+(pageNo-1)+"'>이전</a></li>";
 		}
 		for(int i=0; i<pageNaviSize; i++) {
 			if(reqPage==pageNo) {
-				pageNavi+="<span class='selectPage'>"+pageNo+"</span>";
+				pageNavi+="<li class='page-item'><span class='selectPage page-link'>"+pageNo+"</span></li>";
 			}else {
-				pageNavi +="<a class='btn' href='/noticeList?reqPage="+pageNo+"'>"+pageNo+"</a>";
+				pageNavi +="<li class='page-item'><a class='page-link' href='/noticeList?reqPage="+pageNo+"'>"+pageNo+"</a></li>";
 			}
 			pageNo++;
 			if(pageNo>totalPage) {
@@ -49,7 +49,7 @@ public class NoticeService {
 			
 		}
 		if(pageNo<=totalPage) {
-			pageNavi+="<a class='btn' href='/noticeList?reqPage="+pageNo+"'>다음</a>";
+			pageNavi+="<li class='page-item'><a class='page-link' href='/noticeList?reqPage="+pageNo+"'>다음</a></li>";
 		}
 		NoticePageData npd = new NoticePageData(list,pageNavi);
 		JDBCTemplate.close(conn);
@@ -112,13 +112,13 @@ public class NoticeService {
 		
 		int pageNo=((reqPage-1)/pageNaviSize)*pageNaviSize+1;
 		if(pageNo!=1) {
-			pageNavi+="<a class='btn' href='/searchKeyword?reqPage="+(pageNo-1)+"&keyword'>이전</a>";
+			pageNavi+="<li class='page-item'><a class='page-link' href='/searchKeyword?reqPage="+(pageNo-1)+"&keyword="+keyword+"'>이전</a></li>";
 		}
 		for(int i=0; i<pageNaviSize; i++) {
 			if(reqPage==pageNo) {
-				pageNavi+="<span class='selectPage'>"+pageNo+"</span>";
+				pageNavi+="<li class='page-item'><span class='selectPage page-link'>"+pageNo+"</span></li>";
 			}else {
-				pageNavi +="<a class='btn' href='/searchKeyword?reqPage="+pageNo+"&keyword'>"+pageNo+"</a>";
+				pageNavi +="<li class='page-item'><a class='page-link' href='/searchKeyword?reqPage="+pageNo+"&keyword="+keyword+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 			if(pageNo>totalPage) {
@@ -127,7 +127,7 @@ public class NoticeService {
 			
 		}
 		if(pageNo<=totalPage) {
-			pageNavi+="<a class='btn' href='/searchKeyword?reqPage="+pageNo+"&keyword'>다음</a>";
+			pageNavi+="<li class='page-item'><a class='page-link' href='/searchKeyword?reqPage="+pageNo+"&keyword="+keyword+"'>다음</a></li>";
 		}
 		NoticePageData npd = new NoticePageData(list,pageNavi);
 		JDBCTemplate.close(conn);
@@ -149,6 +149,18 @@ public class NoticeService {
 	public int deleteNotice(int noticeNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		int result=new NoticeDao().deleteNotice(conn,noticeNo);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int updateNotice(Notice n) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new NoticeDao().updateNotice(conn, n);
 		if(result>0) {
 			JDBCTemplate.commit(conn);
 		}else {
