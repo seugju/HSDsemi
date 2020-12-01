@@ -1,6 +1,7 @@
 package reservation.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,13 +37,28 @@ public class ChkReserveServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String phone = request.getParameter("phone");
 		String pw = request.getParameter("pw");
-		Reservation r = new ReservationService().selectReservation(phone, pw);
+		ArrayList<Reservation> list = new ReservationService().selectReservation(phone);
+		ArrayList<Reservation> listFin = new ArrayList<Reservation>(); 
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reservation/chkReserve.jsp");
-		//만약 조회결과에서 비밀번호가 다르다면
-		if(r.getPhone()==null) {
-			request.setAttribute("alertMsg","일치하는 번호가 없거나 비밀번호가 다릅니다.");
+		boolean isRightPassword = false;
+		for(int i=0; i<list.size(); i++) {
+			if(list.get(i).getrPass().equals(pw)) {
+				isRightPassword = true;
+				listFin.add(list.get(i));
+			}
 		}
-		request.setAttribute("chkReserve", r);
+		if(list.size()!=0 && (isRightPassword!=false)) {
+			
+		}
+		//만약 조회결과에서 비밀번호가 다르다면
+		else if(list.size()!=0 && (isRightPassword!=false)) {
+			request.setAttribute("alertMsg","조회 결과는 있지만 비밀번호가 다릅니다.");
+			list = null;
+		}else {
+			request.setAttribute("alertMsg","조회 결과가 없습니다.");
+			list = null;
+		}
+		request.setAttribute("ReserveList", listFin);
 		rd.forward(request, response);
 	}
 
