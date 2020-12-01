@@ -280,7 +280,7 @@ a{
             <input type="hidden" id="sendendday" name="e_time" value="">
             <%if(r!=null){%>
             <input type="hidden" id="sendrCheck" name="rCheck" value="<%=r.getrCheck()%>">
-            <input type="hidden" id="sendrCheck" name="rNum" value="<%=r.getrNum()%>">
+            <input type="hidden" id="sendrNum" name="rNum" value="<%=r.getrNum()%>">
             <%} %>
         </div>
         </div>
