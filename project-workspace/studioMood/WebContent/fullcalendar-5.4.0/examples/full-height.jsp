@@ -20,7 +20,7 @@
 <script src='/fullcalendar-5.4.0/lib/main.js'></script>
 <script>
 var selConcept = null;
-$(document).ready(function(){
+$(document).ready(function(){	
 	  $("div").removeClass("fc-daygrid-event-harness");
 		$("div").removeClass("fc-daygrid-event-harness-abs");
 		$(".fc-event-title-container").parent().parent().parent().remove();
@@ -32,7 +32,20 @@ $(document).ready(function(){
 		$(".fc-event-title-container").parent().parent().parent().remove();
 		$(".fc-daygrid-event-dot").parent().remove();
     var calendarEl = document.getElementById('calendar');
-
+    
+    var today = new Date();
+	console.log("연도"+today.getFullYear());
+	console.log("월"+(today.getMonth()+1));
+	var year = today.getFullYear();
+	var month = (today.getMonth()+1);
+	var day = today.getDate();
+	if(day<10){
+		day="0"+day;
+	}
+	console.log("일"+day);
+	var todayStr = year+"-"+month+"-"+day;
+	console.log("날짜 = "+todayStr);
+	
     var calendar = new FullCalendar.Calendar(calendarEl, {
       height: '100%',
       expandRows: true,
@@ -46,7 +59,7 @@ $(document).ready(function(){
       },
       initialView: 'dayGridMonth',
       //초기화 날짜
-      initialDate: '2020-09-12',  //sysdate로 설정 요망
+      initialDate: todayStr,  //sysdate로 설정 요망
       navLinks: false, // can click day/week names to navigate views
       editable: true,//일정 드래그 앤 드랍
       selectable: true,
