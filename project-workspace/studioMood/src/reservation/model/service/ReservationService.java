@@ -29,7 +29,7 @@ public class ReservationService {
 		ReservationDao dao = new ReservationDao();
 		
 		int totalCount = dao.totalCount(conn);		//총 멤버수를 구하는 dao
-		int numPerPage = 6;						//한페이지당 조회되는 예약 수
+		int numPerPage = 12;						//한페이지당 조회되는 예약 수
 		int totalPage = 0;
 	
 		if(totalCount % numPerPage == 0) {
