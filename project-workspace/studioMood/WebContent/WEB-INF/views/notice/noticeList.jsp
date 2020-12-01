@@ -31,7 +31,7 @@
     <style>
 
         .content {
-            width: 100%;
+            width: 80%;
 
         }
 
