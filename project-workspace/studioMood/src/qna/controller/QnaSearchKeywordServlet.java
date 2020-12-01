@@ -1,29 +1,28 @@
 package qna.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import qna.model.dao.QnaDao;
+import javax.servlet.RequestDispatcher;
+
 import qna.model.service.QnaService;
 import qna.model.vo.QnaPageData;
 
 /**
- * Servlet implementation class NoticeListServlet
+ * Servlet implementation class QnaSearchKeywordServlet
  */
-@WebServlet(name = "QnaList", urlPatterns = { "/qnaList" })
-public class QnaListServlet extends HttpServlet {
+@WebServlet(name = "QnaSearchKeyword", urlPatterns = { "/qnaSearchKeyword" })
+public class QnaSearchKeywordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QnaListServlet() {
+    public QnaSearchKeywordServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,9 +33,13 @@ public class QnaListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		QnaPageData qpd = new QnaService().selectList(reqPage);
+		String qTitle = request.getParameter("qTitle");
+		String keyword = request.getParameter("keyword");
+		
+		QnaPageData qpd = new QnaService().qnaSearch(reqPage, qTitle, keyword);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/qna/qnaList.jsp");
+		request.setAttribute("keyword", keyword);
 		request.setAttribute("list", qpd.getList());
 		request.setAttribute("pageNavi", qpd.getPageNavi());
 		rd.forward(request, response);

@@ -9,21 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import qna.model.dao.QnaDao;
 import qna.model.service.QnaService;
-import qna.model.vo.QnaPageData;
+import qna.model.vo.QnaComment;
 
 /**
- * Servlet implementation class NoticeListServlet
+ * Servlet implementation class InsertQnaCommentServlet
  */
-@WebServlet(name = "QnaList", urlPatterns = { "/qnaList" })
-public class QnaListServlet extends HttpServlet {
+@WebServlet(name = "InsertQnaComment", urlPatterns = { "/insertQnaComment" })
+public class InsertQnaCommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QnaListServlet() {
+    public InsertQnaCommentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,12 +32,21 @@ public class QnaListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		QnaPageData qpd = new QnaService().selectList(reqPage);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/qna/qnaList.jsp");
-		request.setAttribute("list", qpd.getList());
-		request.setAttribute("pageNavi", qpd.getPageNavi());
+		QnaComment qc = new QnaComment();
+		qc.setQnaCommentWriter(request.getParameter("qnaCommentWriter"));
+		qc.setQnaCommentContent(request.getParameter("qnaCommentContent"));
+		qc.setQnaRef(Integer.parseInt(request.getParameter("qnaRef")));
+		
+		int result = new QnaService().insertQnaComment(qc);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		if(result > 0) {
+			request.setAttribute("msg", "댓글 등록 성공");
+		}else {
+			request.setAttribute("msg", "댓글 등록 실패");
+		}
+		request.setAttribute("loc", "/qnaView?qnaNo="+qc.getQnaRef());
 		rd.forward(request, response);
 	}
 

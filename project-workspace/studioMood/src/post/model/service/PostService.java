@@ -19,7 +19,7 @@ public class PostService {
 		Connection conn = JDBCTemplate.getConnection();
 		PostDao dao = new PostDao();
 		int totalCount = dao.totalCount(conn);
-		int numPerPage = 10;
+		int numPerPage = 20;
 		int totalPage = 0;
 		if(totalCount%numPerPage == 0) {
 			totalPage = totalCount / numPerPage;
@@ -41,13 +41,13 @@ public class PostService {
 			pageNo = totalPage-4;
 		}
 		if(pageNo != 1) {
-			pageNavi += "<a class='btn' href='/postList?reqPage="+(pageNo-1)+"'>이전</a>";
+			pageNavi += "<li class='page-item'><a class='page-link' href='/postList?reqPage="+(pageNo-1)+"'>이전</a></li>";
 		}
 		for(int i=0; i<pageNaviSize;i++) {
 			if(reqPage == pageNo) {
-				pageNavi += "<span class='selectPage'>"+pageNo+"</spna>";
+				pageNavi += "<li class='page-item'><span class='selectPage page-link'>"+pageNo+"</spna></li>";
 			}else {
-				pageNavi +="<a class='btn' href='/postList?reqPage="+pageNo+"'>"+pageNo+"</a>";
+				pageNavi +="<li class='page-item'><a class='page-link' href='/postList?reqPage="+pageNo+"'>"+pageNo+"</a></li>";
 			}
 			pageNo++;
 			if(pageNo > totalPage) {
@@ -55,10 +55,13 @@ public class PostService {
 			}
 		}
 		if(pageNo <= totalPage) {
-			pageNavi += "<a class='btn' href='/postList?reqPage="+pageNo+"'>다음</a>";
+			pageNavi += "<li class='page-item'><a class='page-link' href='/postList?reqPage="+pageNo+"'>다음</a></li>";
 		}
 		PostPageData ppd = new PostPageData(list, pageNavi);
 		JDBCTemplate.close(conn);
+		//여기만큼씩
+		//할수있죠??글쎄요... 해볼게요일단...ㅠㅠㅠㅠㄴ ㅇㅇ 이미 다른거만들어져있어서 어디에 뭐가필요한지정리마하면될것같아요
+		//네ㅠㅠ
 		return ppd;
 	}
 
@@ -155,108 +158,103 @@ public class PostService {
 		return result;
 	}
 
-	public ArrayList<Post> searchKeyword(String keyword, String type) {
+	public PostPageData postSearchKeyword(int reqPage, String keyword, String type) {
 		Connection conn = JDBCTemplate.getConnection();
 		ArrayList<Post> list = null;
+		PostPageData ppd = null;
 		if(type.equals("postTitle")) {
-			list = new PostDao().searchKeywordtitle(conn, keyword);
+			System.out.println("제목으로 검");
+			//여기서 제목으로 검색할 때 필요한거 전부다 제작(totalCount, ArrayList<Post>, pageNavi)
+			//여기 한영이안되네 -> 여기 이프, 엘스이프가 다 리스트구하는 만큼씩 나올꺼에요
+			int totalCount = new PostDao().searchTitleCount(conn, keyword);
+			int numPerPage = 20;
+			int totalPage = 0;
+			if(totalCount%numPerPage == 0) {
+				totalPage = totalCount / numPerPage;
+			}else {
+				totalPage = totalCount/ numPerPage+1;
+			}
+			int start = (reqPage-1)*numPerPage +1;
+			int end = reqPage*numPerPage;
+			
+			ArrayList<Post> titlelist = new PostDao().searchTitleList(conn,start,end, keyword);
+			for(Post p : titlelist) {
+				System.out.println(1);
+				System.out.println(p.getPDate());
+			}
+			int pageNaviSize = 5;
+			String pageNavi="";
+			
+			int pageNo = reqPage-2;
+			if(reqPage <=3) {
+				pageNo=1;
+			}else if(pageNo>totalPage-4){
+				pageNo = totalPage-4;
+			}
+			if(pageNo != 1) {
+				pageNavi += "<li class='page-item'><a class='page-link' href='/postSearchKeyword?reqPage="+(pageNo-1)+"&type=postTitle&keyword="+keyword+"'>이전</a></li>";
+			}
+			for(int i=0; i<pageNaviSize;i++) {
+				if(reqPage == pageNo) {
+					pageNavi += "<li class='page-item'><span class='selectPage page-link'>"+pageNo+"</spna></li>";
+				}else {
+					pageNavi +="<li class='page-item'><a class='page-link' href='/postSearchKeyword?reqPage="+pageNo+"&type=postTitle&keyword="+keyword+"'>"+pageNo+"</a></li>";
+				}
+				pageNo++;
+				if(pageNo > totalPage) {
+					break;
+				}
+			}
+			if(pageNo <= totalPage) {
+				pageNavi += "<li class='page-item'><a class='page-link' href='/postSearchKeyword?reqPage="+pageNo+"&type=postTitle&keyword="+keyword+"'>다음</a></li>";
+			}
+			ppd = new PostPageData(titlelist, pageNavi);
 		}else if(type.equals("postWriter")) {
-			list = new PostDao().searchKeywordId(conn, keyword);
-		}
-		JDBCTemplate.close(conn);
-		return list;
-	}
-
-	public PostPageData searchTitleList(int reqPage, String keyword) {
-		Connection conn = JDBCTemplate.getConnection();
-		PostDao dao = new PostDao();
-		int totalCount = dao.searchTitleCount(conn, keyword);
-		int numPerPage = 10;
-		int totalPage = 0;
-		if(totalCount%numPerPage == 0) {
-			totalPage = totalCount / numPerPage;
-		}else {
-			totalPage = totalCount/ numPerPage+1;
-		}
-		int start = (reqPage-1)*numPerPage +1;
-		int end = reqPage*numPerPage;
-		
-		ArrayList<Post> list = new PostDao().searchWriterList(conn,start,end, keyword);
-		int pageNaviSize = 5;
-		String pageNavi="";
-		
-		int pageNo = reqPage-2;
-		if(reqPage <=3) {
-			pageNo=1;
-		}else if(pageNo>totalPage-4){
-			pageNo = totalPage-4;
-		}
-		if(pageNo != 1) {
-			pageNavi += "<a class='btn' href='/searchKeyword?reqPage="+(pageNo-1)+"'>이전</a>";
-		}
-		for(int i=0; i<pageNaviSize;i++) {
-			if(reqPage == pageNo) {
-				pageNavi += "<span class='selectPage'>"+pageNo+"</spna>";
+			System.out.println("writer");
+			//여기서 작성자로 검색할 때 필요한거 전부다 제작(totalCount, ArrayList<Post>, pageNavi)
+			int totalCount = new PostDao().searchWriterCount(conn, keyword);
+			int numPerPage = 20;
+			int totalPage = 0;
+			if(totalCount%numPerPage == 0) {
+				totalPage = totalCount / numPerPage;
 			}else {
-				pageNavi +="<a class='btn' href='/searchKeyword?reqPage="+pageNo+"'>"+pageNo+"</a>";
+				totalPage = totalCount/ numPerPage+1;
 			}
-			pageNo++;
-			if(pageNo > totalPage) {
-				break;
+			int start = (reqPage-1)*numPerPage +1;
+			int end = reqPage*numPerPage;
+			
+			ArrayList<Post> writerlist = new PostDao().searchWriterList(conn,start,end, keyword);
+			int pageNaviSize = 5;
+			String pageNavi="";
+			
+			int pageNo = reqPage-2;
+			if(reqPage <=3) {
+				pageNo=1;
+			}else if(pageNo>totalPage-4){
+				pageNo = totalPage-4;
 			}
+			if(pageNo != 1) {
+				pageNavi += "<li class='page-item'><a class='page-link' href='/postSearchKeyword?reqPage="+(pageNo-1)+"&type=postWriter&keyword="+keyword+"'>이전</a></li>";
+			}
+			for(int i=0; i<pageNaviSize;i++) {
+				if(reqPage == pageNo) {
+					pageNavi += "<li class='page-item'><span class='page-link selectPage'>"+pageNo+"</spna></li>";
+				}else {
+					pageNavi +="<li class='page-item'><a class='page-link' href='/postSearchKeyword?reqPage="+pageNo+"&type=postWriter&keyword="+keyword+"'>"+pageNo+"</a></li>";
+				}
+				pageNo++;
+				if(pageNo > totalPage) {
+					break;
+				}
+			}
+			if(pageNo <= totalPage) {
+				pageNavi += "<li class='page-item'><a class='page-link' href='/postSearchKeyword?reqPage="+pageNo+"&type=postWriter&keyword="+keyword+"'>다음</a></li>";
+			}
+			ppd = new PostPageData(writerlist, pageNavi);
 		}
-		if(pageNo <= totalPage) {
-			pageNavi += "<a class='btn' href='/searchKeyword?reqPage="+pageNo+"'>다음</a>";
-		}
-		PostPageData ppd = new PostPageData(list, pageNavi);
 		JDBCTemplate.close(conn);
 		return ppd;
 	}
 
-	public PostPageData searchWriterList(int reqPage, String keyword) {
-		Connection conn = JDBCTemplate.getConnection();
-		PostDao dao = new PostDao();
-		int totalCount = dao.searchTitleCount(conn, keyword);
-		int numPerPage = 10;
-		int totalPage = 0;
-		if(totalCount%numPerPage == 0) {
-			totalPage = totalCount / numPerPage;
-		}else {
-			totalPage = totalCount/ numPerPage+1;
-		}
-		int start = (reqPage-1)*numPerPage +1;
-		int end = reqPage*numPerPage;
-		
-		ArrayList<Post> list = new PostDao().searchTitleList(conn,start,end, keyword);
-		int pageNaviSize = 5;
-		String pageNavi="";
-		
-		int pageNo = reqPage-2;
-		if(reqPage <=3) {
-			pageNo=1;
-		}else if(pageNo>totalPage-4){
-			pageNo = totalPage-4;
-		}
-		if(pageNo != 1) {
-			pageNavi += "<a class='btn' href='/searchKeyword?reqPage="+(pageNo-1)+"'>이전</a>";
-		}
-		for(int i=0; i<pageNaviSize;i++) {
-			if(reqPage == pageNo) {
-				pageNavi += "<span class='selectPage'>"+pageNo+"</spna>";
-			}else {
-				pageNavi +="<a class='btn' href='/searchKeyword?reqPage="+pageNo+"'>"+pageNo+"</a>";
-			}
-			pageNo++;
-			if(pageNo > totalPage) {
-				break;
-			}
-		}
-		if(pageNo <= totalPage) {
-			pageNavi += "<a class='btn' href='/searchKeyword?reqPage="+pageNo+"'>다음</a>";
-		}
-		PostPageData ppd = new PostPageData(list, pageNavi);
-		JDBCTemplate.close(conn);
-		return ppd;
-	}
-	
+
 }

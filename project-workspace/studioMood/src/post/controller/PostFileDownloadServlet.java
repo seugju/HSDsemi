@@ -36,7 +36,7 @@ public class PostFileDownloadServlet extends HttpServlet {
 		
 		String filename = request.getParameter("filename");
 		String filepath = request.getParameter("filepath");
-		
+		//3. 파일저장경로
 		String root = getServletContext().getRealPath("/");
 		String saveDirectory = root + "upload/post/";
 		
@@ -48,20 +48,21 @@ public class PostFileDownloadServlet extends HttpServlet {
 		
 		String resFilename ="";
 		
-		boolean bool = request.getHeader("user-agent").indexOf("MSIE") != -1 ||
+		boolean bool = request.getHeader("user-agent").indexOf("MSIE") != -1||
 				request.getHeader("user-agent").indexOf("Trident") != -1;
-		System.out.println("IE 여부 : "+bool );
-		if(bool) {
+		System.out.println("IE 여부 : "+bool);
+		if(bool) {	//사용자의 브라우져가 IE인 경우
 			resFilename = URLEncoder.encode(filename, "UTF-8");
 			resFilename = resFilename.replaceAll("\\\\", "%20");
-		}else {
+		}else {		//그 외 브라우져인 경우
 			resFilename = new String(filename.getBytes("UTF-8"),"ISO-8859-1");
 		}
+		//파일 다운로드를 위한 HTTP Header 설정
 		response.setContentType("application/octet-stream");
 		response.setHeader("Content-Disposition", "attachment;filename="+resFilename);
-		
+		//파일전송
 		int read = -1;
-		while((read=bis.read()) != -1) {
+		while((read=bis.read())!= -1) {
 			bos.write(read);
 		}
 		bos.close();

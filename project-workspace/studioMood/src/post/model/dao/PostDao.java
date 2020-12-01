@@ -88,7 +88,7 @@ public class PostDao {
 	public int updatePost(Connection conn, Post p) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "update postscripte set p_title=?, p_content=?, filename=?, filepath=? where p_num?";
+		String query = "update postscripte set p_title=?, p_content=?, filename=?, filepath=? where p_num = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -241,7 +241,7 @@ public class PostDao {
 	public ArrayList<Post> searchKeywordtitle(Connection conn, String keyword) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select * from (select rownum as pnum, p.* from (select * from postscripte order by 1 desc)p) where p_title like (?)";
+		String query = "select * from postscripte where p_title like (?)";
 		ArrayList<Post> list = new ArrayList<Post>();
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -269,7 +269,7 @@ public class PostDao {
 	public ArrayList<Post> searchKeywordId(Connection conn, String keyword) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select * from (select rownum as pnum, p.* from (select * from postscripte order by 1 desc)p) where p_writer like (?)";
+		String query = "select * from postscripte where p_writer like (?)";
 		ArrayList<Post> list = new ArrayList<Post>();
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -308,7 +308,7 @@ public class PostDao {
 			pstmt.setInt(3, end);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
-				System.out.println("난 while문 내부");
+				
 				Post p = new Post();
 				p.setpNum(rset.getInt("pnum"));
 				p.setPostNo(rset.getInt("p_num"));
@@ -316,6 +316,7 @@ public class PostDao {
 				p.setPostWriter(rset.getString("p_writer"));
 				p.setPDate(rset.getString("p_date"));
 				list.add(p);
+				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -355,7 +356,9 @@ public class PostDao {
 		ResultSet rset = null;
 		ArrayList<Post> list = new ArrayList<Post>();
 		String query = "select * from (select rownum as pnum, p.* from (select * from postscripte where p_writer like (?) order by 1 desc)p) where pnum between ? and ?";
+		
 		try {
+			System.out.println("난 while문 내부");
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, '%'+keyword+'%');
 			pstmt.setInt(2, start);
@@ -378,6 +381,29 @@ public class PostDao {
 			JDBCTemplate.close(rset);
 		}
 		return list;
+	}
+
+	public int searchWriterCount(Connection conn, String keyword) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String query = "select count(*) cnt from postscripte where p_writer like (?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, '%'+keyword+'%');
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 
 }

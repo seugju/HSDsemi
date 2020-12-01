@@ -9,21 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import qna.model.dao.QnaDao;
-import qna.model.service.QnaService;
-import qna.model.vo.QnaPageData;
-
 /**
- * Servlet implementation class NoticeListServlet
+ * Servlet implementation class QnaWriterFrmServlet
  */
-@WebServlet(name = "QnaList", urlPatterns = { "/qnaList" })
-public class QnaListServlet extends HttpServlet {
+@WebServlet(name = "QnaWriterFrm", urlPatterns = { "/qnaWriterFrm" })
+public class QnaWriterFrmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QnaListServlet() {
+    public QnaWriterFrmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,13 +28,7 @@ public class QnaListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		QnaPageData qpd = new QnaService().selectList(reqPage);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/qna/qnaList.jsp");
-		request.setAttribute("list", qpd.getList());
-		request.setAttribute("pageNavi", qpd.getPageNavi());
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/qna/qnaWriteFrm.jsp");
 		rd.forward(request, response);
 	}
 
