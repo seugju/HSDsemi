@@ -43,9 +43,9 @@
         background-color: #f8f9fa;
         font-family: 'Noto Sans KR', sans-serif;
         font-size:17px;
-        font-weight:bold;
         box-sizing: border-box;
 		float:left;
+		min-width:1050px;
     }
 
     .resv-chkbox {
@@ -109,6 +109,7 @@
         box-sizing: border-box;
         margin: 0 auto;
         margin: 56px;
+        margin-left:100px;
     }
     .resv-time-chk {
         width: 50%;
@@ -123,11 +124,12 @@
     display: block;
     height: 40px;
         width: 20%;
-        border:1px solid rgb(190, 190, 190);
+        border-radius: 20px 20px 20px 20px;
+        border:1px solid #f8f9fa;
         box-sizing:border-box;
     float: left;
     color: black;
-    background-color:rgb(190, 190, 190);
+    background-color:rgb(241, 209, 209);
     text-align: center;
     line-height: 40px;
 }
@@ -141,6 +143,7 @@
     color:black;
     text-align:center;
     font-size:1.5em;
+    margin-left:70px;
 }
     p{
     color: black;
@@ -177,14 +180,15 @@
 }
 #resv-submit-input-pass{
     width: 230px;
-    height: 20px;
-    margin-top:40px;
+    height: 50px;
+    margin-top:20px;
 }
 #resv-submit-input-text{
     width: 200px;
     background:transparent;
     border: none;
     text-align:left;
+    color:#56373c;
 }
 .resv-submit-div-price{
 	width:30%;	
@@ -230,11 +234,18 @@ select::-ms-expand {
 	display: block;
     height: 40px;
         width: 20%;
-        border:1px solid rgb(190, 190, 190);
+        border:1px solid #f8f9fa;
         box-sizing:border-box;
     float: left;
-    color: white;
-    background-color:black;
+    color: #f8f9fa;
+    background-color:#f8f9fa;
     text-align: center;
     line-height: 40px;
+}
+#resv-select{
+	height:60px;
+	
+}
+#resv-concept-select{
+	height:60px;
 }

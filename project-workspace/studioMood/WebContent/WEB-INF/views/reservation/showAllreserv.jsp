@@ -15,12 +15,14 @@
 	#table-content{
 		margin:0 auto;
 		width:80%;
-		height:50vw;
+		height:60vw;
+		min-height:800px;
+		max-height:1200px;
 		text-align:center;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		border: 1px solid black;
+		/*border: 1px solid black;*/
 	}
 	table{
 		margin:0 auto;
@@ -40,14 +42,17 @@
 		height: 10vw;
 	}
 	#btn button{
-		width: 80%;
-		height:60%;
+		width: 60%;
+		height:40%;
+		max-height:100px;
+		font-size:1.5em;
+		border-radius:50px;
 	}
 </style>
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <div id="table-content">
-	<table border="1px">
+	<table>
 		<tr id="titleLine">
 			<th>체크</th><th>예약번호</th><th>이름</th><th>전화번호</th><th>예약날짜</th><th>시작시간</th><th>종료시간</th><th>컨셉</th><th>컷수</th><th>예약확인</th><th>예약비밀번호</th>
 		</tr>

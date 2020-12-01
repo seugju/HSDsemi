@@ -44,7 +44,7 @@ public class ReservationLoginChkServlet extends HttpServlet {
 		reservation.setrPass(request.getParameter("r_pass"));
 		reservation.setCutNum(Integer.parseInt(request.getParameter("cut")));
 		RequestDispatcher rd = null;
-		if(request.getParameter("rCheck").equals(null)) {
+		if(request.getParameter("rCheck")==null) {
 			reservation.setrCheck("N");
 			if(member==null) {
 				System.out.println("nnnn");

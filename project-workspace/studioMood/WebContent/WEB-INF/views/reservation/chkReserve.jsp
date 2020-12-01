@@ -20,7 +20,7 @@
 	#table-content{
 		
 		width:80vw;
-		height:250px;
+		height:auto;
 	}
 	#resv-one-search {
 	
@@ -29,7 +29,7 @@
   width: 100%;
 }
 
-#resv-one-search td{
+.resv-search-result{
   border: 1px solid #ddd;
   padding: 8px;
 }
@@ -47,12 +47,19 @@
   color: black;
 }
 #btn{
+	width:50%;
+	background:white;
 	border: none;
 	height: 10vw;
+	text-align:center;
 }
 #btn button{
-	width: 80%;
-	height:60%;
+	width: 40%;
+	height:30%;
+	border:1px solid lightgray;
+	background:white;
+	font-weight:bolder;
+	color:gray;
 }
 .resv-btn{
 	width:80vw;
@@ -65,6 +72,7 @@
 	text-align:center;
 	font-family: 'Sunflower', sans-serif;
 }
+
 </style>
 <body>
 
@@ -85,22 +93,21 @@
 		<th>컨셉</th>
 		<th>컷수</th>
 		<th>예약확인</th>
-		<th>예약비밀번호</th>
 	</tr>
 	<%if(list.size()!=0) {%>
   <%for(int i=0; i<list.size(); i++) {%>
   <tr>
   	<td><input type="radio" name="temp" class="change"></td>
-    <td><%=list.get(i).getrNum() %></td>
-    <td><%=list.get(i).getName() %></td>
-    <td><%=list.get(i).getPhone() %></td>
-    <td><%=list.get(i).getrDate() %></td>
-    <td><%=list.get(i).getsTime() %></td>
-    <td><%=list.get(i).geteTime() %></td>
-    <td><%=list.get(i).getConcept() %></td>
-    <td><%=list.get(i).getCutNum() %></td>
-    <td><%=list.get(i).getrCheck() %></td>
-    <td><%=list.get(i).getrPass() %></td>    
+    <td class="resv-search-result"><%=list.get(i).getrNum() %></td>
+    <td class="resv-search-result"><%=list.get(i).getName() %></td>
+    <td class="resv-search-result"><%=list.get(i).getPhone() %></td>
+    <td class="resv-search-result"><%=list.get(i).getrDate() %></td>
+    <td class="resv-search-result"><%=list.get(i).getsTime() %></td>
+    <td class="resv-search-result"><%=list.get(i).geteTime() %></td>
+    <td class="resv-search-result"><%=list.get(i).getConcept() %></td>
+    <td class="resv-search-result"><%=list.get(i).getCutNum() %></td>
+    <td class="resv-search-result"><%=list.get(i).getrCheck() %></td>
+    
   </tr>
   <%} %>
   <%}else{ %>
@@ -109,14 +116,12 @@
   </tr>
   <%} %>
   <tr>
-  	<td id="btn" colspan="5"><button type="button" id="btnChangeReserve">변경하기</button></td>
-	<td id="btn"></td>
-	<td id="btn" colspan="5"><button type="button" id="btnDeleteReserve">취소하기</button></td>
+  	<td id="btn" colspan="5"><button type="button" id="btnReserve">변경하기</button></td>
+	
+	<td id="btn" colspan="5"><button type="button" id="btnReserve">취소하기</button></td>
   </tr>
   </table>
-  <div class="resv-btn">  
-	
-</div>
+ 
   </div>
 		
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
