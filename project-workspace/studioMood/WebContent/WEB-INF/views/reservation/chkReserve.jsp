@@ -116,9 +116,9 @@
   </tr>
   <%} %>
   <tr>
-  	<td id="btn" colspan="5"><button type="button" id="btnReserve">변경하기</button></td>
+  	<td id="btn" colspan="5"><button type="button" id="btnChangeReserve">변경하기</button></td>
 	
-	<td id="btn" colspan="5"><button type="button" id="btnReserve">취소하기</button></td>
+	<td id="btn" colspan="5"><button type="button" id="btnDeleteReserve">취소하기</button></td>
   </tr>
   </table>
  

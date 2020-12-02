@@ -222,8 +222,8 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">reservation</a>
                 <ul class="subMenu">
-                    <li><a class="nav-link sub-nav-item" href="#">예약</a></li>
-                    <li><a class="nav-link sub-nav-item" href="#">예약확인</a></li>
+                    <li><a class="nav-link sub-nav-item" href="/test">예약</a></li>
+                    <li><a class="nav-link sub-nav-item" href="/searchReserve">예약확인</a></li>
                 </ul>
             </li>
             <li class="nav-item">
