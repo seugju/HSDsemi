@@ -193,12 +193,53 @@
     <div class="container-fluid">
         <br>
         <div class="logo">
-            <img src="/img/logo.png" width="100px;" onclick="location.href = '/'">
+            <img src="img/logo.png" width="100px;" onclick="location.href = '/'">
             <h2>STUDIO Mood:</h2>
             <p>감성을 담는 사진관 </p>
         </div>
     </div>
 
+<<<<<<< HEAD
+     <nav class="navbar navbar-expand-sm sticky-top">
+            <ul class="navbar-nav navi-menu">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">about</a>
+                    <ul class="subMenu">
+                        <li><a class="sub-nav-link sub-nav-item" href="#">studio 'mood'</a></li>
+                        <li><a class="sub-nav-link sub-nav-item" href="#">오시는 길</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">product</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">gallery</a>
+                    <ul class="subMenu">
+                        <li><a class="sub-nav-link sub-nav-item" href="#">개인프로필</a></li>
+                        <li><a class="sub-nav-link sub-nav-item" href="#">바디프로필</a></li>
+                        <li><a class="sub-nav-link sub-nav-item" href="#">단체프로필</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">reservation</a>
+                    <ul class="subMenu">
+                        <li><a class="sub-nav-link sub-nav-item" href="#">예약</a></li>
+                        <li><a class="sub-nav-link sub-nav-item" href="/searchReserve">예약확인</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">board</a>
+                    <ul class="subMenu">
+                        <li><a class="sub-nav-link sub-nav-item" href="/noticeList?reqPage=1">공지사항</a></li>
+                        <li><a class="sub-nav-link sub-nav-item"href="#">QnA</a></li>
+                        <li><a class="sub-nav-link sub-nav-item" href="/postList?reqPage=1">review</a></li>
+                        <li><a class="sub-nav-link sub-nav-item"href="#">FAQ</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </nav>
+=======
    <nav class="navbar navbar-expand-sm sticky-top">
         <ul class="navbar-nav navi-menu">
             <li class="nav-item">
@@ -237,6 +278,7 @@
             </li>
         </ul>
     </nav>
+>>>>>>> branch 'main' of https://github.com/seugju/HSDsemi.git
     
 
 </body>

@@ -92,9 +92,9 @@
                 </p>
             </div>
            <div class="footerBox icon" width:130px;>    
-               <img src="/img/Facebook_1.png">
-               <img src="/img/Twitter_1.png">
-               <img src="/img/Instagram_1.png">
+               <img src="img/Facebook_1.png">
+               <img src="img/Twitter_1.png">
+               <img src="img/Instagram_1.png">
                <p><br><br><br><br></p>
            </div>
            </div>
