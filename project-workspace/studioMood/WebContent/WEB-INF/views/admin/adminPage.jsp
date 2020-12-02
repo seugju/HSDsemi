@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>[STUDIO Mood:]admin_</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap&subset=korean" rel="stylesheet">
     <style>
@@ -153,7 +153,7 @@
                     </li>
                     <li>
 
-                        <a href="">
+                        <a href="/noticeList?reqPage=1">
                             <img src="img/icon_Notice.svg" class="icon">
                             NOTICE
                         </a>

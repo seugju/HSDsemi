@@ -195,7 +195,7 @@
                     </li>
                     <li>
 
-                        <a href="">
+                        <a href="/noticeList?reqPage=1">
                             <img src="img/icon_Notice.svg" class="icon">
                             NOTICE
                         </a>

@@ -58,7 +58,7 @@
         
         .logo>p{
         	 font-family: 'KCC-eunyoung';
-        	 font-size: 14pt;
+        	 font-size: 20pt;
         }
 
         .navi-menu,
