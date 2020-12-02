@@ -23,10 +23,11 @@
         .footer{
             background-color: rgb(124, 117, 117);
             text-align: center;
-            width: 100vw;
+            width: 1300px;;
             height: 250px;
             margin: 0;
             padding: 0;
+            z-index: 0;
         }
         .footerBox{
             margin: 20px;

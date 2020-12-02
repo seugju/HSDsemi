@@ -39,6 +39,7 @@
 		}
         header{
             width: 100vw;
+            z-index: 0;
         }
 
         .navbar {
@@ -76,17 +77,17 @@
         .navi-menu {
             margin: 0 auto;
             width: 680px;
+            height: 40px;
         }
 
         .navi-menu>li {
             width: 125px;
-            height: 40px;
             margin: 0 auto;
         }
 
         .navi-menu li>a {
             width: 100%;
-            height: 100%;
+            height: 30px;
             box-sizing: border-box;
             text-align: center;
             display: block;
@@ -123,6 +124,36 @@
             line-height: 30px;
             color: #373a40;
         }
+        .subMenu {
+            margin-top: 10px;
+            padding: 0;
+            list-style-type: none;
+        }
+
+
+        .subMenu li>a {
+            margin: 0;
+            padding: 0;
+            font-size: 10pt;
+            display: inline-block;
+            width: 125px;
+            float: none;
+            color : snow;
+            
+            /*transition-duration: 1s;*/
+        }
+
+        .subMenu>li:first-child>a {
+            margin-top: 30px;
+        }
+           a{
+		      text-decoration: none;
+		      color:black;
+		   }
+		   a:hover{
+		      text-decoration: none;
+		      color:#e6d1d8;
+		   }
 
         .subMenu{
             margin: 0;
@@ -137,26 +168,32 @@
             width: 125px;
             float: none;
         }
+        .subMenu>li:first-child>a {
+            margin-top: 30px;
+        }
+        .subMenu li>a:hover {
+            color: #e6d1d8;
+        }
 
     </style>
     
         <script>
-        $(function(){
+        $(document).ready(function() {
             var subMenu = $(".subMenu");
             subMenu.hide();
-            
-            $(".navi-menu>li>a").hover(function(){
-               $(this).css('color','gray');
-            },function(){
-                $(this).css('color','#373a40');
-           });
-            
-            $(".navi-menu>li>a").click(function(){                
-                subMenu.each(function(idx,item){
-                    $(this).hide();
-                })
-                $(this).next().slideToggle();
-             });
+            var navMenu = $(".navi-menu>li>a");
+            var idx = navMenu.index();
+
+            $(".navi-menu>li>a").hover(function() {
+                $(this).css('color', '#e6d1d8');
+                $(this).next().stop().slideDown(300);
+            }, function() {
+            	
+            	$(this).next().stop().slideUp(300);
+                $(this).css('color', '#391e22');
+                
+            });
+
         });
         
 
