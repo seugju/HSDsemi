@@ -1,0 +1,67 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<style>
+	@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+</style>
+<body>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
+<div class="explain-content">
+	<h1 class="text-center">
+Various concepts
+</h1>
+
+<div class="pricing-box-container">
+	<div id="indiv" class="pricing-box text-center">
+	<div class="opacity-div">
+		<h5>개인프로필</h5>
+		<p class="price"><sup>₩</sup>0<sub>/mo</sub></p>
+		<ul class="features-list">
+			<li><strong>1</strong> Project</li>
+			<li><strong>5</strong> Team Members</li>
+			<li><strong>50</strong> Personal Projects</li>
+			<li><strong>5,000</strong> Messages</li>
+		</ul>
+		</div>
+	</div>
+
+	<div id="group" class="pricing-box text-center">
+	<div class="opacity-div">
+		<h5>단체프로필</h5>
+		<p class="price"><sup>₩</sup>10000</p>
+		<ul class="features-list">
+			<li><strong>1</strong> Project</li>
+			<li><strong>5</strong> Team Members</li>
+			<li><strong>50</strong> Personal Projects</li>
+			<li><strong>5,000</strong> Messages</li>
+		</ul>
+		</div>
+	</div>
+
+	<div id="body" class="pricing-box text-center">
+	<div class="opacity-div">
+		<h5>바디프로필</h5>
+		<p class="price"><sup>₩</sup>89<sub>/mo</sub></p>
+		<ul class="features-list">
+			<li><strong>25</strong> Project</li>
+			<li><strong>50</strong> Team Members</li>
+			<li><strong>500</strong> Personal Projects</li>
+			<li><strong>50,000</strong> Messages</li>
+		</ul>
+		
+	</div>
+	</div>
+	<div class="explain-product">
+		<h3>여기다가 설명을 좀 써주세요 현식씌  저는 이미 베개앞에 핸들이 고장난 8톤트럭 </h3>
+	</div>
+</div>
+
+</div>
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+</body>
+</html>

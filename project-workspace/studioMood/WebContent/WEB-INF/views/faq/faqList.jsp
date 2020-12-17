@@ -73,6 +73,10 @@
             color: #4a4a4a;
             
         }
+          .write-btn:hover{
+        	color: #4a4a4a;
+             text-decoration: none;
+        }
 
         .write {
             width: 80%;
@@ -179,6 +183,14 @@
 	}
 	hr{
 		width:80%;
+	}
+			a{
+		 text-decoration: none;
+		color:black;
+	}
+	.question a:hover{
+		 text-decoration: none;
+		color:#4a4a4a;
 	}
     </style>
 </head>

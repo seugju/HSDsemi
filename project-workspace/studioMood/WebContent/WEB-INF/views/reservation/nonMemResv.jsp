@@ -164,9 +164,7 @@ label {
   text-align: center;
   margin: 50px 0;
 }
-.wrapper{
-	width:80vw;
-}
+
 .nonMem-disabled{
 	background-color:rgb(124, 117, 117);
 }

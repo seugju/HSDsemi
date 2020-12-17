@@ -33,7 +33,6 @@ public class JoinServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		 
 		Member member = new Member();
 		member.setMemberId(request.getParameter("memberId"));
 		member.setMemberPw(request.getParameter("memberPw"));
@@ -48,9 +47,9 @@ public class JoinServlet extends HttpServlet {
 		RequestDispatcher rd = request. getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		request.setAttribute("loc", "/");
 		if(result>0) {
-			request.setAttribute("msg", "회원가입 되었습니다.");
+			request.setAttribute("msg", "회원가입이 완료되었습니다.");
 		}else{
-			request.setAttribute("msg", "입력값을 확인해주세요");
+			request.setAttribute("msg", "회원가입에 실패하셨습니다.");
 		}
 		rd.forward(request, response);
 				

@@ -117,11 +117,25 @@
 		height :40px;
 		
 		}
+		.commentList>ul>li a{
+		text-decoration: none;
+		color:black;
+		}
 		.commentList>ul>li>p:nth-child(2){
 		text-align: right;
+		
 		}
 		.commentList>ul>li:nth-child(2){
 		border-bottom:  1px solid #b8b0b0;
+		}
+		.flex{
+			display: flex;
+            justify-content: center;
+            
+		}
+		.flex>textarea{
+            width: 80%;
+            border:none;
 		}
     </style>
 </head>
@@ -163,8 +177,9 @@
             			<p style="width : 80%; text-align: right;"><%=qc.getQnaCommentDate() %></p>
             		</li>
             		<li>
+            			<div class="flex">
             		<p style="width : 80%;"><%=qc.getQnaCommentContentBr() %></p>
-            		<textarea name = "qnaCommentContent" class="changeComment" style="width: 70%; resize: none;display:none;"><%=qc.getQnaCommentContent() %></textarea>
+            		<textarea name = "qnaCommentContent" class="changeComment" style="width: 80%; resize: none;display:none;"><%=qc.getQnaCommentContent() %></textarea>
             		<%if(m != null) {%>
             		<p class="linkBox" style="width:20%; text-align:right;">
             		<%if(m.getMemberId().equals(qc.getQnaCommentWriter())) {%>
@@ -172,10 +187,11 @@
             		<a href="javascript:void(0)" onclick="deleteComment(this,'<%=qc.getQnaCommentNo() %>','<%=q.getQnaNo()%>')">삭제</a>
             		<%} %>
             		</p>
-            		</li>
-            	</ul>
-            	
             <%} %>
+            		</div>
+            
+            </li>
+            	</ul>
             <%} %>
             </div>
          
@@ -203,6 +219,9 @@
     <%@ include file="/WEB-INF/views/common/footer.jsp" %>
     <script>
 	function modifyComment(obj, commentNo, qnaNo){
+		$(obj).parent().parent().css("border","1px solid #b8b0b0");
+		$(obj).parent().prev().css("outline","none");
+		$(obj).parent().prev().css("height","100px");
     	$(obj).parent().prev().show();	//textarea를 보여주는 코드
 		$(obj).parent().prev().prev().hide();	//p태그를 숨기는 코드
 		//수정버튼 -> 수정완료
@@ -214,6 +233,7 @@
 		$(obj).next().next().hide();
     }
 	function modifyCancel(obj, commentNo, qnaNo){
+		$(obj).parent().parent().css("border","none");
 		$(obj).parent().prev().hide();	//textarea를 숨기는 코드
 		$(obj).parent().prev().prev().show();	//p태그를 보여주는 코드
 		//수정완료 -> 수정

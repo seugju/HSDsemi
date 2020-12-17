@@ -113,7 +113,13 @@
 .container .info span .fa {
   color: #EF3B3A;
 }
-
+.navi-menu li>a {
+    line-height: 30px;
+}
+.resv-chk-do:hover{
+	text-decoration:none;
+	color:#4a4a4a;
+}
 /* END Form */
 /* Demo Purposes */
 body {
@@ -123,8 +129,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-
+.resv-main-frame{
+	width:80%;
+	height:auto;
+}
+.resv-content{
+	height:auto;
+}
 </style>
 <body>
 
@@ -139,7 +150,7 @@ body {
 
 <div class="container">
   <div class="info">
-    <h1>Reservation inquiry</h1><span>전화번호와  <i class="fa fa-heart"></i> </span>
+    <h1>Reservation inquiry</h1><span>전화번호와 4자리 비밀번호를 입력하세요 <i class="fa fa-heart"></i> </span>
   </div>
 </div>
 <div class="form">
@@ -153,7 +164,7 @@ body {
 </div>
 
   </div>
-	
+	</div>
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 </html>

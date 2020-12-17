@@ -86,7 +86,6 @@
             outline: none;
             width: 95%;
         }
-
         .btn-postView {
         	margin-top:10px;
         	line-height : 80px;
@@ -105,6 +104,10 @@
 		padding : 0;
 		margin:0;
 		
+		}
+		.commentList>ul>li a{
+		text-decoration: none;
+		color:black;
 		}
 		.commentList>ul>li{
 		text-decoration: none;
@@ -126,7 +129,16 @@
 		}
 		.btn-comment{
 		display:inline-block;
-		width:40px;
+		width:35px;
+		}
+				.flex{
+			display: flex;
+            justify-content: center;
+            
+		}
+		.flex>textarea{
+            width: 80%;
+            border:none;
 		}
     </style>
 </head>
@@ -152,7 +164,7 @@
                     <td style="height: 30px; font-weight:bold;"><%=p.getPostWriter() %></td>
                     <td>작성일 : <%=p.getPDate() %></td>
                 </tr>
-                <tr>
+                <tr style="border-bottom:1px solid #dfd3d3;">
                     <td style="width: 20%;">첨부파일</td>
 					
                     <td>
@@ -169,8 +181,8 @@
                  <tr>
                 <td colspan="2" style="border-bottom:none;">
                	 <div style="width:80%; margin:0 auto;margin-top:10px;text-align:center;">
-					<div style='width:600px;margin:0 auto;margin-bottom:10px;'>
-						<img src="/upload/post/<%=p.getFilepath() %>">
+					<div style='width:600px;margin:0 auto;margin-bottom:10px; margin-top:20px;'>
+						<img src="/upload/post/<%=p.getFilepath() %>" style="width:600px;">
 					</div>
 					</div>
 				</td>
@@ -185,25 +197,28 @@
             </table>
             <div class="commentList">
             <%for(PostComment pc : list) {%>
+            
             	<ul>
             		<li>
             			<p style="width : 20%; font-weight: bold;"><%=pc.getPostCommentWriter() %></p>
             			<p style="width : 80%; text-align: right;"><%=pc.getPostCommentDate() %></p>
             		</li>
             		<li>
+            		<div class="flex">
             		<p style="width : 80%;"><%=pc.getPostCommentContentBr() %></p>
-            		<textarea name = "postCommentContent" class="changeComment" style="width: 70%; resize: none;display:none;"><%=pc.getPostCommentContent() %></textarea>
+            		<textarea name = "postCommentContent" class="changeComment" style="width: 80%; resize: none;display:none;"><%=pc.getPostCommentContent() %></textarea>
             		<%if(m != null) {%>
-            		<p class="linkBox" style="width:20%; text-align:right;">
-            		<%if(m.getMemberId().equals(pc.getPostCommentWriter())) {%>
-            		<a href="javascript:void(0)" class="btn-comment" onclick="modifyComment(this,'<%=pc.getPostCommentNo()%>','<%=p.getPostNo()%>')">수정</a>
-            		<a href="javascript:void(0)" class="btn-comment" onclick="deleteComment(this,'<%=pc.getPostCommentNo() %>','<%=p.getPostNo() %>')">삭제</a>
+	            		<p class="linkBox" style="width:20%; text-align:right;">
+	            		<%if(m.getMemberId().equals(pc.getPostCommentWriter())) {%>
+	            		<a href="javascript:void(0)" class="btn-comment" onclick="modifyComment(this,'<%=pc.getPostCommentNo()%>','<%=p.getPostNo()%>')">수정</a>
+	            		<a href="javascript:void(0)" class="btn-comment" onclick="deleteComment(this,'<%=pc.getPostCommentNo() %>','<%=p.getPostNo() %>')">삭제</a>
+            			<%} %>
+            			</p>
             		<%} %>
-            		</p>
+            		
+            		</div>
             		</li>
             	</ul>
-            	
-            <%} %>
             <%} %>
             </div>
             <%if(m!=null) {%>
@@ -236,22 +251,28 @@
     	location.href=url+"?filename="+encFilename+"&filepath="+encFilepath;
     }
     function modifyComment(obj, commentNo, postNo){
+		$(obj).parent().parent().css("border","1px solid #b8b0b0");
+		$(obj).parent().prev().css("height","100px");
+		$(obj).parent().prev().css("outline","none");
     	$(obj).parent().prev().show();	//textarea를 보여주는 코드
 		$(obj).parent().prev().prev().hide();	//p태그를 숨기는 코드
 		//수정버튼 -> 수정완료
 		$(obj).html('수정완료');
 		$(obj).attr('onclick', 'modifyComplete(this,"'+commentNo+'","'+postNo+'")')
+		$(obj).attr('style','width:65px;')
 		//삭제버튼 -> 수정취소
 		$(obj).next().html('취소');
 		$(obj).next().attr('onclick', 'modifyCancel(this,"'+commentNo+'","'+postNo+'")')
 		$(obj).next().next().hide();
     }
     function modifyCancel(obj, commentNo, postNo){
+    	$(obj).parent().parent().css("border","none");
     	$(obj).parent().prev().hide();	//textarea를 숨기는 코드
 		$(obj).parent().prev().prev().show();	//p태그를 보여주는 코드
 		//수정완료 -> 수정
 		$(obj).prev().html('수정');
 		$(obj).prev().attr('onclick','modifyComment(this,"'+commentNo+'","'+postNo+'")')
+		
 		//취소 - >삭제
 		$(obj).html('삭제');
 		$(obj).attr('onclick','modifyComment(this,"'+commentNo+'","'+postNo+'")')

@@ -74,6 +74,10 @@
              vertical-align:middle;
              padding:0;
         }
+         .content-btn:hover{
+        	 color: #4a4a4a;
+             text-decoration: none;
+        }
         .button{
         	width:100%;
         	height:50px;
@@ -138,7 +142,7 @@
 			nhn.husky.EZCreator.createInIFrame({
 				oAppRef : oEditors,
 				elPlaceHolder : "noticeContent",
-				sSkinURI : "/nse_files/SmartEditor2Skin.html",
+				sSkinURI : "/nse_files/SmartEditor2Skin2.html",
 				fCreator : "createSEditor2"
 			});
 			function submitContents(elClickedObj) {

@@ -110,12 +110,10 @@
         }
 
         .admin-content {
-            width: 1200px;
-            
+            width: 1200px;         
             float: left;
             display: inline-block;
             height: 950px;
-            
             border-radius: 10px;
             margin: 20px;
             background-color: white;
@@ -149,7 +147,8 @@
         }
         .selectPage{
         	color : #5f7880;
-        	font-weight: bold;        	
+        	font-weight: bold;
+        	
         }
     </style>
     <script>
@@ -181,22 +180,22 @@
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="/adminMembers?reqPage=1">
                             <img src="img/icon_members.svg" class="icon">
                             MEMBERS
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="/reservationAllSearch?reqPage=1">
                             <img src="img/icon_reservation.svg" class="icon">
                             RESERVATION
                         </a>
                     </li>
                     <li>
 
-                        <a href="">
+                        <a href="/adminQna?reqPage=1">
                             <img src="img/icon_Notice.svg" class="icon">
-                            NOTICE
+                            QnA
                         </a>
                     </li>
                 </ul>

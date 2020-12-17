@@ -92,6 +92,11 @@
              line-height:30px;
              float:right;
         }
+        
+         .content-btn:hover{
+        	 color: #4a4a4a;
+             text-decoration: none;
+        }
         .back {
             width: 100%;
             height:30px;
@@ -119,6 +124,15 @@
             color: #4a4a4a;
             margin:5px;
         }
+          .content-btn>a:hover{
+        	 color: #4a4a4a;
+             text-decoration: none;
+        }
+        .modify-btn:hover{
+	 color: #4a4a4a;
+             text-decoration: none;
+        }
+        
         th{
         	padding-left:10px;
         }

@@ -10,7 +10,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript"
+   src="/nse_files/js/HuskyEZCreator.js"
+   charset="utf-8"></script>
 <style>
+
   .postUpdate{
             width: 80%;
              margin : 0 auto;
@@ -48,6 +52,9 @@
             resize : none;
             outline: none;
         }
+        .updateTable>tbody>tr>th{
+          text-align:center;
+          background-color:#F0F0F0;}
         
         .post-write>form>table{
              border-spacing: 0;
@@ -66,6 +73,7 @@
             outline:none;
             border-radius: 5px;
        }
+       
 </style>
 </head>
 <body>
@@ -76,18 +84,18 @@
 		<input type="hidden" name="postNo" value="<%=p.getPostNo() %>">
 		<table class="updateTable">
 		<tr>
-			<th style="width: 20%;">제목</th>
-            <td><input type="text" name="postTitle" style="width: 80%; outline: none;" value="<%=p.getPostTitle()%>"></td>	
+			<th style="width: 10%;">제목</th>
+            <td><input type="text" name="postTitle" style="width: 100%; outline: none;" value="<%=p.getPostTitle()%>"></td>	
 		</tr>
 		<tr>
-						<th style="width: 20%;">작성자</th>
-						<td style="width: 80%"><%=p.getPostWriter() %>
+						<th>작성자</th>
+						<td><%=p.getPostWriter() %>
 						</td>
 					</tr>
 						<tr>
 						<!-- status를 통한 파일 삭제 여부 (delete와 stay로 서블릿에서 구분) -->
-						<th style="width: 20%;">첨부파일</th>
-						<td style="width: 80%"><input type="hidden" id="status" name="status" value="stay">
+						<th>첨부파일</th>
+						<td><input type="hidden" id="status" name="status" value="stay">
 						<%if(p.getFilename() != null) {%>
 						<img src="/img/file.png" width="16px" class="delFile">
 						<input type="file" name="filename" id="file" style="display:none;">
@@ -102,11 +110,13 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2"><textarea name="postContent" style="width:100%; height:500px; vertical-align:top;"><%=p.getPostContent() %></textarea></td>
+					<th>내용</th>
+						<td colspan="2"><textarea name="postContent" style="width:100%; height:500px; vertical-align:top;" id="postContent"><%=p.getPostContent() %></textarea></td>
 					</tr>
+
 					<tr style="text-align:center; border:none;">
 						<td colspan = "2" style="border:none;">
-							<button type="submit" class="btn-post" style="outline:none;">수정</button>
+							<button type="submit" class="btn-post" style="outline:none;" onclick="submitContents(this)">수정</button>
 							<a href="javascript:history.go(-1)" class="btn-post btn-a">취소</a>
 						</td>
 					</tr>
@@ -114,6 +124,24 @@
 		</form>
 	</section>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+		<script type="text/javascript">
+         var oEditors = [];
+         nhn.husky.EZCreator.createInIFrame({
+            oAppRef : oEditors,
+            elPlaceHolder : "postContent",
+            sSkinURI : "/nse_files/SmartEditor2Skin.html",
+            fCreator : "createSEditor2"
+         });
+         function submitContents(elClickedObj) {
+            oEditors.getById["postContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됩니다. 
+            // 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
+
+            try {
+               elClickedObj.form.submit();
+            } catch (e) {
+            }
+         }
+      </script>
 	<script>
 	$("#fileDelBtn").click(function(){
 		if(confirm("첨부파일을 삭제하시겠습니까?")){

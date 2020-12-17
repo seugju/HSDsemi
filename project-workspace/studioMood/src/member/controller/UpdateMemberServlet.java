@@ -50,7 +50,7 @@ public class UpdateMemberServlet extends HttpServlet {
 			rd.forward(request, response);
 		}else {
 			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/common/msg.jsp");
-			request.setAttribute("msg", "수정실패.");
+			request.setAttribute("msg", "수정 실패하였습니다.");
 			request.setAttribute("loc", "/");
 			rd.forward(request, response);
 		}

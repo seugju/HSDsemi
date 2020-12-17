@@ -96,6 +96,9 @@
             text-align: right;
             margin-bottom: 10px;
         }
+         .write>a:hover{
+         color:#4a4a4a;
+        }
         .post{
             width: 80%;
             text-align: center;
@@ -127,7 +130,7 @@
         }
         .pagination>li>.selectPage{
         color:#f1d1d1;
-        }
+        } 
     </style>
 </head>
 <body>
@@ -140,7 +143,7 @@
        
        <%if(m!=null && m.getMemberLevel()==1) {%>
        <div class="write">
-       <a href="/postWriterFrm" class="write-btn">글쓰기</a>
+       <a href="/postWriterFrm" class="write-btn" style="text-decoration: none;" >글쓰기</a>
        </div>
        <%} %>
        <table class="table-title">

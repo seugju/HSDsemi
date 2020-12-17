@@ -128,6 +128,28 @@
         .pagination>li>.selectPage{
         color:#f1d1d1;
         }
+         .write-btn:hover{
+        color:black;
+         text-decoration: none;
+        }
+        
+@media (min-width: 768px) {
+    #kakao-talk-channel-chat-button {
+    position: fixed;
+    z-index: 999;
+    right: 30px; /* 화면 오른쪽으로부터의 거리, 숫자만 변경 */
+    bottom: 30px; /* 화면 아래쪽으로부터의 거리, 숫자만 변경 */
+    }
+}
+
+@media (max-width:767px) {
+    #kakao-talk-channel-chat-button {
+    position: fixed;
+    z-index: 999;
+    right: 15px; /* 화면 오른쪽으로부터의 거리, 숫자만 변경 */
+    bottom: 30px; /* 화면 아래쪽으로부터의 거리, 숫자만 변경 */
+    }
+}
     </style>
 </head>
 <body>
@@ -217,6 +239,20 @@
    </section>
     </div>
     <br><br><br>
+    <div id="kakao-talk-channel-chat-button"></div>
+
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type='text/javascript'>
+  //<![CDATA[
+    // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('d1bb131319eadae26c139431e519d390');
+    // 카카오톡 채널 1:1채팅 버튼을 생성합니다.
+    Kakao.Channel.createChatButton({
+      container: '#kakao-talk-channel-chat-button',
+      channelPublicId: '_GExlxnK' // 카카오톡 채널 홈 URL에 명시된 ID
+    });
+  //]]>
+</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
 

@@ -69,6 +69,7 @@
         	 width: 80%;
         	 border: none;
         	 border-collapse: collapse;
+        	 border-bottom: 4px solid #b8b0b0;
         }
 		.content-tr:hover{
 			background-color:#fbf0f0;
@@ -147,7 +148,7 @@
 		 text-decoration: none;
 		color:black;
 	}
-	a:hover{
+	.content a:hover{
 		 text-decoration: none;
 		color:#4a4a4a;
 	}

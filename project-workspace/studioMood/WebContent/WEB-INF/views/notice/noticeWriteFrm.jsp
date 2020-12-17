@@ -71,6 +71,11 @@
              vertical-align:middle;
              padding:0;
         }
+         .content-btn:hover{
+        	 color: #4a4a4a;
+             text-decoration: none;
+        }
+        
         .button{
         	width:100%;
         	height:50px;
@@ -88,6 +93,9 @@
 		text-align:left;
 		padding-left:5px;
 	}
+	th{
+		background-color:#F0F0F0;
+	}
 
 </style>
 </head>
@@ -101,20 +109,21 @@
 			<form action="/insertNotice" method="post">
 			<table class="content-table">
 				<tr height="30px">
-					<th width="20%">제목</th>
+					<th width="10%">제목</th>
 					<td width="80%"><input type="text" name="noticeTitle" >
 					</td>
 				</tr>
 
 				<tr height="30px">
-					<th width="20%">작성자</th>
+					<th width="10%">작성자</th>
 					<td width="80%">
 						<%=m.getMemberId() %>
 						<input type="hidden" name="noticeWriter" value="admin">
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2"><textarea name="noticeContent" rows="3" col="40" id="noticeContent"></textarea>
+					<th width="10%">내용</th>
+					<td width="80%"><textarea name="noticeContent" rows="3" col="40" id="noticeContent"></textarea>
 				</tr>
 	
 			</table>
@@ -135,7 +144,7 @@
 			nhn.husky.EZCreator.createInIFrame({
 				oAppRef : oEditors,
 				elPlaceHolder : "noticeContent",
-				sSkinURI : "/nse_files/SmartEditor2Skin.html",
+				sSkinURI : "/nse_files/SmartEditor2Skin2.html",
 				fCreator : "createSEditor2"
 			});
 			function submitContents(elClickedObj) {

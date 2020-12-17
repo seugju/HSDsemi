@@ -123,7 +123,10 @@
         .cover {
             display: inline-block;
         }
-
+		.cover>p{
+		font-family: 'S-CoreDream-5Medium';
+		font-size:20px;
+		}
         .product-info {
             font-family: 'Noto Sans KR', sans-serif;
             text-align: center;

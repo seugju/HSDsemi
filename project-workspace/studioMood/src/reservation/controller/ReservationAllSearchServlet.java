@@ -39,7 +39,8 @@ public class ReservationAllSearchServlet extends HttpServlet {
 		ArrayList<Reservation> list = new ReservationService().selectAllReservation();
 		System.out.println("reqPage : " + reqPage);
 		ReservationPageData rpd = new ReservationService().selectMembers(reqPage);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reservation/showAllreserv.jsp");
+		//RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reservation/showAllreserv.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/reservationAllSearch?reqPage=1");
 		request.setAttribute("reservationList", rpd.getList());
 		request.setAttribute("pageNavi", rpd.getPageNavi());
 		rd.forward(request, response);
@@ -54,3 +55,4 @@ public class ReservationAllSearchServlet extends HttpServlet {
 	}
 
 }
+

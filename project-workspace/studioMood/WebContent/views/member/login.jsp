@@ -8,7 +8,7 @@
 
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
-
+	<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <style>
     
      	@font-face {
@@ -76,20 +76,21 @@
 
         .login input {
             margin: 5px;
-            width: 200px;
-            height: 25px;
+            width: 215px;
+            height: 30px;
             border: 1.5px solid #373a40;
             border-radius: 5px;
             outline: none;
         }
 
         #loginBtn {
-            width: 100px;
-            height: 35px;
+            width: 220px;
+            height: 40px;
             color: white;
             border: none;
             background-color: #000;
-            margin: 20px;
+            margin: 10px;
+            
             font-weight: bold;
         }
 
@@ -108,13 +109,20 @@
             font-weight: bold;
             margin: 0 auto;
         }
-
+		#kakao-login-btn{
+			padding:0px;
+			background:white;
+			border:0px;
+			height:auto;
+			margin:0 auto;
+			
+		}
     </style>
-
+    
 </head>
 <body>
 
-	<form action="/login" method="post" id="login">
+	
 	
 		<div class="modal" id="modal">
 		    <div class="modalBox modal-con">
@@ -127,17 +135,119 @@
 		            </div>
 		            <div class="login">
 		                <h2>Login</h2>
+		                <form action="/login" method="post" id="login">
 		                <input type="text" id="id" name="id" placeholder="ID"><br>
 		                <input type="password" id="pw" name="pw" placeholder="password"><br>
 		                <button type="submit" id="loginBtn" value="로그인">로그인</button><br>
-		                <a href="javascript:;" class="close">X</a>
+		                 
+		                </form>
+		                
+		                	<input class="kakaoHiddenId" name="kakaoID" value="" type="hidden">
+		                	<a href="javascript:kakaoLogin();" id="kakao-login-btn" ></a>
+		                	
+		                	
+		                
+		               
 		            </div>
 		        </div>
 		
 		    </div>
 		
 		</div>
-	</form>
+	
+<script type="text/javascript">
+	var id=null;
+    document.addEventListener("DOMContentLoaded", function() {
+
+
+
+        // @details 카카오톡 Developer API 사이트에서 발급받은 JavaScript Key
+
+        
+    	
+
+    	
+    	Kakao.init( "d1bb131319eadae26c139431e519d390" );
+        // @breif 카카오 로그인 버튼을 생성합니다.
+
+        Kakao.Auth.createLoginButton({
+
+              container : "#kakao-login-btn"
+
+            , success : function( authObj ) {
+
+
+
+                // console.log( authObj );
+				
+	
+
+                Kakao.API.request({
+                	
+                      url : "/v2/user/me"
+                    	 
+
+                    , success : function( res ) {
+                    	
+                    	
+
+                        // console.log( res );
+
+
+
+                        // @breif 아이디
+                        
+						id=res['id'];
+                        $(".kakaoHiddenId").attr("value",res['id']);
+                        console.log(id);
+                       
+                        // @breif 닉네임
+						
+						 Kakao.API.request({
+    	      		url: '/v1/user/unlink',
+    	     		 success: function(res) {
+    	    	  
+    	       		 
+    	     		 },
+    	     		 fail: function(err) {
+    	       		 alert('fail: 탈퇴 실패' )
+    	     		 },
+    	    	});
+                        if(id!=null){
+                        	location.href="/kakaoLogin?kakaoLoginId="+id;
+                        }
+                    		
+                    		
+                    	
+
+                      
+
+
+
+                    }, fail : function( error ) {
+
+                        alert( "불러왔지만 실패");
+
+                    }
+
+                });
+
+            }
+
+            , fail : function( error ) {
+
+                alert( "불러오지도 못함");
+
+            }
+
+        });
+
+    });
+   
+    
+    	
+    
+</script>
 
 </body>
 </html>

@@ -19,7 +19,6 @@
 <style>
 	#table-content{
 		
-		width:80vw;
 		height:auto;
 	}
 	#resv-one-search {
@@ -27,6 +26,7 @@
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
+  margin:0 auto;
 }
 
 .resv-search-result{
@@ -53,7 +53,7 @@
 	height: 10vw;
 	text-align:center;
 }
-#btn button{
+button{
 	width: 40%;
 	height:30%;
 	border:1px solid lightgray;
@@ -72,7 +72,18 @@
 	text-align:center;
 	font-family: 'Sunflower', sans-serif;
 }
-
+.resv-chk-submit{
+	height:100px;
+	margin:0 auto;
+	text-align:center;
+	
+}
+.resv-chk-button{
+	height:50px;
+	margin-top:20px;
+	width:20%;
+	margin:20px;
+}
 </style>
 <body>
 
@@ -97,7 +108,7 @@
 	<%if(list.size()!=0) {%>
   <%for(int i=0; i<list.size(); i++) {%>
   <tr>
-  	<td><input type="radio" name="temp" class="change"></td>
+  	<td class="resv-search-result"><input type="radio" name="temp" class="change"></td>
     <td class="resv-search-result"><%=list.get(i).getrNum() %></td>
     <td class="resv-search-result"><%=list.get(i).getName() %></td>
     <td class="resv-search-result"><%=list.get(i).getPhone() %></td>
@@ -115,12 +126,15 @@
   	<td colspan="11"><%=msg %></td>
   </tr>
   <%} %>
-  <tr>
-  	<td id="btn" colspan="5"><button type="button" id="btnReserve">변경하기</button></td>
-	
-	<td id="btn" colspan="5"><button type="button" id="btnReserve">취소하기</button></td>
-  </tr>
+  
   </table>
+  <div class="resv-chk-submit">
+  	
+  	<button type="button" class="resv-chk-button" id="btnChangeReserve">변경하기</button>
+	<button type="button" class="resv-chk-button" id="btnDeleteReserve">취소하기</button>
+	<button type="button" class="resv-chk-button" id="btnPayReserve">결제하기</button>
+  
+  </div>
  
   </div>
 		
@@ -131,13 +145,37 @@
 $("#btnChangeReserve").click(function(){
 	var check = $("[type=radio]:checked");
 	var rNum = check.parent().next().html();
-	location.href="/reserveUpdateNum?rNum="+rNum;
+	
+	if(check.length!=0){
+		console.log("성공");
+		location.href="/reserveUpdateNum?rNum="+rNum;
+	}else{
+		alert("경고");
+	}
+		
+	
+	
 	//비회원은 현재 수정이 아니라 삽입되는 현상 발생함 해결요망
 });
 $("#btnDeleteReserve").click(function(){
 	var check = $("[type=radio]:checked");
 	var phone = check.parent().next().next().next().html();
-	location.href="/reserveDelete?phone="+phone;
+	if(check.length!=0){
+		location.href="/reserveDelete?phone="+phone;
+	}else{
+		alert("경고");
+	}
+	
+});
+$("#btnPayReserve").click(function(){
+	var check = $("[type=radio]:checked");
+	var phone = check.parent().next().next().next().html();
+	if(check.length!=0){
+		location.href="/payment?phone="+phone;
+	}else{
+		alert("경고");
+	}
+	
 });
 </script>
 </html>

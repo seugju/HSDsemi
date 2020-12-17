@@ -21,11 +21,20 @@
             font-weight: normal;
             font-style: normal;
         }
+        
+        .admin-wrap {
+            margin: 0 auto;
+            width: 1500px;
+            height: 1000px;
+            border-radius: 20px;
+            background-color: #9f807d;
+        }
 
         .admin-menu {
             width: 200px;
             text-align: center;
-            height: 100vw;
+            margin-top: 30px;
+            height: 900px;
             background-color: #9f807d;
             display: inline-block;
             float: left;
@@ -81,18 +90,21 @@
             height: 28%;
         }
 
-        .admin-content {
-            text-indent: 20px;
+       .admin-content {
+            width: 1200px;         
             float: left;
             display: inline-block;
-            height: 100vw;
+            height: 950px;
+            border-radius: 10px;
+            margin: 20px;
+            background-color: white;
+            text-align: left;
         }
 
 
         .real-content>p {
             font-family: 'Black Han Sans';
             font-size: 50pt;
-            float: left;
             margin: 10px;
 
         }
@@ -146,16 +158,16 @@
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="/reservationAllSearch?reqPage=1">
                             <img src="img/icon_reservation.svg" class="icon">
                             RESERVATION
                         </a>
                     </li>
                     <li>
 
-                        <a href="">
+                        <a href="/adminQna?reqPage=1">
                             <img src="img/icon_Notice.svg" class="icon">
-                            NOTICE
+                            QnA
                         </a>
                     </li>
                 </ul>

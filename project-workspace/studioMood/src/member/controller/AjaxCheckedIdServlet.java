@@ -35,7 +35,7 @@ public class AjaxCheckedIdServlet extends HttpServlet {
 		String memberId = request.getParameter("memberId");
 		Member m = new MemberService().selectOneMember(memberId);
 		PrintWriter out = response.getWriter();
-		if( m == null) { //사용가능한 경우 
+		if( m == null) { //�궗�슜媛��뒫�븳 寃쎌슦 
 			out.print(1);
 		}else {
 			out.print(0);

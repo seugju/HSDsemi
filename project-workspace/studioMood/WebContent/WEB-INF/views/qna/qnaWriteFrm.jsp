@@ -41,6 +41,11 @@
             height: 40px;
             font-size:17px;
         }
+         .qna-write>form>table>tbody>tr>th{
+        background-color:#F0F0F0;
+        text-align:center
+        }
+        
         .qna-write>form>table>tbody>tr>td{
          border: 1px solid #b8b0b0;
         }
@@ -69,18 +74,19 @@
 				</td>
 				</tr>
 					<tr>
-						<th width="20%">제목</th>
-                        <td><input type="text" name="qTitle" style="width: 80%; outline: none; "></td>
+						<th width="10%">제목</th>
+                        <td><input type="text" name="qTitle" style="width: 100%; outline: none; "></td>
 					</tr>
-				
+			
 					<tr>
-						<th width="20%" >작성자</th>
-						<td width="80%"><%=m.getMemberId() %>
+						<th>작성자</th>
+						<td><%=m.getMemberId() %>
 						<input type="hidden" name="qWriter" value="<%=m.getMemberId() %>">
 						</td>
 					</tr>
                <tr>
-                  <td colspan="2"><textarea name="qContent" style="width: 100%; height: 500px; box-sizing: border-box;" id="qContent"></textarea></td>
+               <th>내용</th>
+                  <td><textarea name="qContent" style="width: 100%; height: 400px; box-sizing: border-box;" id="qContent"></textarea></td>
                </tr>
 
 					<tr style="text-align:center; border:none;">

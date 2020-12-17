@@ -62,6 +62,9 @@
         .updateTable>tbody>tr>td{
          border: 1px solid #b8b0b0;
         }
+         .updateTable>tbody>tr>th{
+          text-align:center;
+          background-color:#F0F0F0;}
          .updateTable>tbody>tr>td>textarea{
            border:none;
             resize : none;
@@ -71,7 +74,7 @@
              border-spacing: 0;
              margin-top:50px;
         }
-       
+      
     </style>
 </head>
 <body>
@@ -90,15 +93,16 @@
 				</td>
 				</tr>
 					<tr>
-						<th width="20%">제목</th>
+						<th width="10%">제목</th>
                         <td><input type="text" name="qTitle" style="width: 80%; outline: none;" value="<%=q.getqTitle() %>"></td>
 					</tr>
 				
 					<tr>
-						<th width="20%">작성자</th>
-						<td width="80%"><%=q.getqWriter() %></td>
+						<th>작성자</th>
+						<td><%=q.getqWriter() %></td>
 					</tr>
 					<tr>
+					<th>내용</th>
                   		<td colspan="2"><textarea name="qContent" style="width: 100%; height: 500px; box-sizing: border-box;" id="qContent"><%=q.getqContent() %></textarea></td>
                		</tr>
                		

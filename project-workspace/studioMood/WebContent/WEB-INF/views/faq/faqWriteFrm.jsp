@@ -70,6 +70,10 @@
              vertical-align:middle;
              padding:0;
         }
+        .content-btn:hover{
+        	 color: #4a4a4a;
+             text-decoration: none;
+        }
         .button{
         	width:100%;
         	height:50px;
@@ -87,6 +91,9 @@
 	button{
 		outline:none;
 	}
+		th{
+		background-color:#F0F0F0;
+	}
 </style>
 </head>
 <body>
@@ -99,13 +106,14 @@
 			<form action="/insertFaq" method="post">
 			<table class="content-table">
 				<tr height="30px">
-					<th width="20%">제목</th>
+					<th width="10%">제목</th>
 					<td width="80%"><input type="text" name="faqTitle" >
 					</td>
 				</tr>
 
 				<tr>
-					<td colspan="2"><textarea name="faqContent" rows="3" col="40" id="faqContent"></textarea>
+				<th width="10%">내용</th>
+					<td><textarea name="faqContent" rows="3" col="40" id="faqContent"></textarea>
 				</tr>
 	
 			</table>
@@ -126,7 +134,7 @@
 			nhn.husky.EZCreator.createInIFrame({
 				oAppRef : oEditors,
 				elPlaceHolder : "faqContent",
-				sSkinURI : "/nse_files/SmartEditor2Skin.html",
+				sSkinURI : "/nse_files/SmartEditor2Skin2.html",
 				fCreator : "createSEditor2"
 			});
 			function submitContents(elClickedObj) {

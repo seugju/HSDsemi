@@ -11,6 +11,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap&subset=korean" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
 <style>
         @font-face {
             font-family: 'Wemakeprice-Bold';
@@ -100,16 +108,14 @@
         }
 
         .div2 {
-            height: 10%;
+            height: 13%;
         }
 
         .admin-content {
-            width: 1200px;
-            
+            width: 1200px;        
             float: left;
             display: inline-block;
-            height: 950px;
-            
+            height: 950px;        
             border-radius: 10px;
             margin: 20px;
             background-color: white;
@@ -129,12 +135,13 @@
             width: 120px;
         }
         .th-long{
-            width: 200px;
+            width: 202px;
         }
         .table th{
-            font-size: 11pt;
+            font-size:11pt;
         }
         .table td{
+        	padding : 10px;
             font-size: 10pt;
         }
         #pageNavi>*{
@@ -159,7 +166,7 @@
 <style>
 	#table-content{
 		margin:0 auto;
-		width:80%;
+		width:90%;
 		height:60vw;
 		min-height:800px;
 		max-height:1200px;
@@ -169,7 +176,11 @@
 		align-items: center;
 		/*border: 1px solid black;*/
 	}
-	table{
+	        .real-content {
+            display: inline-block;
+            width:80%;
+        }
+	.table{
 		margin:0 auto;
 		width: 100%;
 		height: 100%;
@@ -195,7 +206,7 @@
 	}
 </style>
 <body>
-<%@ include file="/WEB-INF/views/common/header.jsp"%>
+
 <div class="admin-wrap">
         <!--화면 좌측-->
         <div class="admin-menu">
@@ -213,22 +224,22 @@
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="/adminMembers?reqPage=1">
                             <img src="img/icon_members.svg" class="icon">
                             MEMBERS
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="/reservationAllSearch?reqPage=1">
                             <img src="img/icon_reservation.svg" class="icon">
                             RESERVATION
                         </a>
                     </li>
                     <li>
 
-                        <a href="">
+                        <a href="/adminQna?reqPage=1">
                             <img src="img/icon_Notice.svg" class="icon">
-                            NOTICE
+                            QnA
                         </a>
                     </li>
                 </ul>
@@ -239,13 +250,12 @@
         <div class="admin-content">
             <div class="div2"></div>
             <div class="real-content">
-                <div class="members">
+                <div class="members" >
                     <p class="title"> 전체예약정보 </p>
-                   
                     <table class="table table-hover">
                         <tr>                            
                             <th class="th-short">체크</th>
-                            <th class="th-short">예약번호</th>
+                            <th class="th-short">No</th>
                             <th class="th-long">이름</th>
                             <th class="th-long">전화번호</th>
                             <th class="th-long">예약날짜</th>
@@ -253,8 +263,8 @@
                             <th class="th-long">종료시간</th>
                             <th class="th-long">컨셉</th>
                             <th class="th-short">컷수</th>
-                            <th class="th-short">예약확인</th>
-                            <th class="th-long">예약비밀번호</th>
+                            <th class="th-short">결제</th>
+                            <th class="th-long">비밀번호</th>
                         </tr>
                         <%for(Reservation r : list){%>
                         	<tr>
@@ -310,19 +320,27 @@
 		</tr>
 	</table>
 	</div!-->
-	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+	
 </body>
 <script type="text/javascript">
 	$("#btnChangeReserve").click(function(){
 		var check = $("[type=radio]:checked");
 		var rNum = check.parent().next().html();
-		location.href="/reserveUpdateNum?rNum="+rNum;
-		//비회원은 현재 수정이 아니라 삽입되는 현상 발생함 해결요망
+		console.log("체크 = "+check);
+		if(check.length!=0){
+			location.href="/reserveUpdateNum?rNum="+rNum;
+		}else{
+			alert("경고");
+		}
 	});
 	$("#btnDeleteReserve").click(function(){
 		var check = $("[type=radio]:checked");
 		var rNum = check.parent().next().html();
-		location.href="/reserveDeleteNum?rNum="+rNum;
+		if(check.length!=0){
+			location.href="/reserveDeleteNum?rNum="+rNum;
+		}else{
+			alert("경고");
+		}
 	});
 </script>
 </html>

@@ -125,7 +125,7 @@ $(document).ready(function(){
 						var timeLabel = $(".labelchk");
 						for(var i=0;i<timeLabel.length;i++){
 							var val = timeLabel.eq(i).attr("value");							
-							if(Number(val)>=sTime && Number(val)<=eTime){
+							if(Number(val)>=sTime && Number(val)<eTime){
 								timeLabel.eq(i).addClass("resv-chk-style-disabled");
 								//timeLabel.eq(i).removeClass(".labelchk");
 								timeLabel.eq(i).children().prop("disabled",true);								
@@ -190,16 +190,22 @@ $(document).ready(function(){
 	};
 </script>
 <style>
-	
+	body{
+		/* width:100vw; */
+	}
   html, body {
     /*overflow: hidden; /* don't do scrollbars */*/
+    
     font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
     font-size: 14px;
   }
   html{
-  	overflow:scroll; width:1920px; height:1080px;
+  	overflow:scroll; 
   }
-
+	.resv-main-frame{
+		width:80%;
+		   
+	}
   #calendar-container {
     position: fixed;
     top: 0;
@@ -228,6 +234,11 @@ $(document).ready(function(){
 a{
 	color:black;
 }
+
+.resv-chk-do:hover{
+	text-decoration:none;
+	color:#4a4a4a;
+}
 .resv-submit-div-go button{
   background:#f8f9fa;
   color:rgb(241, 209, 209);
@@ -243,6 +254,23 @@ a{
 }
 
 
+.nav-item{
+	line-height:50px;
+	
+}
+.navi-menu li>a{
+	line-height:30px;
+}
+.navbar{
+	padding-left:16px;
+	padding-right:16px;
+	padding-top:8px;
+	padding-bottom:8px;
+}
+.resv-select {
+    width: 100%;
+    margin: 0 auto;
+}
 </style>
 </head>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>

@@ -10,6 +10,8 @@ import common.JDBCTemplate;
 import member.model.dao.MemberDao;
 import member.model.vo.Member;
 import member.model.vo.MemberPageData;
+import qna.model.vo.Qna;
+import qna.model.vo.QnaPageData;
 
 public class MemberService {
 
@@ -74,8 +76,8 @@ public class MemberService {
 		Connection conn = JDBCTemplate.getConnection();
 		MemberDao dao = new MemberDao();
 		
-		int totalCount = dao.totalCount(conn);		//총 멤버수를 구하는 dao
-		int numPerPage = 12;						//한페이지당 조회되는 멤버 수
+		int totalCount = dao.totalCount(conn);		//珥� 硫ㅻ쾭�닔瑜� 援ы븯�뒗 dao
+		int numPerPage = 12;						//�븳�럹�씠吏��떦 議고쉶�릺�뒗 硫ㅻ쾭 �닔
 		int totalPage = 0;
 	
 		if(totalCount % numPerPage == 0) {
@@ -106,14 +108,14 @@ public class MemberService {
 		}
 		
 		
-		//이전버튼 만들기 -> 페이지 시작번호가 1이 아닌 경우에만 이전 버튼 생성  
+		//�씠�쟾踰꾪듉 留뚮뱾湲� -> �럹�씠吏� �떆�옉踰덊샇媛� 1�씠 �븘�땶 寃쎌슦�뿉留� �씠�쟾 踰꾪듉 �깮�꽦  
 		if(pageNo != 1) {
 				pageNavi += "<a class='btn' href='/adminMembers?reqPage="+(pageNo-1)+"'>이전</a>";
 		}
 		
-		//페이지 네비게이션 숫자
+		//�럹�씠吏� �꽕鍮꾧쾶�씠�뀡 �닽�옄
 		for(int i=0; i<pageNaviSize; i++) {
-			if(reqPage == pageNo) {     //페이지네비가 현재 요청 페이지인 경우 (a태그가 필요 X) 
+			if(reqPage == pageNo) {     //�럹�씠吏��꽕鍮꾧� �쁽�옱 �슂泥� �럹�씠吏��씤 寃쎌슦 (a�깭洹멸� �븘�슂 X) 
 				pageNavi += "<span class= 'selectPage'>"+pageNo+"</span>";
 			}else {
 				pageNavi += "<a class='btn' href='/adminMembers?reqPage="+pageNo+"'>"+pageNo+"</a>";
@@ -127,7 +129,7 @@ public class MemberService {
 			
 		}
 		
-		//다음버튼 
+		//�떎�쓬踰꾪듉 
 		if(pageNo <= totalPage) {
 			pageNavi += "<a class='btn' href = '/adminMembers?reqPage="+pageNo+"'>다음</a>";
 		}
@@ -135,6 +137,78 @@ public class MemberService {
 		MemberPageData mpd = new MemberPageData(list,pageNavi);
 		JDBCTemplate.close(conn);
 		return mpd;
+	}
+
+	public Member selectKakaoOneMember(Member member) {
+		Connection conn = JDBCTemplate.getConnection();
+		Member loginMember = new MemberDao().selectKakaoOneMember(conn, member);
+		JDBCTemplate.close(conn);
+		return loginMember; 
+	}
+	public QnaPageData selectQna(int reqPage) {
+		Connection conn = JDBCTemplate.getConnection();
+		MemberDao dao = new MemberDao();
+		int totalCount = dao.qtotalCount(conn);		//珥� 硫ㅻ쾭�닔瑜� 援ы븯�뒗 dao
+		int numPerPage = 12;						//�븳�럹�씠吏��떦 議고쉶�릺�뒗 硫ㅻ쾭 �닔
+		int totalPage = 0;
+	
+		if(totalCount % numPerPage == 0) {
+			totalPage = totalCount/numPerPage;
+		}else {
+			totalPage=totalCount/numPerPage +1;
+		}
+
+		//reqPage 1  -> start : 1, end : 10
+		//reqPage 2  -> start : 11, end : 20
+		//reqPage 3  -> start : 21, end : 30
+		
+		int start = (reqPage -1) * numPerPage+1;
+		int end = reqPage *numPerPage;
+		
+		ArrayList<Qna> list = dao.selectQnaList(conn,start,end);
+		
+		int pageNaviSize = 5;
+		String pageNavi = "";
+		
+		int pageNo = 0;
+		if(reqPage <=3) {
+			pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+		}else if(reqPage >= totalPage-1){
+			pageNo = totalPage-4;
+		}else{
+			pageNo = (reqPage-2);
+		}
+		
+		
+		//�씠�쟾踰꾪듉 留뚮뱾湲� -> �럹�씠吏� �떆�옉踰덊샇媛� 1�씠 �븘�땶 寃쎌슦�뿉留� �씠�쟾 踰꾪듉 �깮�꽦  
+		if(pageNo != 1) {
+				pageNavi += "<a class='btn' href='/adminQna?reqPage="+(pageNo-1)+"'>이전</a>";
+		}
+		
+		//�럹�씠吏� �꽕鍮꾧쾶�씠�뀡 �닽�옄
+		for(int i=0; i<pageNaviSize; i++) {
+			if(reqPage == pageNo) {     //�럹�씠吏��꽕鍮꾧� �쁽�옱 �슂泥� �럹�씠吏��씤 寃쎌슦 (a�깭洹멸� �븘�슂 X) 
+				pageNavi += "<span class= 'selectPage'>"+pageNo+"</span>";
+			}else {
+				pageNavi += "<a class='btn' href='/adminQna?reqPage="+pageNo+"'>"+pageNo+"</a>";
+			}
+			
+			pageNo++;
+			
+			if(pageNo > totalPage) {
+				break;
+			}
+			
+		}
+		
+		//�떎�쓬踰꾪듉 
+		if(pageNo <= totalPage) {
+			pageNavi += "<a class='btn' href = '/adminQna?reqPage="+pageNo+"'>다음</a>";
+		}
+		
+		QnaPageData qpd = new QnaPageData(list, pageNavi);
+		JDBCTemplate.close(conn);
+		return qpd;
 	}
 
 	

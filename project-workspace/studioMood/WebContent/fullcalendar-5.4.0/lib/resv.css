@@ -1,5 +1,5 @@
 .resv-main-frame{
-    width: 80vw;
+    
     min-width: 800px;
     height: 1300px;
 	margin:0 auto;
@@ -11,7 +11,7 @@
         border-bottom:  1px solid;
        border-bottom-color: rgb(246, 177, 177);
         box-sizing: border-box;
-              
+             line-height:40px;
         text-align: center;
     }
 .resv-chk-do{
@@ -23,12 +23,7 @@
         border-right: 0px;
     }
 
-    a {
-        text-decoration: none;
-        color: white;
-        display: block;
-        line-height: 40px;
-    }
+   
 
     .resv-content {
         width: 100%;
@@ -38,7 +33,8 @@
     }
 
     .resv-select {
-        width: 100%;
+        margin-left:10%;
+		width:80%;
         height: 350px;
         background-color: #f8f9fa;
         font-family: 'Noto Sans KR', sans-serif;
@@ -64,7 +60,7 @@
         text-align: center;
     }
 
-    
+   
 
     .resv-submit {
         width: 100%;
@@ -73,7 +69,7 @@
         box-sizing: border-box;
         float: left;
     }
-
+ 
     .chkbox {
 
         height: 50px;
@@ -102,6 +98,7 @@
         width: 200px;
         height: 60px;
     }
+    
     .resv-time-list{
         width: 80%;
         height: 42px;
@@ -111,6 +108,7 @@
         margin: 56px;
         margin-left:100px;
     }
+    
     .resv-time-chk {
         width: 50%;
         height: 250px;
@@ -120,6 +118,7 @@
         float: left;
         position:relative;
     }
+    
     .labelchk{
     display: block;
     height: 40px;
@@ -237,7 +236,12 @@ select::-ms-expand {
 #resv-select{
 	height:60px;
 	
+	
 }
 #resv-concept-select{
 	height:60px;
+}
+#calendar{
+	width:80%;
+	margin:0 auto;
 }
