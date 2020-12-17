@@ -36,13 +36,14 @@ public class ReservationAllSearchServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		ArrayList<Reservation> list = new ReservationService().selectAllReservation();
+		ArrayList<Reservation> list = new ReservationService().selectAllReservation();		
 		System.out.println("reqPage : " + reqPage);
 		ReservationPageData rpd = new ReservationService().selectMembers(reqPage);
 		//RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reservation/showAllreserv.jsp");
-		RequestDispatcher rd = request.getRequestDispatcher("/reservationAllSearch?reqPage=1");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reservation/showAllreserv.jsp?reqPage=1");
 		request.setAttribute("reservationList", rpd.getList());
 		request.setAttribute("pageNavi", rpd.getPageNavi());
+		request.setAttribute("rNumlist", rpd.getrNumlist());
 		rd.forward(request, response);
 	}
 

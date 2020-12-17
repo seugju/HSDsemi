@@ -35,13 +35,13 @@ public class ReserveDeleteNumServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("utf-8");
 		int rNum = Integer.parseInt(request.getParameter("rNum"));
-		int result = new ReservationService().deleteReservation(rNum);
-		RequestDispatcher rd = request.getRequestDispatcher("/reservationAllSearch");
+		int result = new ReservationService().deleteReservation(rNum);		
 		if(result>0) {
 			System.out.println("삭제완료");
 		}else {
 			System.out.println("삭제실패");
 		}
+		RequestDispatcher rd = request.getRequestDispatcher("/reservationAllSearch?reqPage=1");
 		rd.forward(request, response);
 	}
 

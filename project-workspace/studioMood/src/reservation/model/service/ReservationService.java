@@ -42,6 +42,7 @@ public class ReservationService {
 		int end = reqPage *numPerPage;
 		
 		ArrayList<Reservation> list = dao.selectReservations(conn,start,end);
+		ArrayList<Integer> rNumlist = dao.selectReservationsrNum(conn,start,end);
 		
 		int pageNaviSize = 5;
 		String pageNavi = "";
@@ -82,7 +83,7 @@ public class ReservationService {
 			pageNavi += "<a class='btn' href = '/reservationAllSearch?reqPage="+pageNo+"'>다음</a>";
 		}
 		 
-		ReservationPageData rpd = new ReservationPageData(list,pageNavi);
+		ReservationPageData rpd = new ReservationPageData(list,pageNavi, rNumlist);
 		JDBCTemplate.close(conn);
 		return rpd;
 	}

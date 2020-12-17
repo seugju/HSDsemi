@@ -5,6 +5,7 @@
     <%
     	ArrayList<Reservation> list = (ArrayList<Reservation>)request.getAttribute("reservationList");
     	String pageNavi = (String)request.getAttribute("pageNavi");
+    	ArrayList<Integer> rNumlist = (ArrayList<Integer>)request.getAttribute("rNumlist");
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -253,7 +254,7 @@
                 <div class="members" >
                     <p class="title"> 전체예약정보 </p>
                     <table class="table table-hover">
-                        <tr>                            
+                        <tr>
                             <th class="th-short">체크</th>
                             <th class="th-short">No</th>
                             <th class="th-long">이름</th>
@@ -269,7 +270,7 @@
                         <%for(Reservation r : list){%>
                         	<tr>
                         		<td><input type="radio" name="temp" class="change"></td>
-	                        	<td><%=r.getrNum() %></td>
+                        		<td><%=r.getrNum() %></td>
 								<td><%=r.getName() %></td>
 								<td><%=r.getPhone() %></td>
 								<td><%=r.getrDate() %></td>
@@ -281,7 +282,10 @@
 								<td><%=r.getrPass() %></td>
                         	</tr>
                         <%} %>
-                    </table>
+                        <%for(int i=0; i<rNumlist.size(); i++){%>
+                        	<input type="hidden" name="orirNum<%=i+1%>" value="<%=rNumlist.get(i)%>">
+                        <%} %>
+                    </table>                    
                     <div id= "pageNavi"><%=pageNavi %></div>
                 </div>
             </div>
@@ -326,9 +330,10 @@
 	$("#btnChangeReserve").click(function(){
 		var check = $("[type=radio]:checked");
 		var rNum = check.parent().next().html();
+		var orirNum = $("[name=orirNum"+rNum+"]").val();
 		console.log("체크 = "+check);
 		if(check.length!=0){
-			location.href="/reserveUpdateNum?rNum="+rNum;
+			location.href="/reserveUpdateNum?rNum="+orirNum;
 		}else{
 			alert("경고");
 		}
@@ -336,11 +341,12 @@
 	$("#btnDeleteReserve").click(function(){
 		var check = $("[type=radio]:checked");
 		var rNum = check.parent().next().html();
+		var orirNum = $("[name=orirNum"+rNum+"]").val();
 		if(check.length!=0){
-			location.href="/reserveDeleteNum?rNum="+rNum;
+			location.href="/reserveDeleteNum?rNum="+orirNum;
 		}else{
 			alert("경고");
-		}
+		}		
 	});
 </script>
 </html>
